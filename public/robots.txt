@@ -1,0 +1,19 @@
+# Pujya Agritech - Production Robots.txt
+User-agent: *
+Allow: /
+Allow: /products
+Allow: /projects
+Allow: /gallery
+Allow: /blog
+Allow: /about
+Allow: /contact
+Allow: /certificates/
+Allow: /workflow/
+
+# Disallow private admin dashboard & internal endpoints
+Disallow: /admin
+Disallow: /api/quotes
+Disallow: /api/admin/
+
+# Sitemap reference
+Sitemap: https://www.pujyaagritech.com/sitemap.xml

@@ -1,0 +1,8 @@
+{
+  "name": "Pujya Sales Corporation",
+  "description": "Pujya Agritech - Premium Protected Cultivation Technology, Greenhouses, Polyhouses, Fan & Pad Systems, Drip Irrigation, and Agricultural Infrastructure Solutions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

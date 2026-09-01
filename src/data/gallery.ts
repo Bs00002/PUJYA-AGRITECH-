@@ -1,0 +1,60 @@
+import { GalleryItem } from '../types';
+
+export const GALLERY_ITEMS: GalleryItem[] = [
+  {
+    id: 'gal-1',
+    title: 'Naturally Ventilated Polyhouse Field Installation',
+    category: 'poly-houses',
+    imageUrl: '/gallery/site-gallery-1.jpg',
+    caption: 'Turnkey execution of multi-span naturally ventilated polyhouse structure.',
+    isFeatured: true,
+  },
+  {
+    id: 'gal-2',
+    title: 'Hi-Tech Commercial Polyhouse Facility',
+    category: 'poly-houses',
+    imageUrl: '/gallery/site-gallery-2.jpg',
+    caption: 'High-performance polyhouse structural installation with internal crop trellising.',
+    isFeatured: true,
+  },
+  {
+    id: 'gal-3',
+    title: 'Galvanized Structural Steel Frame Erection',
+    category: 'projects',
+    imageUrl: '/gallery/site-gallery-3.jpg',
+    caption: 'IS-2062 grade hot-dip galvanized steel framing and purlin assembly.',
+    isFeatured: true,
+  },
+  {
+    id: 'gal-4',
+    title: 'Agro Shade Net House & Nursery Unit',
+    category: 'net-houses',
+    imageUrl: '/gallery/site-gallery-4.jpg',
+    caption: 'UV-stabilized agro shade net house for sapling propagation and crop protection.',
+    isFeatured: true,
+  },
+  {
+    id: 'gal-5',
+    title: 'High-Tension Cable Net House Installation',
+    category: 'net-houses',
+    imageUrl: '/gallery/site-gallery-5.jpg',
+    caption: 'Cable-supported anti-insect monofilament net structure.',
+    isFeatured: true,
+  },
+  {
+    id: 'gal-6',
+    title: 'Evaporative Climate Control Fan & Pad Unit',
+    category: 'poly-houses',
+    imageUrl: '/gallery/site-gallery-6.jpg',
+    caption: 'Evaporative cooling pad wall and heavy-duty axial exhaust fan installation.',
+    isFeatured: true,
+  },
+  {
+    id: 'gal-7',
+    title: 'Automated Drip Fertigation & Irrigation System',
+    category: 'field',
+    imageUrl: '/gallery/site-gallery-7.jpg',
+    caption: 'Pressure-compensating micro-drip delivery manifolds and automated dosing.',
+    isFeatured: true,
+  },
+];

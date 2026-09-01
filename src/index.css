@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-white: #FFFFFF;
+    --bg-muted: #F5F8F5;
+    --bg-muted-subtle: #F2F6F2;
+    --color-primary-green: #2F7445;
+    --color-primary-green-hover: #255d37;
+    --color-text-dark: #10232B;
+    --color-text-muted: #60717A;
+    --color-border: #E4EAE5;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--color-text-dark);
+    background-color: var(--bg-white);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #10232B;
+    background-color: #FFFFFF;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 1rem; /* 16px */
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+}
+
+/* Image Scale Hover Micro-interaction */
+.img-hover-zoom {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.group:hover .img-hover-zoom,
+.img-hover-container:hover .img-hover-zoom {
+  transform: scale(1.03);
+}
+
+/* Button Micro Interaction: Arrow Translate 4-6px Right */
+.btn-arrow-icon {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .btn-arrow-icon,
+.btn-hover-trigger:hover .btn-arrow-icon {
+  transform: translateX(5px);
+}
+
+/* Nav Link Underline Growing Effect */
+.nav-link-item {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link-item::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #2F7445;
+  transition: width 0.25s ease, left 0.25s ease;
+}
+
+.nav-link-item:hover::after,
+.nav-link-item.active-nav::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Subtle Editorial Card Border & Hover */
+.editorial-card {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.editorial-card:hover {
+  border-color: #2F7445;
+}
+
+/* Prefers Reduced Motion Overrides */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
