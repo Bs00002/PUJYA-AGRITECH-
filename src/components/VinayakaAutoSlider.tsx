@@ -141,7 +141,7 @@ export const VinayakaAutoSlider: React.FC<VinayakaAutoSliderProps> = ({
       {/* MAIN CLEAN MEDIA VIEWPORT (NO OVERLAYS, NO TOP STRIP, NO ARROWS, NO BADGES) */}
       {/* ========================================================================= */}
       <div
-        className="relative w-full h-[440px] sm:h-[540px] lg:h-[600px] bg-[#07171E] overflow-hidden select-none"
+        className="relative w-full h-[280px] sm:h-[420px] md:h-[500px] lg:h-[600px] bg-[#07171E] overflow-hidden select-none"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
@@ -187,7 +187,7 @@ export const VinayakaAutoSlider: React.FC<VinayakaAutoSliderProps> = ({
                 )}
 
                 {/* Minimal Video Controls Bar */}
-                <div className="absolute bottom-4 left-4 right-4 z-30 flex items-center justify-between bg-[#07171E]/85 backdrop-blur-md px-4 py-2 rounded-xl border border-[#D4AF37]/30 text-white shadow-lg">
+                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 z-30 flex items-center justify-between gap-2 bg-[#07171E]/85 backdrop-blur-md px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl border border-[#D4AF37]/30 text-white shadow-lg">
                   <div className="flex items-center gap-3">
                     <button
                       onClick={toggleVideoPlayback}

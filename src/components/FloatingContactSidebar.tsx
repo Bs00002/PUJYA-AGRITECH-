@@ -23,7 +23,7 @@ export const FloatingContactSidebar: React.FC<FloatingContactSidebarProps> = ({
   onOpenService,
   phoneNumber = '+919974431960',
   whatsappNumber = '919974431960',
-  emailAddress = 'contact@pujyasales.com',
+  emailAddress = 'info@pujyaagritech.com',
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);

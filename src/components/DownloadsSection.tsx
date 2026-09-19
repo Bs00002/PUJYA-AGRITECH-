@@ -25,7 +25,6 @@ export const DownloadsSection: React.FC = () => {
     }, 600);
   };
 
-
   const getIcon = (type: string) => {
     switch (type) {
       case 'Award': return <Award className="w-6 h-6 text-amber-600" />;
@@ -84,12 +83,12 @@ export const DownloadsSection: React.FC = () => {
                 </div>
               </div>
 
-              <div className="pt-5 mt-4 border-t border-slate-100 flex items-center justify-between">
+              <div className="pt-5 mt-4 border-t border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
                 <span className="text-[11px] font-medium text-slate-500">Official Specification Document</span>
                 <button
                   onClick={() => handleDownload(doc.id, doc.title, doc.downloadUrl)}
                   disabled={downloadingId === doc.id}
-                  className="px-4 py-2 rounded-xl bg-[#004b93] hover:bg-[#003870] disabled:bg-slate-300 text-white text-xs font-bold transition-all flex items-center gap-1.5 shadow-xs"
+                  className="px-4 py-2 rounded-xl bg-[#004b93] hover:bg-[#003870] disabled:bg-slate-300 text-white text-xs font-bold transition-all flex items-center gap-1.5 shadow-xs cursor-pointer"
                 >
                   {downloadingId === doc.id ? (
                     <>

@@ -204,11 +204,13 @@ export const WorkflowJourney: React.FC<WorkflowJourneyProps> = ({ onOpenConsulta
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [selectedStep, setSelectedStep] = useState<WorkflowStage | null>(null);
 
-  // GSAP ScrollTrigger Setup for Sticky Storytelling
+  // GSAP ScrollTrigger Setup for Sticky Storytelling (Desktop Only >= 1024px)
   useEffect(() => {
     if (shouldReduceMotion) return;
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add('(min-width: 1024px)', () => {
       const st = ScrollTrigger.create({
         id: 'workflow-scroll-trigger',
         trigger: sectionRef.current,
@@ -229,13 +231,14 @@ export const WorkflowJourney: React.FC<WorkflowJourneyProps> = ({ onOpenConsulta
       });
 
       triggerInstanceRef.current = st;
-    }, sectionRef);
+      return () => {
+        if (st) st.kill();
+      };
+    });
 
     return () => {
-      ctx.revert();
-      if (triggerInstanceRef.current) {
-        triggerInstanceRef.current.kill();
-      }
+      mm.revert();
+      triggerInstanceRef.current = null;
     };
   }, [shouldReduceMotion]);
 
@@ -469,13 +472,13 @@ export const WorkflowJourney: React.FC<WorkflowJourneyProps> = ({ onOpenConsulta
         </div>
 
         {/* MOBILE VERTICAL PROCESS LIST */}
-        <div className="space-y-8 relative before:absolute before:left-5 before:top-4 before:bottom-4 before:w-[2px] before:bg-gray-200">
+        <div className="space-y-8 relative pl-2 sm:pl-4 before:absolute before:left-6 sm:before:left-8 before:top-4 before:bottom-4 before:w-[2px] before:bg-gray-200">
           {WORKFLOW_STAGES.map((stage) => {
             const IconComp = stage.icon;
             return (
-              <div key={stage.id} className="relative pl-12 space-y-3 group">
+              <div key={stage.id} className="relative pl-10 sm:pl-12 space-y-3 group">
                 {/* Vertical Node Indicator */}
-                <div className="absolute left-2 top-0 -translate-x-1/2 w-8 h-8 rounded-full bg-[#006B8F] text-white flex items-center justify-center font-mono text-xs font-bold shadow-md">
+                <div className="absolute left-1.5 sm:left-2 top-0 -translate-x-1/2 w-8 h-8 rounded-full bg-[#006B8F] text-white flex items-center justify-center font-mono text-xs font-bold shadow-md">
                   {stage.stepNumber}
                 </div>
 

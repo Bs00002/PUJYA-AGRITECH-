@@ -149,10 +149,11 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
           <button
             onClick={onBack}
-            className="text-[11px] font-bold text-[#006B8F] hover:text-[#005775] transition-colors cursor-pointer uppercase tracking-wider flex items-center gap-1"
+            className="text-[11px] font-bold text-[#006B8F] hover:text-[#005775] transition-colors cursor-pointer uppercase tracking-wider flex items-center gap-1 shrink-0"
           >
             <ChevronLeft className="w-3.5 h-3.5" />
-            <span>BACK TO ALL PRODUCTS</span>
+            <span className="hidden sm:inline">BACK TO ALL PRODUCTS</span>
+            <span className="sm:hidden">ALL PRODUCTS</span>
           </button>
         </div>
       </div>
@@ -220,8 +221,11 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             {/* Specification Grid Table (Matching PDF Brochure Table Grid or Key-Value Details) */}
             {specifications && (
               specifications.model ? (
-                <div className="overflow-x-auto pt-1">
-                  <table className="w-full text-center border-collapse text-sm border border-gray-300">
+                <div className="overflow-x-auto pt-1 pb-1">
+                  <span className="text-[10px] text-gray-500 font-medium sm:hidden block pb-1">
+                    ← Swipe horizontally to view full specifications →
+                  </span>
+                  <table className="min-w-[560px] w-full text-center border-collapse text-sm border border-gray-300">
                     <thead>
                       <tr className="bg-[#F8FAF8] text-[#10232B] font-bold border-b border-gray-300 text-xs uppercase">
                         <th className="py-2.5 px-2 border-r border-gray-300">MODEL</th>

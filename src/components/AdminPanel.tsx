@@ -1390,8 +1390,10 @@ export const AdminPanel: React.FC<{ onGoToSite: () => void }> = ({ onGoToSite })
                     <tr>
                       <th className="py-3.5 px-4">Date</th>
                       <th className="py-3.5 px-4">Customer Name</th>
+                      <th className="py-3.5 px-4">Company / Farm</th>
                       <th className="py-3.5 px-4">Contact Phone</th>
-                      <th className="py-3.5 px-4">Requirement</th>
+                      <th className="py-3.5 px-4">City / Location</th>
+                      <th className="py-3.5 px-4">Source / Requirement</th>
                       <th className="py-3.5 px-4 text-center">Status</th>
                       <th className="py-3.5 px-4 text-right">Actions</th>
                     </tr>
@@ -1403,8 +1405,14 @@ export const AdminPanel: React.FC<{ onGoToSite: () => void }> = ({ onGoToSite })
                         <tr key={enq.id} className="hover:bg-[#142935] transition-colors">
                           <td className="py-3.5 px-4 font-mono text-slate-400">{enq.date}</td>
                           <td className="py-3.5 px-4 font-bold text-white">{enq.name}</td>
+                          <td className="py-3.5 px-4 text-slate-300">{enq.company || '—'}</td>
                           <td className="py-3.5 px-4 font-mono">{enq.mobile}</td>
-                          <td className="py-3.5 px-4 text-slate-300">{enq.interestedProduct}</td>
+                          <td className="py-3.5 px-4 text-slate-300">{enq.city || enq.location || '—'}</td>
+                          <td className="py-3.5 px-4 text-slate-300">
+                            <span className="bg-[#122733] border border-[#1E3E52] text-[10px] font-mono px-2 py-0.5 rounded text-[#08779A]">
+                              {enq.source || enq.interestedProduct}
+                            </span>
+                          </td>
                           <td className="py-3.5 px-4 text-center">
                             <select
                               value={enq.status}
@@ -1888,10 +1896,11 @@ export const AdminPanel: React.FC<{ onGoToSite: () => void }> = ({ onGoToSite })
             </div>
             <div className="space-y-2 text-slate-300">
               <p><strong className="text-white">Customer Name:</strong> {viewingEnquiry.name}</p>
+              {viewingEnquiry.company && <p><strong className="text-white">Company / Farm Name:</strong> {viewingEnquiry.company}</p>}
               <p><strong className="text-white">Mobile:</strong> {viewingEnquiry.mobile}</p>
               <p><strong className="text-white">Email:</strong> {viewingEnquiry.email || 'N/A'}</p>
-              <p><strong className="text-white">Requirement:</strong> {viewingEnquiry.interestedProduct}</p>
-              {viewingEnquiry.location && <p><strong className="text-white">Location:</strong> {viewingEnquiry.location}</p>}
+              {(viewingEnquiry.city || viewingEnquiry.location) && <p><strong className="text-white">City / Location:</strong> {viewingEnquiry.city || viewingEnquiry.location}</p>}
+              <p><strong className="text-white">Source / Requirement:</strong> {viewingEnquiry.source || viewingEnquiry.interestedProduct}</p>
               {viewingEnquiry.areaSqM && <p><strong className="text-white">Proposed Area:</strong> {viewingEnquiry.areaSqM} Sq. Meters</p>}
               <p><strong className="text-white">Date Submitted:</strong> {viewingEnquiry.date}</p>
               <div className="pt-2">

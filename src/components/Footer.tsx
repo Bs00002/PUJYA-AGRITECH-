@@ -50,7 +50,7 @@ export const Footer: React.FC<FooterProps> = ({
   const socialLinks = [
     {
       name: 'Instagram',
-      url: 'https://www.instagram.com/pujyasales/',
+      url: 'https://www.instagram.com/pujyaagritech/',
       icon: Instagram,
     },
     {
@@ -81,7 +81,10 @@ export const Footer: React.FC<FooterProps> = ({
             </a>
 
             <div className="space-y-2">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-[#AEE583]">
+              <p className="text-xs font-bold tracking-widest text-[#AEE583] uppercase">
+                BUILD • PLANT • GROW
+              </p>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-[#AEE583]/90">
                 Protected Cultivation Infrastructure
               </h3>
               <p className="text-sm text-[#E2F1F8] leading-relaxed max-w-sm font-normal">
@@ -171,8 +174,8 @@ export const Footer: React.FC<FooterProps> = ({
 
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-[#AEE583] shrink-0" />
-                <a href={`mailto:${contactInfo?.email || 'contact@pujyasales.com'}`} className="hover:text-white transition-colors truncate">
-                  contact@pujyasales.com
+                <a href={`mailto:${contactInfo?.email || 'info@pujyaagritech.com'}`} className="hover:text-white transition-colors truncate">
+                  {contactInfo?.email || 'info@pujyaagritech.com'}
                 </a>
               </div>
 
@@ -233,7 +236,7 @@ export const Footer: React.FC<FooterProps> = ({
             © 2026 Pujya Agritech. All Rights Reserved.
           </p>
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-4 gap-y-2">
             <span className="hover:text-white cursor-pointer transition-colors">
               Privacy Policy
             </span>

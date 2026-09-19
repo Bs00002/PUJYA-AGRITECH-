@@ -64,33 +64,25 @@ export const Header: React.FC<HeaderProps> = ({
     >
       {/* 
         MATHEMATICALLY PERFECT 50% VIEWPORT CENTERED LOGO
-        Positioned relative to full-width header (100% viewport width)
+        Positioned relative to full-width header (xl and above)
       */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-auto flex items-center justify-center">
+      <div className="hidden xl:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-auto items-center justify-center">
         <a
           href="/"
           onClick={(e) => handleNavClick('home', e)}
           className="cursor-pointer inline-block shrink-0 focus:outline-none px-2 hover:opacity-95 transition-opacity py-1"
           aria-label="Pujya Agritech Home"
         >
-          <div className="hidden lg:block">
-            <PujyaLogo variant="default" height={76} />
-          </div>
-          <div className="hidden sm:block lg:hidden">
-            <PujyaLogo variant="default" height={60} />
-          </div>
-          <div className="sm:hidden">
-            <PujyaLogo variant="default" height={48} />
-          </div>
+          <PujyaLogo variant="default" height={72} />
         </a>
       </div>
 
       <div className="max-w-[1440px] w-[95%] mx-auto relative">
-        {/* DESKTOP CENTERED LOGO LAYOUT (lg and above) */}
-        <div className="hidden lg:flex items-center justify-between h-20 sm:h-22">
+        {/* DESKTOP CENTERED LOGO LAYOUT (xl and above, 1280px+) */}
+        <div className="hidden xl:flex items-center justify-between h-20 sm:h-22">
           {/* LEFT NAV CONTAINER (Left half, aligned toward logo with padding) */}
-          <div className="w-[calc(50%-90px)] flex items-center justify-end pr-8 xl:pr-14 z-10">
-            <nav className="flex items-center gap-4 xl:gap-6 2xl:gap-8" aria-label="Left Navigation">
+          <div className="w-[calc(50%-85px)] flex items-center justify-end pr-6 2xl:pr-12 z-10">
+            <nav className="flex items-center gap-4 2xl:gap-7" aria-label="Left Navigation">
               {leftNavItems.map((item) => {
                 const isActive = activeTab === item.id;
                 return (
@@ -98,7 +90,7 @@ export const Header: React.FC<HeaderProps> = ({
                     key={item.id}
                     href={item.path}
                     onClick={(e) => handleNavClick(item.id, e)}
-                    className={`text-[13px] xl:text-[14px] 2xl:text-[15px] tracking-wide transition-colors whitespace-nowrap nav-link-item ${
+                    className={`text-[13px] 2xl:text-[14px] tracking-wide transition-colors whitespace-nowrap nav-link-item ${
                       isActive
                         ? 'text-[#2F7445] font-bold active-nav'
                         : 'text-[#10232B] font-semibold hover:text-[#2F7445]'
@@ -112,8 +104,8 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* RIGHT NAV CONTAINER (Right half, aligned from logo with padding) */}
-          <div className="w-[calc(50%-90px)] flex items-center justify-start pl-8 xl:pl-14 gap-3 xl:gap-5 z-10">
-            <nav className="flex items-center gap-4 xl:gap-6 2xl:gap-8" aria-label="Right Navigation">
+          <div className="w-[calc(50%-85px)] flex items-center justify-start pl-6 2xl:pl-12 gap-3 2xl:gap-5 z-10">
+            <nav className="flex items-center gap-4 2xl:gap-7" aria-label="Right Navigation">
               {rightNavItems.map((item) => {
                 const isActive = activeTab === item.id;
                 return (
@@ -121,7 +113,7 @@ export const Header: React.FC<HeaderProps> = ({
                     key={item.id}
                     href={item.path}
                     onClick={(e) => handleNavClick(item.id, e)}
-                    className={`text-[13px] xl:text-[14px] 2xl:text-[15px] tracking-wide transition-colors whitespace-nowrap nav-link-item ${
+                    className={`text-[13px] 2xl:text-[14px] tracking-wide transition-colors whitespace-nowrap nav-link-item ${
                       isActive
                         ? 'text-[#2F7445] font-bold active-nav'
                         : 'text-[#10232B] font-semibold hover:text-[#2F7445]'
@@ -135,7 +127,7 @@ export const Header: React.FC<HeaderProps> = ({
 
             <button
               onClick={onOpenConsultationModal}
-              className="group inline-flex items-center gap-1.5 xl:gap-2 px-3.5 py-2.5 rounded text-xs xl:text-sm font-semibold text-white bg-[#2F7445] hover:bg-[#255d37] transition-all shadow-2xs btn-hover-trigger shrink-0 cursor-pointer"
+              className="group inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded text-xs 2xl:text-sm font-semibold text-white bg-[#2F7445] hover:bg-[#255d37] transition-all shadow-2xs btn-hover-trigger shrink-0 cursor-pointer"
             >
               <span>GET PROJECT CONSULTATION</span>
               <ArrowRight className="w-4 h-4 btn-arrow-icon" />
@@ -152,31 +144,48 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* MOBILE / TABLET LAYOUT (Below lg) */}
-        <div className="flex lg:hidden items-center justify-between h-18 sm:h-20">
-          <div className="w-10 sm:w-20"></div>
+        {/* MOBILE & TABLET & LAPTOP (<1280px) CLEAN HEADER */}
+        <div className="flex xl:hidden items-center justify-between h-16 sm:h-20 px-1 sm:px-3">
+          {/* Left-Aligned Logo: No collision possible on any screen */}
+          <a
+            href="/"
+            onClick={(e) => handleNavClick('home', e)}
+            className="cursor-pointer inline-flex items-center py-1"
+            aria-label="Pujya Agritech Home"
+          >
+            <div className="sm:hidden">
+              <PujyaLogo variant="default" height={42} />
+            </div>
+            <div className="hidden sm:block">
+              <PujyaLogo variant="default" height={52} />
+            </div>
+          </a>
 
-          <div className="flex items-center gap-2 z-10">
+          {/* Right Action Buttons */}
+          <div className="flex items-center gap-2 sm:gap-3 z-10">
+            {/* Show Consultation button on tablets & medium screens, hide on narrow phones */}
             <button
               onClick={onOpenConsultationModal}
-              className="px-3 py-2 rounded text-[11px] font-medium text-white bg-[#2F7445] active:bg-[#255d37]"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded text-xs font-semibold text-white bg-[#2F7445] hover:bg-[#255d37] transition-colors shadow-2xs cursor-pointer"
             >
-              Consultation
+              <span>Consultation</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
+
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded text-[#10232B] hover:bg-[#F5F8F5]"
+              className="p-2 sm:p-2.5 rounded-lg text-[#10232B] hover:bg-[#F5F8F5] transition-colors cursor-pointer"
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-6 h-6 text-[#2F7445]" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile & Tablet Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-[#E4EAE5] px-4 pt-3 pb-6 space-y-3 shadow-lg">
+        <div className="xl:hidden bg-white border-b border-[#E4EAE5] px-4 pt-3 pb-6 space-y-3 shadow-lg animate-fade-in">
           <div className="flex flex-col gap-1 pb-3 border-b border-[#E4EAE5]">
             {allNavItems.map((item) => {
               const isActive = activeTab === item.id;

@@ -941,54 +941,54 @@ export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
         {/* ================= 2. SUB-PRODUCTS CATALOGUE GRID ================= */}
         <div className="space-y-8" id="catalogue-grid">
           {/* Category Selector Tabs */}
-          <div className="flex flex-wrap items-center justify-between gap-4 bg-gray-50 p-3.5 rounded-xl border border-gray-200/60">
-            <div className="flex flex-wrap gap-2.5">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 bg-gray-50 p-2.5 sm:p-3.5 rounded-xl border border-gray-200/60">
+            <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setSelectedCategory('turnkey-project')}
-                className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-all uppercase cursor-pointer ${
+                className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-bold transition-all uppercase cursor-pointer ${
                   selectedCategory === 'turnkey-project'
                     ? 'bg-[#006B8F] text-white shadow-2xs'
                     : 'bg-white text-gray-700 hover:text-[#10232B] hover:bg-gray-100 border border-gray-200/60'
                 }`}
               >
-                Green House Turnkey Project (6)
+                Turnkey Projects (6)
               </button>
 
               <button
                 onClick={() => setSelectedCategory('greenhouse-kit')}
-                className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-all uppercase cursor-pointer ${
+                className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-bold transition-all uppercase cursor-pointer ${
                   selectedCategory === 'greenhouse-kit'
                     ? 'bg-[#006B8F] text-white shadow-2xs'
                     : 'bg-white text-gray-700 hover:text-[#10232B] hover:bg-gray-100 border border-gray-200/60'
                 }`}
               >
-                Green House Kit (2)
+                Greenhouse Kits (2)
               </button>
 
               <button
                 onClick={() => setSelectedCategory('greenhouse-material')}
-                className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-all uppercase cursor-pointer ${
+                className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-bold transition-all uppercase cursor-pointer ${
                   selectedCategory === 'greenhouse-material'
                     ? 'bg-[#006B8F] text-white shadow-2xs'
                     : 'bg-white text-gray-700 hover:text-[#10232B] hover:bg-gray-100 border border-gray-200/60'
                 }`}
               >
-                Green House Material (3)
+                Materials (3)
               </button>
 
               <button
                 onClick={() => setSelectedCategory('all')}
-                className={`px-4 py-2.5 rounded-lg text-sm font-bold transition-all uppercase cursor-pointer ${
+                className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-bold transition-all uppercase cursor-pointer ${
                   selectedCategory === 'all'
                     ? 'bg-[#006B8F] text-white shadow-2xs'
                     : 'bg-white text-gray-700 hover:text-[#10232B] hover:bg-gray-100 border border-gray-200/60'
                 }`}
               >
-                All Products ({PRODUCT_CATALOGUE.length})
+                All ({PRODUCT_CATALOGUE.length})
               </button>
             </div>
 
-            <span className="text-sm text-gray-500 font-mono font-medium px-2">
+            <span className="text-xs sm:text-sm text-gray-500 font-mono font-medium px-1">
               Showing {displayedProducts.length} Product{displayedProducts.length > 1 ? 's' : ''}
             </span>
           </div>

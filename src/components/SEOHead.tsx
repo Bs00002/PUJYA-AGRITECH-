@@ -9,8 +9,8 @@ export interface SEOHeadProps {
   jsonLd?: Record<string, any> | Array<Record<string, any>>;
 }
 
-const DOMAIN = 'https://www.pujyaagritech.com';
-const DEFAULT_OG_IMAGE = 'https://www.pujyaagritech.com/who-we-are-bg.jpeg';
+const DOMAIN = 'https://pujaagritech.com';
+const DEFAULT_OG_IMAGE = 'https://pujaagritech.com/who-we-are-bg.jpeg';
 
 export const SEOHead: React.FC<SEOHeadProps> = ({
   title,

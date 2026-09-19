@@ -57,8 +57,10 @@ export const CertificationsSection: React.FC = () => {
   useEffect(() => {
     if (shouldReduceMotion) return;
 
-    const ctx = gsap.context(() => {
-      // 1. Heading fades up
+    const mm = gsap.matchMedia();
+
+    // Desktop/Tablet (>= 768px): Horizontal stagger entrance
+    mm.add('(min-width: 768px)', () => {
       if (headingRef.current) {
         gsap.from(headingRef.current, {
           y: 35,
@@ -73,10 +75,9 @@ export const CertificationsSection: React.FC = () => {
         });
       }
 
-      // 2. Card 1 (IEC Certificate) slides/fades in from LEFT
       if (card1Ref.current) {
         gsap.from(card1Ref.current, {
-          x: -50,
+          x: -40,
           opacity: 0,
           scale: 0.95,
           duration: 0.8,
@@ -90,7 +91,6 @@ export const CertificationsSection: React.FC = () => {
         });
       }
 
-      // 3. Card 2 (APEDA Certificate) fades/scales up in CENTER
       if (card2Ref.current) {
         gsap.from(card2Ref.current, {
           y: 35,
@@ -107,10 +107,9 @@ export const CertificationsSection: React.FC = () => {
         });
       }
 
-      // 4. Card 3 (Indian Nurserymen Association) slides/fades in from RIGHT
       if (card3Ref.current) {
         gsap.from(card3Ref.current, {
-          x: 50,
+          x: 40,
           opacity: 0,
           scale: 0.95,
           duration: 0.8,
@@ -123,9 +122,29 @@ export const CertificationsSection: React.FC = () => {
           },
         });
       }
-    }, sectionRef);
+    });
 
-    return () => ctx.revert();
+    // Mobile (< 768px): Pure vertical entrance with zero horizontal overflow
+    mm.add('(max-width: 767px)', () => {
+      [headingRef.current, card1Ref.current, card2Ref.current, card3Ref.current].forEach((el, idx) => {
+        if (el) {
+          gsap.from(el, {
+            y: 25,
+            opacity: 0,
+            duration: 0.6,
+            delay: idx * 0.1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 88%',
+              toggleActions: 'play none none reverse',
+            },
+          });
+        }
+      });
+    });
+
+    return () => mm.revert();
   }, [shouldReduceMotion]);
 
   // Reset zoom & pan when opening a new certificate or closing
@@ -286,18 +305,18 @@ export const CertificationsSection: React.FC = () => {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Lightbox Top Bar Controls */}
-              <div className="w-full flex items-center justify-between px-4 py-3 bg-black/40 backdrop-blur-md rounded-xl text-white border border-white/10 shrink-0 mb-3">
-                <div className="text-left pr-4">
-                  <h4 className="text-sm sm:text-base font-bold text-white leading-tight">
+              <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 px-4 py-3 bg-black/60 backdrop-blur-md rounded-xl text-white border border-white/10 shrink-0 mb-3">
+                <div className="text-left pr-2">
+                  <h4 className="text-xs sm:text-base font-bold text-white leading-tight">
                     {activeCert.title}
                   </h4>
-                  <p className="text-[11px] text-emerald-400 font-medium">
+                  <p className="text-[10px] sm:text-[11px] text-emerald-400 font-medium">
                     {activeCert.subHeader}
                   </p>
                 </div>
 
                 {/* Zoom & Close Toolbar */}
-                <div className="flex items-center gap-2 shrink-0">
+                <div className="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-2 shrink-0 border-t sm:border-t-0 border-white/10 pt-2 sm:pt-0">
                   <button
                     onClick={handleZoomIn}
                     className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"

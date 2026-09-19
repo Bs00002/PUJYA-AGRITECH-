@@ -113,7 +113,7 @@ export const GalleryView: React.FC = () => {
             </div>
 
             {/* Media Area */}
-            <div className="relative h-[360px] sm:h-[480px] bg-[#F8FAF8] rounded-xl overflow-hidden flex items-center justify-center border border-gray-200/80">
+            <div className="relative h-[260px] sm:h-[420px] md:h-[480px] max-h-[55vh] bg-[#F8FAF8] rounded-xl overflow-hidden flex items-center justify-center border border-gray-200/80">
               {activeMedia.videoUrl ? (
                 <iframe
                   src={activeMedia.videoUrl}

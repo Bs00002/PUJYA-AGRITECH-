@@ -96,10 +96,10 @@ export const DEFAULT_CONTACT_INFO: ContactInfo = {
   mobile: '+91 99744 31960',
   phone2: '+91 90814 12412',
   whatsapp: '+91 90814 12412',
-  email: 'contact@pujyasales.com',
+  email: 'info@pujyaagritech.com',
   mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.862371948834!2d72.4632!3d23.0289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDAxJzdoLjQiTiA3MsKwMjcnNDtuNSJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin',
   businessHours: 'Monday - Saturday: 9:00 AM - 7:00 PM',
-  instagram: 'https://www.instagram.com/pujyasales/',
+  instagram: 'https://www.instagram.com/pujyaagritech/',
   facebook: 'https://www.facebook.com/pujyasales',
   indiaMart: 'https://www.indiamart.com/pujyasalescorporation/photos.html',
 };

@@ -94,9 +94,11 @@ export interface Enquiry {
   id: string;
   name: string;
   company?: string;
+  city?: string;
   mobile: string;
   email: string;
   interestedProduct: string;
+  source?: string;
   areaSqM?: number;
   location?: string;
   message: string;
@@ -160,7 +162,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   logoText: 'PUJYA AGRITECH',
   phone: '+91 99744 31960 / +91 90814 12412',
   whatsapp: '+91 90814 12412',
-  email: 'contact@pujyasales.com',
+  email: 'info@pujyaagritech.com',
   socialLinkedin: 'https://www.linkedin.com',
   socialFacebook: 'https://www.facebook.com/pujyasales',
   socialYoutube: 'https://www.youtube.com',

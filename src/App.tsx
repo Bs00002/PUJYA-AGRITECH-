@@ -38,13 +38,12 @@ const PATH_TO_TAB: Record<string, string> = {
 // Global Organization & LocalBusiness JSON-LD Schema
 const GLOBAL_ORGANIZATION_SCHEMA = {
   '@type': 'Organization',
-  '@id': 'https://www.pujyaagritech.com/#organization',
+  '@id': 'https://pujaagritech.com/#organization',
   name: 'Pujya Agritech',
-  alternateName: 'Pujya Sales Corporation',
-  url: 'https://www.pujyaagritech.com',
-  logo: 'https://www.pujyaagritech.com/logo.png',
+  url: 'https://pujaagritech.com',
+  logo: 'https://pujaagritech.com/logo.png',
   description: 'Manufacturer and turnkey EPC partner for Greenhouses, Naturally Ventilated Poly Houses, Shade Net Houses, Drip Irrigation, and Protected Farming Infrastructure in India.',
-  foundingDate: '2012',
+  foundingDate: '2017',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Ahmedabad',
@@ -56,31 +55,29 @@ const GLOBAL_ORGANIZATION_SCHEMA = {
       '@type': 'ContactPoint',
       telephone: '+91 99744 31960',
       contactType: 'sales & project consultation',
-      email: 'contact@pujyasales.com',
+      email: 'info@pujyaagritech.com',
       availableLanguage: ['English', 'Hindi', 'Gujarati'],
     },
     {
       '@type': 'ContactPoint',
       telephone: '+91 90814 12412',
       contactType: 'engineering & customer support',
-      email: 'contact@pujyasales.com',
+      email: 'info@pujyaagritech.com',
       availableLanguage: ['English', 'Hindi', 'Gujarati'],
     },
   ],
   sameAs: [
-    'https://www.instagram.com/pujyasales/',
-    'https://www.facebook.com/pujyasales',
-    'https://www.indiamart.com/pujyasalescorporation/photos.html',
+    'https://www.instagram.com/pujyaagritech/',
   ],
 };
 
 const GLOBAL_LOCAL_BUSINESS_SCHEMA = {
   '@type': 'LocalBusiness',
-  '@id': 'https://www.pujyaagritech.com/#localbusiness',
+  '@id': 'https://pujaagritech.com/#localbusiness',
   name: 'Pujya Agritech',
-  image: 'https://www.pujyaagritech.com/who-we-are-bg.jpeg',
+  image: 'https://pujaagritech.com/who-we-are-bg.jpeg',
   telephone: ['+91 99744 31960', '+91 90814 12412'],
-  email: 'contact@pujyasales.com',
+  email: 'info@pujyaagritech.com',
   priceRange: '₹₹₹',
   address: {
     '@type': 'PostalAddress',
@@ -193,8 +190,8 @@ function MainLayout() {
             {
               '@type': 'BreadcrumbList',
               itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.pujyaagritech.com/' },
-                { '@type': 'ListItem', position: 2, name: 'Products', item: 'https://www.pujyaagritech.com/products' },
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://pujaagritech.com/' },
+                { '@type': 'ListItem', position: 2, name: 'Products', item: 'https://pujaagritech.com/products' },
               ],
             },
           ],
@@ -209,8 +206,8 @@ function MainLayout() {
             {
               '@type': 'BreadcrumbList',
               itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.pujyaagritech.com/' },
-                { '@type': 'ListItem', position: 2, name: 'Projects', item: 'https://www.pujyaagritech.com/projects' },
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://pujaagritech.com/' },
+                { '@type': 'ListItem', position: 2, name: 'Projects', item: 'https://pujaagritech.com/projects' },
               ],
             },
           ],
@@ -231,24 +228,34 @@ function MainLayout() {
         };
       case 'about':
         return {
-          title: 'About Pujya Agritech | Protected Cultivation & Agricultural Engineering Leader',
-          description: 'Pujya Agritech (Estd. 2012, Ahmedabad & Gandhinagar, Gujarat) is a premier turnkey EPC contractor and manufacturer of polyhouses, greenhouses, shade nets, and irrigation systems in India.',
+          title: 'About Us | Pujya Agritech — Protected Cultivation & Greenhouse Infrastructure',
+          description: 'Pujya Agritech (Estd. 2017, Ahmedabad & Gandhinagar, Gujarat) is a premier turnkey EPC contractor and manufacturer of polyhouses, greenhouses, shade nets, and irrigation systems in India.',
           canonicalPath: '/about',
           jsonLd: [GLOBAL_ORGANIZATION_SCHEMA, GLOBAL_LOCAL_BUSINESS_SCHEMA],
         };
       case 'contact':
         return {
           title: 'Contact Pujya Agritech | Greenhouse Project Consultation & Quote',
-          description: 'Get project cost estimates, NHB/MIDH subsidy guidance, and turnkey polyhouse consultation from Pujya Agritech. Phone: +91 99744 31960 / +91 90814 12412, Email: contact@pujyasales.com.',
+          description: 'Get project cost estimates, NHB/MIDH subsidy guidance, and turnkey polyhouse consultation from Pujya Agritech. Phone: +91 99744 31960 / +91 90814 12412, Email: info@pujyaagritech.com.',
           canonicalPath: '/contact',
           jsonLd: [GLOBAL_ORGANIZATION_SCHEMA, GLOBAL_LOCAL_BUSINESS_SCHEMA],
         };
       default:
         return {
-          title: 'Pujya Agritech | Protected Cultivation & Agricultural Infrastructure',
-          description: 'Turnkey EPC manufacturer and infrastructure provider for Polyhouses, Greenhouses, Shade Net Houses, Drip Irrigation, and Hydroponics in Ahmedabad, Gujarat, India.',
+          title: 'Pujya Agritech | Greenhouse, Polyhouse & Protected Cultivation Solutions',
+          description: 'Explore Pujya Agritech for greenhouse and polyhouse infrastructure, protected cultivation materials, shade net solutions, agricultural accessories, and project consultation. BUILD • PLANT • GROW.',
           canonicalPath: '/',
-          jsonLd: [GLOBAL_ORGANIZATION_SCHEMA, GLOBAL_LOCAL_BUSINESS_SCHEMA],
+          jsonLd: [
+            GLOBAL_ORGANIZATION_SCHEMA,
+            GLOBAL_LOCAL_BUSINESS_SCHEMA,
+            {
+              '@type': 'WebSite',
+              '@id': 'https://pujaagritech.com/#website',
+              url: 'https://pujaagritech.com',
+              name: 'Pujya Agritech',
+              description: 'Greenhouse, Polyhouse & Protected Cultivation Solutions',
+            },
+          ],
         };
     }
   };

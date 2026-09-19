@@ -9,11 +9,14 @@ Allow: /about
 Allow: /contact
 Allow: /certificates/
 Allow: /workflow/
+Allow: /gallery/
+Allow: /products/
+Allow: /projects/
 
 # Disallow private admin dashboard & internal endpoints
 Disallow: /admin
 Disallow: /api/quotes
 Disallow: /api/admin/
 
-# Sitemap reference
-Sitemap: https://www.pujyaagritech.com/sitemap.xml
+# Canonical XML Sitemap
+Sitemap: https://pujaagritech.com/sitemap.xml

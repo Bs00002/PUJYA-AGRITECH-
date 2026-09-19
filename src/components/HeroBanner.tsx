@@ -56,11 +56,11 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
           </p>
 
           {/* Action Buttons */}
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+          <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto max-w-sm sm:max-w-none mx-auto">
             {onOpenConsultationModal && (
               <button
                 onClick={onOpenConsultationModal}
-                className="inline-flex items-center gap-2.5 bg-[#34D399] hover:bg-[#25b882] text-[#071317] font-bold text-xs sm:text-sm px-7 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all uppercase tracking-wider cursor-pointer"
+                className="inline-flex items-center justify-center gap-2.5 bg-[#34D399] hover:bg-[#25b882] text-[#071317] font-bold text-xs sm:text-sm px-6 sm:px-7 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all uppercase tracking-wider cursor-pointer text-center"
               >
                 <span>GET PROJECT CONSULTATION</span>
               </button>
@@ -68,7 +68,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
             {onViewProducts && (
               <button
                 onClick={onViewProducts}
-                className="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm px-7 py-3.5 rounded-xl border border-white/30 transition-all uppercase tracking-wider cursor-pointer"
+                className="inline-flex items-center justify-center gap-2.5 bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm px-6 sm:px-7 py-3.5 rounded-xl border border-white/30 transition-all uppercase tracking-wider cursor-pointer text-center"
               >
                 <span>VIEW PRODUCTS</span>
               </button>

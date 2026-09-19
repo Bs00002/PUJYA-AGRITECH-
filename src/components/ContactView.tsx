@@ -133,10 +133,10 @@ export const ContactView: React.FC<ContactViewProps> = ({ onSubmitSuccess }) => 
 
               <div className="pt-1 text-sm sm:text-base font-semibold text-white">
                 <a
-                  href="mailto:contact@pujyasales.com"
+                  href="mailto:info@pujyaagritech.com"
                   className="inline-flex items-center gap-1.5 text-white hover:text-[#AEE583] transition-colors py-0.5 break-all"
                 >
-                  <span>contact@pujyasales.com</span>
+                  <span>info@pujyaagritech.com</span>
                 </a>
               </div>
             </div>
@@ -319,7 +319,7 @@ export const ContactView: React.FC<ContactViewProps> = ({ onSubmitSuccess }) => 
                   </div>
                 </div>
                 <div className="space-y-1">
-                  <h3 className="text-base sm:text-lg font-extrabold text-white">@pujyasales</h3>
+                  <h3 className="text-base sm:text-lg font-extrabold text-white">@pujyaagritech</h3>
                   <p className="text-xs text-white/85 leading-relaxed font-normal">
                     Follow our latest projects & agricultural solutions
                   </p>
@@ -327,7 +327,7 @@ export const ContactView: React.FC<ContactViewProps> = ({ onSubmitSuccess }) => 
               </div>
               <div className="pt-3 border-t border-white/15">
                 <a
-                  href="https://www.instagram.com/pujyasales/?utm_source=chatgpt.com"
+                  href="https://www.instagram.com/pujyaagritech/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-xs font-bold text-[#AEE583] hover:text-white transition-colors"

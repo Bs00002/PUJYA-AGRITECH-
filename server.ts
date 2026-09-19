@@ -129,7 +129,11 @@ const quoteRequests: Array<{
   name: string;
   phone: string;
   email: string;
+  company?: string;
+  city?: string;
   location: string;
+  source?: string;
+  consent?: boolean;
   structureType: string;
   areaSqM: number;
   notes: string;
@@ -139,8 +143,11 @@ const quoteRequests: Array<{
     id: "PQ-1001",
     name: "Rajesh Kumar",
     phone: "+91 99744 31960",
-    email: "contact@pujyasales.com",
+    email: "info@pujyaagritech.com",
+    company: "Pujya Sales Corp",
+    city: "Ahmedabad",
     location: "Ahmedabad, Gujarat",
+    source: "Website Consultation Form",
     structureType: "Green House Structure",
     areaSqM: 4000,
     notes: "Inquiry regarding shade net houses and poly film supply.",
@@ -159,19 +166,40 @@ app.get("/robots.txt", (_req, res) => {
   res.sendFile(path.join(process.cwd(), "public", "robots.txt"));
 });
 
-app.get("/api/health", (_req, res) => {
-  res.json({ status: "ok", company: "Pujya Agritech", estd: 2012 });
+app.get("/site.webmanifest", (_req, res) => {
+  res.header("Content-Type", "application/manifest+json");
+  res.sendFile(path.join(process.cwd(), "public", "site.webmanifest"));
 });
 
-// Public Quote Submission Endpoint (Sanitized & Rate Limited)
+// Google Search Console HTML Verification File Handler
+app.get("/google:token.html", (req, res) => {
+  const filename = `google${req.params.token}.html`;
+  const filePath = path.join(process.cwd(), "public", filename);
+  res.header("Content-Type", "text/html");
+  res.sendFile(filePath, (err) => {
+    if (err) {
+      res.status(404).send("Google Search Console verification file not found.");
+    }
+  });
+});
+
+app.get("/api/health", (_req, res) => {
+  res.json({ status: "ok", company: "Pujya Agritech", estd: 2017 });
+});
+
+// Public Quote / Lead Submission Endpoint (Sanitized & Rate Limited)
 app.post("/api/quotes", publicApiLimiter, (req, res) => {
   const name = sanitizeInput(req.body.name);
-  const phone = sanitizeInput(req.body.phone);
+  const phone = sanitizeInput(req.body.phone || req.body.mobile);
   const email = sanitizeInput(req.body.email);
-  const location = sanitizeInput(req.body.location);
-  const structureType = sanitizeInput(req.body.structureType);
+  const company = sanitizeInput(req.body.company);
+  const city = sanitizeInput(req.body.city);
+  const location = sanitizeInput(req.body.location || req.body.city);
+  const source = sanitizeInput(req.body.source || "Website Form");
+  const consent = Boolean(req.body.consent);
+  const structureType = sanitizeInput(req.body.structureType) || source;
   const areaSqM = Number(req.body.areaSqM) || 1000;
-  const notes = sanitizeInput(req.body.notes);
+  const notes = sanitizeInput(req.body.notes) || `Lead Source: ${source}`;
 
   if (!name || !phone) {
     res.status(400).json({ success: false, error: "Name and phone number are required." });
@@ -183,8 +211,12 @@ app.post("/api/quotes", publicApiLimiter, (req, res) => {
     name,
     phone,
     email: email || "",
-    location: location || "India",
-    structureType: structureType || "Green House Structure",
+    company: company || "",
+    city: city || "",
+    location: location || city || "India",
+    source: source,
+    consent,
+    structureType: structureType,
     areaSqM,
     notes: notes || "",
     createdAt: new Date().toISOString(),
@@ -215,18 +247,18 @@ app.post("/api/ai-consult", publicApiLimiter, async (req, res) => {
 
 Thank you for inquiring about **${structureType || 'Protected Cultivation Solutions'}**!
 
-Pujya Agritech started its work in this industry in 2012. Headquartered in Ahmedabad, Gujarat, with manufacturing facility in Gandhinagar, Gujarat, we manufacture and supply:
+Pujya Agritech was established in 2017. Headquartered in Ahmedabad, Gujarat, with manufacturing facility in Gandhinagar, Gujarat, we manufacture and supply:
 - Green Houses, Shade Net Houses, Poly Tunnels
 - Hydroponics, Cattle Shelters, Poultry Farms
 - Agricultural Protective Materials (Pan-India supply)
 
-*Contact Pujya Agritech directly at +91 99744 31960 / +91 90814 12412 or contact@pujyasales.com for details.*`,
+*Contact Pujya Agritech directly at +91 99744 31960 / +91 90814 12412 or info@pujyaagritech.com for details.*`,
       });
       return;
     }
 
     const ai = new GoogleGenAI({ apiKey });
-    const prompt = `You are the AI Assistant for "Pujya Agritech" (Protected Cultivation Technology, Established 2012, Ahmedabad & Gandhinagar, Gujarat).
+    const prompt = `You are the AI Assistant for "Pujya Agritech" (Protected Cultivation Technology, Established 2017, Ahmedabad & Gandhinagar, Gujarat).
 Pujya Agritech provides:
 - Green Houses, Shade Net Houses, Poly Tunnels
 - Hydroponics, Cattle Shelters, Poultry Farms
@@ -235,7 +267,7 @@ Pujya Agritech provides:
 User Context: Crop: ${crop || 'General'}, Location: ${location || 'India'}, Structure: ${structureType || 'General'}, Area: ${areaSqM || 'N/A'}
 Inquiry: "${message}"
 
-Provide a professional response. Recommend contacting Pujya Agritech at +91 99744 31960 / +91 90814 12412 / contact@pujyasales.com.`;
+Provide a professional response. Recommend contacting Pujya Agritech at +91 99744 31960 / +91 90814 12412 / info@pujyaagritech.com.`;
 
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
@@ -244,13 +276,13 @@ Provide a professional response. Recommend contacting Pujya Agritech at +91 9974
 
     res.json({
       success: true,
-      reply: response.text || "Thank you for contacting Pujya Agritech. Please reach out to our team at +91 99744 31960 / +91 90814 12412 or contact@pujyasales.com.",
+      reply: response.text || "Thank you for contacting Pujya Agritech. Please reach out to our team at +91 99744 31960 / +91 90814 12412 or info@pujyaagritech.com.",
     });
   } catch (error: any) {
     res.status(500).json({
       success: false,
       error: "Error processing inquiry.",
-      fallback: "Pujya Agritech provides protected cultivation technology and materials. Please contact +91 99744 31960 / +91 90814 12412 or contact@pujyasales.com.",
+      fallback: "Pujya Agritech provides protected cultivation technology and materials. Please contact +91 99744 31960 / +91 90814 12412 or info@pujyaagritech.com.",
     });
   }
 });
