@@ -6,25 +6,28 @@ repo_url = "https://github.com/Bs00002/PUJYA-AGRITECH-.git"
 dist_dir = os.path.abspath("dist")
 temp_dir = os.path.abspath("scratch/production_deploy")
 
-if os.path.exists(temp_dir):
-    shutil.rmtree(temp_dir)
+def copy_dist():
+    os.makedirs(temp_dir, exist_ok=True)
+    # Copy all files/dirs from dist to temp_dir (excluding .git)
+    for item in os.listdir(dist_dir):
+        src = os.path.join(dist_dir, item)
+        dst = os.path.join(temp_dir, item)
+        if os.path.isdir(src):
+            if os.path.exists(dst):
+                shutil.rmtree(dst)
+            shutil.copytree(src, dst)
+        else:
+            shutil.copy2(src, dst)
 
-# Ensure dist exists and has index.html
-if not os.path.exists(os.path.join(dist_dir, "index.html")):
-    print("dist/index.html not found, running npm run build first...")
-    subprocess.run(["npm", "run", "build"], check=True, shell=True)
-
-# Copy dist files to temp directory
-shutil.copytree(dist_dir, temp_dir)
+copy_dist()
 print(f"Copied dist files to {temp_dir}")
 
-# Initialize git in temp directory
 commands = [
     ["git", "init"],
-    ["git", "checkout", "-b", "production"],
+    ["git", "checkout", "-B", "production"],
     ["git", "add", "."],
-    ["git", "commit", "-m", "Deploy pre-built production dist/ files for Hostinger hPanel"],
-    ["git", "remote", "add", "origin", repo_url],
+    ["git", "commit", "-m", "Add Google Search Console verification file and meta tags to production build"],
+    ["git", "remote", "set-url", "origin", repo_url] if os.path.exists(os.path.join(temp_dir, ".git", "config")) else ["git", "remote", "add", "origin", repo_url],
     ["git", "push", "--force", "origin", "production"]
 ]
 
@@ -34,8 +37,5 @@ for cmd in commands:
     print(res.stdout)
     if res.stderr:
         print("ERR:", res.stderr)
-    if res.returncode != 0:
-        print(f"Failed with code {res.returncode}")
-        break
 
 print("Production branch push script finished.")

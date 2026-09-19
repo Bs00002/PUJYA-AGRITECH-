@@ -38,10 +38,10 @@ const PATH_TO_TAB: Record<string, string> = {
 // Global Organization & LocalBusiness JSON-LD Schema
 const GLOBAL_ORGANIZATION_SCHEMA = {
   '@type': 'Organization',
-  '@id': 'https://pujaagritech.com/#organization',
+  '@id': 'https://pujyaagritech.com/#organization',
   name: 'Pujya Agritech',
-  url: 'https://pujaagritech.com',
-  logo: 'https://pujaagritech.com/logo.png',
+  url: 'https://pujyaagritech.com',
+  logo: 'https://pujyaagritech.com/logo.png',
   description: 'Manufacturer and turnkey EPC partner for Greenhouses, Naturally Ventilated Poly Houses, Shade Net Houses, Drip Irrigation, and Protected Farming Infrastructure in India.',
   foundingDate: '2017',
   address: {
@@ -73,9 +73,9 @@ const GLOBAL_ORGANIZATION_SCHEMA = {
 
 const GLOBAL_LOCAL_BUSINESS_SCHEMA = {
   '@type': 'LocalBusiness',
-  '@id': 'https://pujaagritech.com/#localbusiness',
+  '@id': 'https://pujyaagritech.com/#localbusiness',
   name: 'Pujya Agritech',
-  image: 'https://pujaagritech.com/who-we-are-bg.jpeg',
+  image: 'https://pujyaagritech.com/who-we-are-bg.jpeg',
   telephone: ['+91 99744 31960', '+91 90814 12412'],
   email: 'info@pujyaagritech.com',
   priceRange: '₹₹₹',
@@ -190,8 +190,8 @@ function MainLayout() {
             {
               '@type': 'BreadcrumbList',
               itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://pujaagritech.com/' },
-                { '@type': 'ListItem', position: 2, name: 'Products', item: 'https://pujaagritech.com/products' },
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://pujyaagritech.com/' },
+                { '@type': 'ListItem', position: 2, name: 'Products', item: 'https://pujyaagritech.com/products' },
               ],
             },
           ],
@@ -206,8 +206,8 @@ function MainLayout() {
             {
               '@type': 'BreadcrumbList',
               itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://pujaagritech.com/' },
-                { '@type': 'ListItem', position: 2, name: 'Projects', item: 'https://pujaagritech.com/projects' },
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://pujyaagritech.com/' },
+                { '@type': 'ListItem', position: 2, name: 'Projects', item: 'https://pujyaagritech.com/projects' },
               ],
             },
           ],
@@ -250,8 +250,8 @@ function MainLayout() {
             GLOBAL_LOCAL_BUSINESS_SCHEMA,
             {
               '@type': 'WebSite',
-              '@id': 'https://pujaagritech.com/#website',
-              url: 'https://pujaagritech.com',
+              '@id': 'https://pujyaagritech.com/#website',
+              url: 'https://pujyaagritech.com',
               name: 'Pujya Agritech',
               description: 'Greenhouse, Polyhouse & Protected Cultivation Solutions',
             },
