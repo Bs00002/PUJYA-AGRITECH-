@@ -16,7 +16,7 @@ export default defineConfig(() => {
       // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
       watch: process.env.DISABLE_HMR === 'true' ? null : {
-        ignored: ['**/IMAGES OF PS/**', '**/*.mp4', '**/.git/**', '**/public/certificates/**']
+        ignored: ['**/IMAGES OF PS/**', '**/*.mp4', '**/.git/**', '**/public/certificates/**', '**/scratch/**', '**/dist/**']
       },
     },
   };

@@ -1,0 +1,50 @@
+name: Deploy Pujya Agritech to Hostinger
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🛠️ Build Production Bundle (Vite)
+        run: npm run build
+
+      - name: 🌿 Deploy Built Files to 'production' Branch (For Hostinger Git Tool)
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: production
+          folder: dist
+          clean: true
+
+      - name: 🚀 Deploy to Hostinger public_html via FTP (If Secrets Configured)
+        if: ${{ secrets.FTP_SERVER != '' && secrets.FTP_USERNAME != '' && secrets.FTP_PASSWORD != '' }}
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./dist/
+          server-dir: ./public_html/
+          dangerous-clean-slate: false

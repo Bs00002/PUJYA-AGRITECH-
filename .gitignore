@@ -9,3 +9,4 @@ coverage/
 *.zip
 *.7z
 uploads/
+scratch/production_deploy/
