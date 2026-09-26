@@ -1,6 +1,7 @@
 import React from 'react';
-import { ShieldCheck, ArrowRight, Award, CheckCircle2, PhoneCall, Quote } from 'lucide-react';
+import { ShieldCheck, ArrowRight, Award, PhoneCall, Quote } from 'lucide-react';
 import { useAdmin } from '../context/AdminContext';
+import { WhoWeAreMission } from './WhoWeAreMission';
 
 interface AboutUsProps {
   onOpenConsultationModal?: () => void;
@@ -26,13 +27,6 @@ export const AboutUs: React.FC<AboutUsProps> = ({ onOpenConsultationModal }) => 
       title: 'Farmer Needs First',
       desc: 'Every farm structure is customized around real crop protection, ROI, and growing realities.',
     },
-  ];
-
-  const highlights = [
-    { label: 'FOUNDED', val: '2017', sub: 'Ahmedabad, Gujarat' },
-    { label: 'FACILITY', val: 'Gandhinagar', sub: 'In-house Manufacturing' },
-    { label: 'PROJECTS', val: 'Turnkey', sub: 'Govt, Corporate & Farmers' },
-    { label: 'REACH', val: 'Pan-India', sub: 'Reliable Field Execution' },
   ];
 
   return (
@@ -68,19 +62,17 @@ export const AboutUs: React.FC<AboutUsProps> = ({ onOpenConsultationModal }) => 
               </div>
             </div>
 
-            {/* Right Hero Image Card (Clean Photograph with No Text Overlay) */}
+            {/* Right Hero Image Card (Turnkey Commercial Polyhouse & Water Harvesting Complex) */}
             <div className="lg:col-span-5 relative">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] bg-[#EBF5F8]">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] bg-[#EBF5F8] group">
                 <img
-                  src="/who-we-are-bg.jpeg"
+                  src="/about-hero-greenhouse.png"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    if (!target.src.endsWith('/who-we-are.jpeg')) {
-                      target.src = '/who-we-are.jpeg';
-                    }
+                    target.src = '/who-we-are-greenhouse.png';
                   }}
-                  alt="Pujya Agritech Protected Cultivation Site"
-                  className="w-full h-full object-cover"
+                  alt="Pujya Agritech Commercial Polyhouse and Water Harvesting Project"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
               <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-[#006B8F]/15 rounded-3xl -z-10 hidden sm:block"></div>
@@ -91,91 +83,14 @@ export const AboutUs: React.FC<AboutUsProps> = ({ onOpenConsultationModal }) => 
       </section>
 
       {/* ========================================================================= */}
-      {/* 2. WHO WE ARE & OUR MISSION — EXACT HOME PAGE #006B8F DEEP TEAL DESIGN */}
+      {/* 2. WHO WE ARE & OUR MISSION — EXACT PUJYA TEAL DESIGN WITH GREENHOUSE IMAGE */}
       {/* ========================================================================= */}
-      <section className="relative py-12 md:py-16 bg-white text-white font-sans overflow-hidden">
-        
-        {/* Organic Top Edge Divider SVG (Exact Home Page Wave) */}
-        <div className="w-full overflow-hidden leading-none z-10 relative -mb-1">
-          <svg className="w-full h-8 md:h-12 text-[#006B8F] fill-current" viewBox="0 0 1440 48" preserveAspectRatio="none">
-            <path d="M0,32 C140,44 260,14 380,30 C500,44 620,12 740,26 C860,40 980,12 1100,28 C1220,42 1340,16 1440,32 L1440,48 L0,48 Z" />
-          </svg>
-        </div>
-
-        {/* Main Deep Pujya Teal (#006B8F) Section Body */}
-        <div className="bg-[#006B8F] py-12 md:py-16 px-4 relative z-0">
-          <div className="max-w-[1280px] w-[94%] mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-              
-              {/* LEFT COLUMN: Clean Greenhouse Photograph (No Text Overlay) */}
-              <div className="lg:col-span-5 relative">
-                <div className="relative rounded-2xl overflow-hidden border-2 border-white/20 bg-white/10 shadow-md h-[280px] sm:h-[340px] lg:h-[380px]">
-                  <img
-                    src="/who-we-are-bg.jpeg"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      if (!target.src.endsWith('/who-we-are.jpeg')) {
-                        target.src = '/who-we-are.jpeg';
-                      }
-                    }}
-                    alt="Pujya Agritech Protected Cultivation Site"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-
-              {/* RIGHT COLUMN: Eyebrow + Headline + Paragraphs + Action Buttons */}
-              <div className="lg:col-span-7 space-y-5">
-                <div className="flex items-center gap-2 mb-1">
-                  <ShieldCheck className="w-5 h-5 text-[#AEE583]" />
-                  <h2 className="text-xl sm:text-2xl font-extrabold tracking-widest uppercase text-white">
-                    WHO WE ARE
-                  </h2>
-                </div>
-
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                  Turnkey Protected Cultivation Infrastructure across India
-                </h3>
-
-                {/* White Readable Paragraphs */}
-                <div className="space-y-3.5 text-sm sm:text-base text-white/95 leading-[1.7] font-normal">
-                  <p>
-                    Established in 2017 and headquartered in Ahmedabad, <strong className="text-white font-bold">Pujya Agritech</strong> is a professionally managed organization delivering advanced and reliable solutions in protected farming infrastructure across India.
-                  </p>
-                  <p>
-                    With a strong foundation built on technical expertise, industry experience, and customer-centric values, we specialize in the design, supply, and execution of turnkey <strong className="text-white font-bold">Poly House, Greenhouse, Fan & Pad Cooling Systems</strong>, and <strong className="text-white font-bold">Shade Net House</strong> projects.
-                  </p>
-                  <p>
-                    Over the years, we have successfully executed a diverse portfolio of Government, Institutional, and Farmer-based projects, establishing ourselves as a trusted partner in modern agriculture development.
-                  </p>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="pt-2 flex flex-wrap items-center gap-3">
-                  {onOpenConsultationModal && (
-                    <button
-                      onClick={onOpenConsultationModal}
-                      className="inline-flex items-center gap-2 text-sm font-bold tracking-wider text-[#006B8F] bg-white hover:bg-slate-100 px-5 py-3 rounded-lg shadow-sm transition-all uppercase cursor-pointer"
-                    >
-                      <span>REQUEST CONSULTATION</span>
-                      <ArrowRight className="w-4 h-4 text-[#006B8F]" />
-                    </button>
-                  )}
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        {/* Organic Bottom Edge Divider SVG (Exact Home Page Wave) */}
-        <div className="w-full overflow-hidden leading-none z-10 relative -mt-1">
-          <svg className="w-full h-8 md:h-12 text-[#006B8F] fill-current" viewBox="0 0 1440 48" preserveAspectRatio="none">
-            <path d="M0,0 L1440,0 L1440,16 C1320,32 1200,10 1080,24 C960,38 840,12 720,26 C600,40 480,8 360,22 C240,36 120,10 0,18 Z" />
-          </svg>
-        </div>
-
-      </section>
+      <WhoWeAreMission
+        onLearnMoreAboutClick={() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        onViewProductsClick={onOpenConsultationModal}
+      />
 
       {/* ========================================================================= */}
       {/* 3. FOUNDER & LEADERSHIP SECTION (Premium Editorial Asymmetric Layout) */}
@@ -184,18 +99,18 @@ export const AboutUs: React.FC<AboutUsProps> = ({ onOpenConsultationModal }) => 
         <div className="max-w-[1240px] w-[90%] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             
-            {/* Left Column: Large Framed Founder Photograph (420-500px width visual area) */}
+            {/* Left Column: Large Framed Founder Photograph */}
             <div className="lg:col-span-5 flex justify-center">
               <div className="relative w-full max-w-[460px] aspect-[4/5] sm:h-[540px] lg:h-[580px] rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-xl group">
                 
                 {/* Real Photograph: Sunil Joshi holding Agritech award */}
                 <img
-                  src="/sunil-joshi.jpeg"
+                  src="/sunil-joshi-award.jpeg"
                   alt="Sunil Joshi — Founder & Director, Pujya Agritech"
-                  className="w-full h-full object-cover object-top group-hover:scale-[1.015] transition-transform duration-500 ease-out"
+                  className="w-full h-full object-cover object-[center_20%] group-hover:scale-[1.02] transition-transform duration-500 ease-out"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    target.src = '/who-we-are-bg.jpeg';
+                    target.src = '/sunil-joshi.jpeg';
                   }}
                 />
 

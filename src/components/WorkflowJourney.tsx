@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import {
   MapPin,
   FlaskConical,
@@ -13,16 +11,16 @@ import {
   PackageCheck,
   ChevronRight,
   ChevronLeft,
-  Leaf,
   X,
   CheckCircle2,
   ArrowRight,
-  Check,
+  Play,
+  Pause,
+  Sparkles,
+  ShieldCheck,
+  Activity,
+  Layers,
 } from 'lucide-react';
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 export interface WorkflowStage {
   id: number;
@@ -36,6 +34,7 @@ export interface WorkflowStage {
   outcome: string;
   imageUrl: string;
   icon: React.ComponentType<{ className?: string }>;
+  accentColor: string;
 }
 
 export const WORKFLOW_STAGES: WorkflowStage[] = [
@@ -48,15 +47,16 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     description: 'Understand the land, location, available area and project requirements through on-site evaluation.',
     summary: 'Pujya Agritech first visits the proposed project location to thoroughly inspect and evaluate the available land, site conditions, accessibility, orientation, and practical client requirements. The assessment provides the technical information required to plan a suitable protected cultivation project.',
     highlights: [
-      'Site inspection and land assessment',
-      'Understanding available area and location',
+      'Site inspection and topographical land assessment',
+      'Understanding available area, access roads & water points',
       'Checking site suitability for protected cultivation',
-      'Understanding farmer/client requirements',
-      'Collecting the information required for further project planning',
+      'Understanding farmer/client operational requirements',
+      'Collecting data for precision engineering planning',
     ],
     outcome: 'A clear understanding of the site before designing the project.',
     imageUrl: '/workflow/step-01.jpeg',
     icon: MapPin,
+    accentColor: '#006B8F',
   },
   {
     id: 2,
@@ -68,14 +68,15 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     summary: 'Project site conditions are scientifically studied to understand the micro-environment in which cultivation will take place. This evaluation ensures that structure design, shade density, and cooling systems match local weather patterns.',
     highlights: [
       'Climate and local environmental conditions evaluation',
-      'Soil-related quality and growing assessment',
-      'Micro-climate growing conditions analysis',
-      'Crop-specific environmental requirements',
-      'Using the assessment to support suitable protected cultivation planning',
+      'Soil chemical composition and drainage assessment',
+      'Micro-climate and seasonal solar trajectory analysis',
+      'Crop-specific environmental requirement mapping',
+      'Science-backed blueprint for protected climate control',
     ],
     outcome: 'Better technical understanding of the growing environment before implementation.',
     imageUrl: '/workflow/step-02.jpeg',
     icon: FlaskConical,
+    accentColor: '#0E7490',
   },
   {
     id: 3,
@@ -86,15 +87,16 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     description: 'Prepare the project design, structure specifications and technical requirements for construction.',
     summary: 'Collected site and crop information is converted into a comprehensive engineering project design. Our structural team prepares layout drawings, structural specifications, and material requirements customized for your site.',
     highlights: [
-      'Comprehensive project planning & master layout',
-      'Structure design and engineering specifications',
-      'Layout planning for optimal space utilization',
-      'Selection and planning of required protected cultivation infrastructure',
-      'Designing according to the available site and client requirements',
+      'Comprehensive project planning & master layout CAD',
+      'Structure load calculation and engineering specs',
+      'Layout planning for optimal space and sunlight utilization',
+      'Selection of climate screens, vents and automation gear',
+      'Customized architectural design aligned with client targets',
     ],
     outcome: 'A planned and technically suitable project design ready for execution.',
     imageUrl: '/workflow/step-03.png',
     icon: Compass,
+    accentColor: '#2563EB',
   },
   {
     id: 4,
@@ -105,14 +107,16 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     description: 'Guide customers through applicable NHB, MIDH and state government subsidy and financing processes.',
     summary: 'Pujya Agritech supports customers in understanding applicable central (NHB/MIDH) and state government subsidy schemes, as well as banking financing possibilities for protected farming infrastructure.',
     highlights: [
-      'Guidance regarding applicable government subsidy schemes',
-      'Assistance in understanding required documentation and project reports',
-      'Support related to bank loan and subsidy approval processes',
-      'Helping customers understand requirements for their specific project',
+      'Guidance regarding applicable central & state subsidies',
+      'Assistance in Bankable Detailed Project Report (DPR)',
+      'Support throughout bank sanction and subsidy inspection stages',
+      'Clarification of subsidy eligibility criteria and documents',
+      'Navigating fast-track agricultural credit facilities',
     ],
-    outcome: 'Customers receive guidance for navigating applicable financing and subsidy opportunities.',
+    outcome: 'Customers receive seamless guidance for financing and government subsidies.',
     imageUrl: '/workflow/step-04.jfif',
     icon: FileCheck2,
+    accentColor: '#7C3AED',
   },
   {
     id: 5,
@@ -123,15 +127,16 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     description: 'Execute the protected cultivation structure using GI steel frames according to project specifications.',
     summary: 'The physical execution stage where our specialized installation team constructs the polyhouse or net house structure on site using heavy-duty GI steel components and high-grade UV cladding material.',
     highlights: [
-      'Protected cultivation structure setup and foundation civil work',
-      'Polyhouse / Net House framework installation',
-      'Structural implementation strictly according to the approved design',
-      'Installation of cladding, insect nets, and vent mechanisms',
-      'Focus on proper execution quality and long-term durability',
+      'Concrete foundation anchors and civil site works',
+      'Hot-dip galvanized (GI) steel framework assembly',
+      'High-grade UV stabilized 200-micron poly film & insect netting',
+      'Automated top and side ventilation mechanisms',
+      'Strict engineering inspection and stress durability check',
     ],
-    outcome: 'The protected cultivation structure is physically established and prepared for cultivation.',
+    outcome: 'The protected cultivation structure is physically established and durable.',
     imageUrl: '/workflow/step-05.jpeg',
     icon: Hammer,
+    accentColor: '#059669',
   },
   {
     id: 6,
@@ -142,15 +147,16 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     description: 'Install precision drip irrigation and fertigation systems for controlled water and nutrient delivery.',
     summary: 'Installation of automated or semi-automated drip irrigation and fertigation systems tailored to crop water requirements, ensuring precise nutrient dosing directly to crop root zones.',
     highlights: [
-      'Precision drip irrigation system installation',
-      'Fertigation dosing system setup',
-      'Efficient water distribution pipeline network',
-      'Direct nutrient delivery through controlled irrigation loops',
-      'Planning the system according to crop and project requirements',
+      'Pressure-compensating drip lateral line deployment',
+      'Venturi & automated fertigation dosing injector setup',
+      'Multi-stage gravel and disc filtration arrays',
+      'Automated zone valves and moisture sensor integration',
+      'Optimal nutrient distribution directly to root zones',
     ],
-    outcome: 'Controlled and efficient delivery of water and nutrients to the crop.',
+    outcome: 'Controlled and highly efficient delivery of water and crop nutrients.',
     imageUrl: '/workflow/step-06.png',
     icon: Droplets,
+    accentColor: '#0284C7',
   },
   {
     id: 7,
@@ -161,15 +167,16 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     description: 'Provide practical agronomy guidance and continuous technical support for successful crop cultivation.',
     summary: 'Our support does not end after structure installation. We provide ongoing agronomic guidance, crop management protocols, and technical consulting to ensure optimal plant health and high yield.',
     highlights: [
-      'Practical agronomy guidance for high-value crops',
-      'Crop management support and fertigation scheduling',
-      'Guidance related to protected cultivation practices and climate control',
-      'Continuous technical assistance throughout crop growth cycles',
-      'Helping farmers operate the protected cultivation system effectively',
+      'Crop selection and planting schedule formulation',
+      'Custom fertigation recipes and nutritional dosage planning',
+      'Integrated pest & disease management protocols',
+      'Microclimate humidity and temperature regulation advice',
+      'Continuous agronomic site check-ins and expert backing',
     ],
-    outcome: 'Farmers receive practical technical support for better project operation and crop management.',
+    outcome: 'Farmers receive practical agronomic support for high yields and healthy crops.',
     imageUrl: '/workflow/step-07.jpg',
     icon: Sprout,
+    accentColor: '#16A34A',
   },
   {
     id: 8,
@@ -180,15 +187,16 @@ export const WORKFLOW_STAGES: WorkflowStage[] = [
     description: 'Support grading, handling, packaging, storage guidance and buyer market linkage after harvest.',
     summary: 'The final stage after crop production focusing on harvesting techniques, produce handling, sorting, packaging, and storage guidance to maintain peak fresh quality for market movement.',
     highlights: [
-      'Practical harvesting guidance for crop quality preservation',
-      'Grading and handling best practices',
-      'Produce packaging recommendations for market transport',
-      'Storage-related environmental considerations',
-      'Supporting better post-harvest management practices for market value',
+      'Standard operating procedures for morning harvest picking',
+      'Sorting, grading, and uniform packaging standards',
+      'Cold-chain and pre-cooling storage recommendations',
+      'Direct buyer and wholesale market linkage guidance',
+      'Maximizing premium farm-gate realizations and shelf life',
     ],
-    outcome: 'Better handling of produce after harvesting and improved readiness for storage/market movement.',
+    outcome: 'Superior produce preservation and improved readiness for market movement.',
     imageUrl: '/workflow/step-08.jpeg',
     icon: PackageCheck,
+    accentColor: '#D97706',
   },
 ];
 
@@ -197,339 +205,429 @@ interface WorkflowJourneyProps {
 }
 
 export const WorkflowJourney: React.FC<WorkflowJourneyProps> = ({ onOpenConsultationModal }) => {
-  const shouldReduceMotion = useReducedMotion();
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const triggerInstanceRef = useRef<ScrollTrigger | null>(null);
-
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [selectedStep, setSelectedStep] = useState<WorkflowStage | null>(null);
-
-  // GSAP ScrollTrigger Setup for Sticky Storytelling (Desktop Only >= 1024px)
-  useEffect(() => {
-    if (shouldReduceMotion) return;
-
-    const mm = gsap.matchMedia();
-
-    mm.add('(min-width: 1024px)', () => {
-      const st = ScrollTrigger.create({
-        id: 'workflow-scroll-trigger',
-        trigger: sectionRef.current,
-        start: 'top top',
-        end: `+=${WORKFLOW_STAGES.length * 450}`,
-        pin: true,
-        pinSpacing: true,
-        scrub: 0.6,
-        onUpdate: (self) => {
-          const rawProgress = self.progress;
-          // Calculate step index smoothly
-          const index = Math.min(
-            Math.floor(rawProgress * WORKFLOW_STAGES.length),
-            WORKFLOW_STAGES.length - 1
-          );
-          setActiveIndex(index);
-        },
-      });
-
-      triggerInstanceRef.current = st;
-      return () => {
-        if (st) st.kill();
-      };
-    });
-
-    return () => {
-      mm.revert();
-      triggerInstanceRef.current = null;
-    };
-  }, [shouldReduceMotion]);
-
-  // Handle direct navigation to a step
-  const handleStepSelect = (index: number) => {
-    setActiveIndex(index);
-    if (triggerInstanceRef.current) {
-      const st = triggerInstanceRef.current;
-      const stepRatio = index / (WORKFLOW_STAGES.length - 1);
-      const targetScroll = st.start + stepRatio * (st.end - st.start);
-      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-    }
-  };
+  const [hoveredNode, setHoveredNode] = useState<number | null>(null);
 
   const activeStage = WORKFLOW_STAGES[activeIndex] || WORKFLOW_STAGES[0];
+  const totalStages = WORKFLOW_STAGES.length;
+
+  // Auto-cycle through stages when playing
+  useEffect(() => {
+    if (!isPlaying) return;
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % totalStages);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [isPlaying, totalStages]);
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % totalStages);
+  };
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + totalStages) % totalStages);
+  };
 
   return (
     <section
-      ref={sectionRef}
-      className="relative bg-[#F8FAF8] text-[#10232B] font-sans border-y border-[#E4EAE5] overflow-hidden"
+      className="relative bg-gradient-to-b from-[#F4FAF5] via-white to-[#F0F7F2] text-[#10232B] font-sans py-20 px-4 sm:px-6 lg:px-12 overflow-hidden border-y border-[#E4EAE5]"
       id="project-workflow"
     >
-      {/* Background Accent Gradients */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-[#006B8F]/5 blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full bg-[#2F7445]/5 blur-3xl" />
+      {/* Background Decorative Tech Elements */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden select-none">
+        <div className="absolute top-1/4 left-1/10 w-96 h-96 rounded-full bg-[#006B8F]/5 blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/10 w-[450px] h-[450px] rounded-full bg-[#2F7445]/6 blur-3xl" />
+        {/* Subtle grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage: `radial-gradient(#10232B 1px, transparent 1px)`,
+            backgroundSize: '24px 24px',
+          }}
+        />
       </div>
 
-      {/* ===================== DESKTOP STICKY SCROLL STORYTELLING ===================== */}
-      <div className="hidden lg:flex min-h-screen flex-col justify-between py-10 px-6 lg:px-12 max-w-[1440px] w-full mx-auto relative z-10">
-        
-        {/* HEADER */}
-        <div className="text-center space-y-2 max-w-3xl mx-auto shrink-0 mb-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#006B8F]/25 bg-white shadow-2xs">
-            <Leaf className="w-3.5 h-3.5 text-[#006B8F]" />
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#006B8F]">
-              FROM CONCEPT TO COMPLETION
-            </span>
-          </div>
-
-          <h2 className="text-3xl lg:text-4xl font-extrabold tracking-tight text-[#10232B] uppercase">
-            OUR PROJECT PROCESS
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Clean Section Header (No Pill Badge) */}
+        <div className="text-center space-y-3 max-w-3xl mx-auto mb-14">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#10232B] uppercase">
+            OUR PROJECT <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#006B8F] to-[#2F7445]">PROCESS HUB</span>
           </h2>
 
-          <p className="text-base text-gray-600 leading-relaxed font-normal max-w-xl mx-auto">
-            From site assessment to final execution — every stage is planned with precision.
+          <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-normal">
+            From site assessment to final harvest — explore each stage of our scientific agricultural lifecycle.
           </p>
+
+          {/* Quick Step Indicators (Compact Track for All Screens) */}
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-3">
+            {WORKFLOW_STAGES.map((s, idx) => {
+              const isActive = idx === activeIndex;
+              return (
+                <button
+                  key={s.id}
+                  onClick={() => {
+                    setActiveIndex(idx);
+                    setIsPlaying(false);
+                  }}
+                  className={`px-3 py-1 rounded-full text-xs font-bold font-mono transition-all duration-300 cursor-pointer flex items-center gap-1.5 ${
+                    isActive
+                      ? 'bg-[#006B8F] text-white shadow-md scale-105'
+                      : 'bg-white/80 hover:bg-white text-gray-600 border border-gray-200/80 hover:border-gray-300'
+                  }`}
+                >
+                  <span className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-[#AEE583]' : 'bg-gray-400'}`} />
+                  <span>{s.stepNumber}</span>
+                  <span className="hidden sm:inline font-sans font-semibold text-[11px]">{s.journeyTag}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* MAIN SPLIT STORYTELLING STAGE */}
-        <div className="grid grid-cols-12 gap-10 items-center my-auto flex-1 max-h-[540px]">
+        {/* ===================== ORBIT TECH HUB + LIVE SPOTLIGHT GRID ===================== */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* LEFT COLUMN: Large Premium Image Container */}
-          <div className="col-span-7 relative h-full min-h-[420px] max-h-[500px] rounded-2xl overflow-hidden shadow-xl border border-gray-200/80 bg-white group">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeStage.id}
-                initial={{ opacity: 0, scale: 1.04 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute inset-0 w-full h-full"
-              >
-                <img
-                  src={activeStage.imageUrl}
-                  alt={activeStage.title}
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-            </AnimatePresence>
-          </div>
+          {/* ================= LEFT: CENTRAL ORBIT TECH HUB ================= */}
+          <div className="lg:col-span-5 flex flex-col items-center justify-center">
+            
+            <div className="relative w-[340px] h-[340px] sm:w-[440px] sm:h-[440px] flex items-center justify-center select-none">
+              
+              {/* Outer Decorative Glow Rings */}
+              <div className="absolute inset-0 rounded-full border border-[#006B8F]/15 animate-[spin_60s_linear_infinite]" />
+              <div className="absolute inset-6 rounded-full border border-dashed border-[#2F7445]/20 animate-[spin_40s_linear_infinite_reverse]" />
+              <div className="absolute inset-14 rounded-full border border-[#006B8F]/10" />
 
-          {/* RIGHT COLUMN: Active Stage Technical Overview */}
-          <div className="col-span-5 flex flex-col justify-between space-y-6 pl-2">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeStage.id}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.35, ease: 'easeOut' }}
-                className="space-y-5"
-              >
-                {/* Step Counter Eyebrow */}
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl font-extrabold font-mono text-[#006B8F]">
-                    STEP {activeStage.stepNumber}
+              {/* Pulsing Radar Sweep Wave */}
+              <div className="absolute w-[280px] h-[280px] sm:w-[370px] sm:h-[370px] rounded-full bg-gradient-to-tr from-[#006B8F]/5 via-transparent to-[#2F7445]/10 animate-pulse pointer-events-none" />
+
+              {/* Connecting Laser Beams from Center to Orbit Nodes */}
+              <svg viewBox="0 0 440 440" className="absolute inset-0 w-full h-full pointer-events-none z-0">
+                <defs>
+                  <filter id="laserGlow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#006B8F" floodOpacity="0.6"/>
+                  </filter>
+                </defs>
+                {WORKFLOW_STAGES.map((_, idx) => {
+                  const angle = (idx * (360 / totalStages) - 90) * (Math.PI / 180);
+                  const r = 180;
+                  const x = 220 + r * Math.cos(angle);
+                  const y = 220 + r * Math.sin(angle);
+                  const isActive = idx === activeIndex;
+
+                  return (
+                    <line
+                      key={idx}
+                      x1={220}
+                      y1={220}
+                      x2={x}
+                      y2={y}
+                      stroke={isActive ? '#006B8F' : '#E2E8F0'}
+                      strokeWidth={isActive ? 2.5 : 1}
+                      strokeDasharray={isActive ? 'none' : '4 4'}
+                      filter={isActive ? 'url(#laserGlow)' : undefined}
+                      className="transition-all duration-500"
+                    />
+                  );
+                })}
+              </svg>
+
+              {/* Center Core HUD Radar */}
+              <div className="relative z-10 w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-white shadow-2xl border-4 border-white flex flex-col items-center justify-center p-3 text-center group cursor-pointer overflow-hidden transition-all duration-300">
+                {/* Background active image subtle blur */}
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-15 scale-110 transition-all duration-700"
+                  style={{ backgroundImage: `url(${activeStage.imageUrl})` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/80 to-white/95" />
+
+                <div className="relative z-10 flex flex-col items-center">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#006B8F]/10 border border-[#006B8F]/30 flex items-center justify-center text-[#006B8F] mb-1 shadow-inner">
+                    {React.createElement(activeStage.icon, { className: 'w-5 h-5 sm:w-6 sm:h-6' })}
+                  </div>
+                  <span className="text-[10px] font-mono font-bold tracking-widest text-[#006B8F] uppercase">
+                    STAGE {activeStage.stepNumber} / 08
                   </span>
-                  <span className="w-8 h-[2px] bg-[#006B8F]/30" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-gray-500">
+                  <span className="text-xs sm:text-sm font-extrabold text-[#10232B] uppercase tracking-wide line-clamp-1">
                     {activeStage.journeyTag}
                   </span>
                 </div>
 
-                {/* Title */}
-                <h3 className="text-2xl lg:text-3xl font-extrabold text-[#10232B] leading-tight">
-                  {activeStage.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-base text-gray-600 leading-relaxed font-normal">
-                  {activeStage.description}
-                </p>
-
-                {/* Key Highlights List */}
-                <div className="space-y-2 pt-1">
-                  <p className="text-xs font-bold font-mono text-gray-400 uppercase tracking-wider">
-                    KEY IMPLEMENTATION HIGHLIGHTS
-                  </p>
-                  <ul className="space-y-2">
-                    {activeStage.highlights.slice(0, 3).map((h, i) => (
-                      <li key={i} className="flex items-start gap-2.5 text-sm text-gray-700 font-medium">
-                        <CheckCircle2 className="w-4 h-4 text-[#006B8F] shrink-0 mt-0.5" />
-                        <span>{h}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Outcome Callout Box */}
-                <div className="p-3.5 rounded-xl bg-white border border-gray-200 shadow-2xs flex items-center gap-3 text-xs font-medium text-gray-700">
-                  <div className="w-2 h-2 rounded-full bg-[#006B8F] shrink-0" />
-                  <span><strong className="text-[#006B8F] font-bold">Outcome:</strong> {activeStage.outcome}</span>
-                </div>
-
-                {/* Actions */}
-                <div className="pt-2 flex items-center gap-3">
-                  {onOpenConsultationModal && (
-                    <button
-                      onClick={() => onOpenConsultationModal(activeStage.title)}
-                      className="px-5 py-2.5 rounded-lg bg-[#006B8F] hover:bg-[#005775] text-white text-sm font-bold shadow-md hover:shadow-lg transition-all cursor-pointer flex items-center gap-2 uppercase tracking-wide"
-                    >
-                      <span>DISCUSS THIS STAGE</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  )}
-
-                  <button
-                    onClick={() => setSelectedStep(activeStage)}
-                    className="px-4 py-2.5 rounded-lg bg-white border border-gray-200 hover:border-[#006B8F] text-[#10232B] hover:text-[#006B8F] text-sm font-bold transition-all cursor-pointer"
-                  >
-                    View Full Specifications
-                  </button>
-                </div>
-
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-        </div>
-
-        {/* BOTTOM TIMELINE PROGRESS NAVIGATION BAR */}
-        <div className="shrink-0 pt-6 border-t border-gray-200/80">
-          <div className="relative flex items-center justify-between max-w-5xl mx-auto px-4">
-            
-            {/* Background Connecting Line */}
-            <div className="absolute left-6 right-6 top-1/2 -translate-y-1/2 h-[3px] bg-gray-200 rounded-full z-0" />
-            
-            {/* Active Progress Line Fill */}
-            <div
-              className="absolute left-6 top-1/2 -translate-y-1/2 h-[3px] bg-[#006B8F] rounded-full z-0 transition-all duration-300 ease-out"
-              style={{
-                width: `calc(${(activeIndex / (WORKFLOW_STAGES.length - 1)) * 100}% - 3rem)`,
-              }}
-            />
-
-            {/* 8 Process Step Nodes */}
-            {WORKFLOW_STAGES.map((stage, idx) => {
-              const isActive = idx === activeIndex;
-              const isPassed = idx < activeIndex;
-
-              return (
-                <button
-                  key={stage.id}
-                  onClick={() => handleStepSelect(idx)}
-                  className="relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none"
-                  title={`Go to Step ${stage.stepNumber}: ${stage.title}`}
-                >
-                  {/* Circle Node */}
-                  <div
-                    className={`w-9 h-9 rounded-full flex items-center justify-center font-mono text-xs font-bold transition-all duration-300 shadow-sm ${
-                      isActive
-                        ? 'bg-[#006B8F] text-white ring-4 ring-[#006B8F]/20 scale-110'
-                        : isPassed
-                        ? 'bg-[#2F7445] text-white'
-                        : 'bg-white text-gray-500 border border-gray-300 group-hover:border-[#006B8F] group-hover:text-[#006B8F]'
-                    }`}
-                  >
-                    {isPassed ? <Check className="w-4 h-4 text-white" /> : stage.stepNumber}
-                  </div>
-
-                  {/* Step Label below node */}
-                  <span
-                    className={`mt-2 text-[11px] font-bold font-mono uppercase tracking-wider transition-colors max-w-[80px] text-center line-clamp-1 ${
-                      isActive
-                        ? 'text-[#006B8F]'
-                        : isPassed
-                        ? 'text-[#2F7445]'
-                        : 'text-gray-400 group-hover:text-gray-600'
-                    }`}
-                  >
-                    {stage.journeyTag}
-                  </span>
-                </button>
-              );
-            })}
-
-          </div>
-        </div>
-
-      </div>
-
-      {/* ===================== MOBILE & TABLET RESPONSIVE VERTICAL SCROLL EXPERIENCE ===================== */}
-      <div className="lg:hidden py-12 px-4 sm:px-6 space-y-10 max-w-2xl mx-auto">
-        {/* MOBILE HEADER */}
-        <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#006B8F]/25 bg-white shadow-2xs">
-            <Leaf className="w-3.5 h-3.5 text-[#006B8F]" />
-            <span className="text-[11px] font-bold uppercase tracking-widest text-[#006B8F]">
-              FROM CONCEPT TO COMPLETION
-            </span>
-          </div>
-
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#10232B] uppercase">
-            OUR PROJECT PROCESS
-          </h2>
-
-          <p className="text-sm text-gray-600 leading-relaxed font-normal">
-            From site assessment to final execution — every stage is planned with precision.
-          </p>
-        </div>
-
-        {/* MOBILE VERTICAL PROCESS LIST */}
-        <div className="space-y-8 relative pl-2 sm:pl-4 before:absolute before:left-6 sm:before:left-8 before:top-4 before:bottom-4 before:w-[2px] before:bg-gray-200">
-          {WORKFLOW_STAGES.map((stage) => {
-            const IconComp = stage.icon;
-            return (
-              <div key={stage.id} className="relative pl-10 sm:pl-12 space-y-3 group">
-                {/* Vertical Node Indicator */}
-                <div className="absolute left-1.5 sm:left-2 top-0 -translate-x-1/2 w-8 h-8 rounded-full bg-[#006B8F] text-white flex items-center justify-center font-mono text-xs font-bold shadow-md">
-                  {stage.stepNumber}
-                </div>
-
-                {/* Stage Content Card */}
-                <div className="bg-white rounded-2xl border border-gray-200/90 p-5 shadow-xs space-y-3">
-                  <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-gray-100 border border-gray-100">
-                    <img
-                      src={stage.imageUrl}
-                      alt={stage.title}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                    <div className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded bg-[#006B8F] text-white text-[10px] font-mono font-bold uppercase">
-                      {stage.category}
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#006B8F]">
-                      <IconComp className="w-4 h-4" />
-                      <span>STEP {stage.stepNumber} • {stage.journeyTag}</span>
-                    </div>
-                    <h3 className="text-lg font-bold text-[#10232B] leading-snug">
-                      {stage.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 leading-relaxed font-normal">
-                      {stage.description}
-                    </p>
-                  </div>
-
-                  {/* Highlights */}
-                  <div className="space-y-1.5 pt-1 border-t border-gray-100">
-                    {stage.highlights.slice(0, 2).map((h, i) => (
-                      <div key={i} className="flex items-center gap-2 text-xs text-gray-700">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#006B8F] shrink-0" />
-                        <span>{h}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <button
-                    onClick={() => setSelectedStep(stage)}
-                    className="w-full py-2 bg-gray-50 hover:bg-gray-100 text-[#10232B] text-xs font-bold rounded-lg border border-gray-200 transition-colors"
-                  >
-                    View Details
-                  </button>
-                </div>
+                {/* Circular Active Progress Ring */}
+                <svg className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none">
+                  <circle
+                    cx="50%"
+                    cy="50%"
+                    r="47%"
+                    fill="transparent"
+                    stroke="#E2E8F0"
+                    strokeWidth="3"
+                  />
+                  <circle
+                    cx="50%"
+                    cy="50%"
+                    r="47%"
+                    fill="transparent"
+                    stroke="#006B8F"
+                    strokeWidth="3"
+                    strokeDasharray={290}
+                    strokeDashoffset={290 - (290 * (activeIndex + 1)) / totalStages}
+                    strokeLinecap="round"
+                    className="transition-all duration-700 ease-out"
+                  />
+                </svg>
               </div>
-            );
-          })}
+
+              {/* 8 Radial Orbit Nodes */}
+              {WORKFLOW_STAGES.map((stage, idx) => {
+                const angleDeg = idx * (360 / totalStages) - 90;
+                const angleRad = angleDeg * (Math.PI / 180);
+                const isActive = idx === activeIndex;
+                const isHovered = hoveredNode === idx;
+                const StageIcon = stage.icon;
+
+                // Center is 50%, offset using cos/sin as percentage
+                const xOffset = Math.cos(angleRad) * 41; // radius in percentage
+                const yOffset = Math.sin(angleRad) * 41;
+
+                return (
+                  <div
+                    key={stage.id}
+                    style={{
+                      left: `calc(50% + ${xOffset}%)`,
+                      top: `calc(50% + ${yOffset}%)`,
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                    className="absolute z-20"
+                    onMouseEnter={() => setHoveredNode(idx)}
+                    onMouseLeave={() => setHoveredNode(null)}
+                  >
+                    <button
+                      onClick={() => {
+                        setActiveIndex(idx);
+                        setIsPlaying(false);
+                      }}
+                      className={`relative w-11 h-11 sm:w-14 sm:h-14 rounded-full flex flex-col items-center justify-center transition-all duration-300 cursor-pointer shadow-md focus:outline-none ${
+                        isActive
+                          ? 'bg-[#006B8F] text-white ring-4 ring-[#006B8F]/25 scale-120 shadow-xl'
+                          : 'bg-white text-gray-700 hover:text-[#006B8F] border border-gray-200 hover:border-[#006B8F]/50 hover:scale-110'
+                      }`}
+                      title={`${stage.stepNumber}: ${stage.title}`}
+                    >
+                      {/* Active Beacon Ping */}
+                      {isActive && (
+                        <span className="absolute -inset-1 rounded-full bg-[#006B8F] opacity-40 animate-ping pointer-events-none" />
+                      )}
+
+                      <StageIcon className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-200 ${isActive ? 'scale-110 text-white' : 'text-gray-600'}`} />
+                      <span className={`text-[9px] sm:text-[10px] font-mono font-bold leading-none mt-0.5 ${isActive ? 'text-[#AEE583]' : 'text-gray-500'}`}>
+                        {stage.stepNumber}
+                      </span>
+                    </button>
+
+                    {/* Hover Floating Tooltip */}
+                    <AnimatePresence>
+                      {isHovered && !isActive && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 5, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 5, scale: 0.95 }}
+                          className="absolute z-30 bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-[#10232B] text-white text-xs font-semibold rounded-lg shadow-xl whitespace-nowrap pointer-events-none border border-white/10"
+                        >
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-[#AEE583] font-mono font-bold">#{stage.stepNumber}</span>
+                            <span>{stage.title}</span>
+                          </div>
+                          <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[#10232B]" />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+
+            </div>
+
+            {/* Orbit Controls (Play/Pause & Steppers) */}
+            <div className="mt-8 flex items-center justify-center gap-3 bg-white/90 backdrop-blur-md px-5 py-2.5 rounded-full border border-gray-200/90 shadow-sm">
+              <button
+                onClick={() => {
+                  handlePrev();
+                  setIsPlaying(false);
+                }}
+                className="p-2 rounded-full hover:bg-gray-100 text-gray-700 transition-colors cursor-pointer"
+                title="Previous Stage"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              <button
+                onClick={() => setIsPlaying(!isPlaying)}
+                className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#006B8F]/10 hover:bg-[#006B8F]/20 text-[#006B8F] text-xs font-bold transition-all cursor-pointer"
+                title={isPlaying ? 'Pause Auto-cycle' : 'Play Auto-cycle'}
+              >
+                {isPlaying ? (
+                  <>
+                    <Pause className="w-3.5 h-3.5" />
+                    <span>AUTO-CYCLING</span>
+                  </>
+                ) : (
+                  <>
+                    <Play className="w-3.5 h-3.5" />
+                    <span>PAUSED</span>
+                  </>
+                )}
+              </button>
+
+              <button
+                onClick={() => {
+                  handleNext();
+                  setIsPlaying(false);
+                }}
+                className="p-2 rounded-full hover:bg-gray-100 text-gray-700 transition-colors cursor-pointer"
+                title="Next Stage"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+
+          </div>
+
+          {/* ================= RIGHT: SYNCHRONIZED LIVE SPOTLIGHT CONSOLE ================= */}
+          <div className="lg:col-span-7">
+            <div className="bg-white/95 backdrop-blur-lg rounded-3xl border border-gray-200/90 shadow-xl overflow-hidden transition-all duration-300">
+              
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeStage.id}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.35, ease: 'easeOut' }}
+                  className="p-6 sm:p-8 space-y-6"
+                >
+                  {/* Top Bar: Tag & Indicator */}
+                  <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-gray-100">
+                    <div className="flex items-center gap-3">
+                      <span className="px-3 py-1 rounded-md bg-[#006B8F] text-white font-mono font-bold text-xs uppercase tracking-wider">
+                        STAGE {activeStage.stepNumber}
+                      </span>
+                      <span className="text-xs font-mono font-bold text-gray-500 uppercase tracking-widest">
+                        {activeStage.category}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-2 text-xs font-medium text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/60">
+                      <Activity className="w-3.5 h-3.5 animate-pulse" />
+                      <span>Live Stage Active</span>
+                    </div>
+                  </div>
+
+                  {/* Stage Headline & Image Card */}
+                  <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
+                    
+                    {/* Visual Media with Glass Tech Badge */}
+                    <div className="sm:col-span-6 relative aspect-[16/11] rounded-2xl overflow-hidden bg-gray-100 border border-gray-200/80 shadow-md group">
+                      <img
+                        src={activeStage.imageUrl}
+                        alt={activeStage.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                      
+                      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs">
+                        <span className="font-mono bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/20">
+                          PHASE 0{activeStage.id}
+                        </span>
+                        <span className="font-semibold text-emerald-300 flex items-center gap-1">
+                          <ShieldCheck className="w-3.5 h-3.5" /> Quality Assured
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Stage Overview Description */}
+                    <div className="sm:col-span-6 space-y-3">
+                      <h3 className="text-2xl sm:text-3xl font-extrabold text-[#10232B] leading-tight">
+                        {activeStage.title}
+                      </h3>
+                      <p className="text-sm text-gray-600 leading-relaxed font-normal">
+                        {activeStage.description}
+                      </p>
+
+                      <div className="p-3 rounded-xl bg-gradient-to-r from-emerald-50 to-[#F0FAF5] border border-emerald-200/80 text-xs text-[#10232B] font-medium space-y-1">
+                        <div className="text-[11px] font-bold text-emerald-800 uppercase tracking-wide flex items-center gap-1.5">
+                          <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+                          <span>Key Deliverable / Outcome:</span>
+                        </div>
+                        <p className="text-gray-700 italic">"{activeStage.outcome}"</p>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  {/* Highlights Grid */}
+                  <div className="space-y-3 pt-2">
+                    <div className="flex items-center justify-between">
+                      <p className="text-xs font-mono font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
+                        <Layers className="w-3.5 h-3.5 text-[#006B8F]" />
+                        <span>Execution Scope & Specifications</span>
+                      </p>
+                      <span className="text-[11px] text-gray-500 font-mono">
+                        {activeStage.highlights.length} Points
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      {activeStage.highlights.map((h, i) => (
+                        <div
+                          key={i}
+                          className="flex items-start gap-2.5 p-2.5 rounded-xl bg-[#F8FAF9] hover:bg-white border border-gray-200/80 hover:border-[#006B8F]/30 transition-all text-xs font-medium text-gray-700 shadow-2xs"
+                        >
+                          <CheckCircle2 className="w-4 h-4 text-[#006B8F] shrink-0 mt-0.5" />
+                          <span className="leading-snug">{h}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="pt-3 border-t border-gray-100 flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      {onOpenConsultationModal && (
+                        <button
+                          onClick={() => onOpenConsultationModal(activeStage.title)}
+                          className="px-5 py-2.5 rounded-xl bg-[#006B8F] hover:bg-[#005775] text-white text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all cursor-pointer flex items-center gap-2 uppercase tracking-wide"
+                        >
+                          <span>Consult On This Stage</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </button>
+                      )}
+
+                      <button
+                        onClick={() => setSelectedStep(activeStage)}
+                        className="px-4 py-2.5 rounded-xl bg-white border border-gray-200 hover:border-[#006B8F] text-[#10232B] hover:text-[#006B8F] text-xs sm:text-sm font-bold transition-all cursor-pointer"
+                      >
+                        Full Technical Blueprint
+                      </button>
+                    </div>
+
+                    {/* Step Navigation Pill */}
+                    <div className="flex items-center gap-1.5 text-xs font-mono text-gray-400">
+                      <span>{activeStage.stepNumber}</span>
+                      <span>/</span>
+                      <span>08</span>
+                    </div>
+                  </div>
+
+                </motion.div>
+              </AnimatePresence>
+
+            </div>
+          </div>
+
         </div>
+
       </div>
 
       {/* ===================== FULL STAGE DETAIL MODAL ===================== */}

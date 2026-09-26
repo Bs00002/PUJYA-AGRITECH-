@@ -24,21 +24,30 @@ export const WhoWeAreMission: React.FC<WhoWeAreMissionProps> = ({
       <div className="bg-[#006B8F] py-12 md:py-16 px-4 relative z-0">
         <div className="max-w-[1280px] w-[94%] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
-            {/* LEFT COLUMN: Existing Image */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative rounded-2xl overflow-hidden border-2 border-white/20 bg-white/10 shadow-md h-[280px] sm:h-[340px] lg:h-[360px]">
+
+            {/* LEFT COLUMN: Modern Hi-Tech Greenhouse Facility Image */}
+            <div className="lg:col-span-5 relative group">
+              <div className="relative rounded-2xl overflow-hidden border-2 border-white/25 bg-white/10 shadow-2xl h-[280px] sm:h-[340px] lg:h-[380px]">
                 <img
-                  src="/who-we-are-bg.jpeg"
+                  src="/who-we-are-greenhouse.png"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     if (!target.src.endsWith('/who-we-are.jpeg')) {
                       target.src = '/who-we-are.jpeg';
                     }
                   }}
-                  alt="Pujya Agritech Protected Cultivation Site"
-                  className="w-full h-full object-cover"
+                  alt="Pujya Agritech Commercial Greenhouse Facility"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-white">
+                  <span className="font-mono bg-black/50 backdrop-blur-md px-3 py-1 rounded-lg border border-white/20 font-semibold">
+                    Turnkey Agritech Projects
+                  </span>
+                  <span className="bg-[#AEE583]/90 text-[#10232B] font-bold px-2.5 py-1 rounded-md text-[11px] uppercase tracking-wider">
+                    Across India
+                  </span>
+                </div>
               </div>
             </div>
 
