@@ -62,16 +62,16 @@ export const AboutUs: React.FC<AboutUsProps> = ({ onOpenConsultationModal }) => 
               </div>
             </div>
 
-            {/* Right Hero Image Card (Turnkey Commercial Polyhouse & Water Harvesting Complex) */}
+            {/* Right Hero Image Card (Commercial Polyhouse Complex) */}
             <div className="lg:col-span-5 relative">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] bg-[#EBF5F8] group">
                 <img
-                  src="/about-hero-greenhouse.png"
+                  src="/who-we-are-greenhouse.png"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    target.src = '/who-we-are-greenhouse.png';
+                    target.src = '/about-hero-greenhouse.png';
                   }}
-                  alt="Pujya Agritech Commercial Polyhouse and Water Harvesting Project"
+                  alt="Pujya Agritech Commercial Polyhouse Project"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
@@ -86,6 +86,7 @@ export const AboutUs: React.FC<AboutUsProps> = ({ onOpenConsultationModal }) => 
       {/* 2. WHO WE ARE & OUR MISSION — EXACT PUJYA TEAL DESIGN WITH GREENHOUSE IMAGE */}
       {/* ========================================================================= */}
       <WhoWeAreMission
+        imageSrc="/about-hero-greenhouse.png"
         onLearnMoreAboutClick={() => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}

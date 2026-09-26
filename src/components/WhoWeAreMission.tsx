@@ -2,11 +2,13 @@ import React from 'react';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
 
 interface WhoWeAreMissionProps {
+  imageSrc?: string;
   onLearnMoreAboutClick?: () => void;
   onViewProductsClick?: () => void;
 }
 
 export const WhoWeAreMission: React.FC<WhoWeAreMissionProps> = ({ 
+  imageSrc = '/about-hero-greenhouse.png',
   onLearnMoreAboutClick,
   onViewProductsClick
 }) => {
@@ -29,11 +31,11 @@ export const WhoWeAreMission: React.FC<WhoWeAreMissionProps> = ({
             <div className="lg:col-span-5 relative group">
               <div className="relative rounded-2xl overflow-hidden border-2 border-white/25 bg-white/10 shadow-2xl h-[280px] sm:h-[340px] lg:h-[380px]">
                 <img
-                  src="/who-we-are-greenhouse.png"
+                  src={imageSrc}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    if (!target.src.endsWith('/who-we-are.jpeg')) {
-                      target.src = '/who-we-are.jpeg';
+                    if (!target.src.endsWith('/who-we-are-greenhouse.png')) {
+                      target.src = '/who-we-are-greenhouse.png';
                     }
                   }}
                   alt="Pujya Agritech Commercial Greenhouse Facility"
