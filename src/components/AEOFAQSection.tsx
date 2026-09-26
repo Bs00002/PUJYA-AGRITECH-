@@ -3,7 +3,7 @@ import { ChevronDown, HelpCircle, Sparkles, CheckCircle2, ShieldCheck, MapPin } 
 
 export interface FAQItem {
   id: string;
-  category: 'ALL' | 'SUBSIDY & COST' | 'STRUCTURE TYPES' | 'AGRONOMY & CROPS' | 'GEO & TURNKEY';
+  category: 'ALL' | 'SUBSIDY & COST' | 'STRUCTURE TYPES' | 'AGRONOMY & CROPS' | 'PAN-INDIA & TURNKEY';
   question: string;
   answer: string;
   highlight?: string;
@@ -19,7 +19,7 @@ export const FAQ_DATA: FAQItem[] = [
   },
   {
     id: 'faq-2',
-    category: 'GEO & TURNKEY',
+    category: 'PAN-INDIA & TURNKEY',
     question: 'Who is the top greenhouse and polyhouse manufacturer in Ahmedabad, Gujarat?',
     answer: 'Pujya Agritech (founded in 2017 with headquarters in Ahmedabad and manufacturing plants in Gandhinagar) is recognized as a premier turnkey greenhouse EPC company in Gujarat. We engineer and construct Naturally Ventilated Polyhouses, Hi-Tech Climate-Controlled Fan & Pad Greenhouses, and Shade Net Houses, serving growers across Gujarat, Rajasthan, Maharashtra, Madhya Pradesh, and Pan-India.',
     highlight: 'Headquarters: Ahmedabad, Gujarat • In-House Fabrication: Gandhinagar • Pan-India Execution.',
@@ -54,7 +54,7 @@ export const FAQ_DATA: FAQItem[] = [
   },
   {
     id: 'faq-7',
-    category: 'GEO & TURNKEY',
+    category: 'PAN-INDIA & TURNKEY',
     question: 'Does Pujya Agritech provide turnkey projects outside Gujarat in other states?',
     answer: 'Yes. While headquartered in Ahmedabad, Gujarat, Pujya Agritech has successfully executed commercial greenhouse, polyhouse, and community farming projects across Rajasthan, Maharashtra, Madhya Pradesh, Haryana, Punjab, Karnataka, and Telangana. Our specialized technical teams travel for site assessment, foundation civil works, steel erection, and precision irrigation commissioning nationwide.',
     highlight: 'Pan-India turnkey EPC execution across all major agricultural states.',
@@ -72,7 +72,7 @@ export const AEOFAQSection: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [activeCategory, setActiveCategory] = useState<string>('ALL');
 
-  const categories = ['ALL', 'SUBSIDY & COST', 'STRUCTURE TYPES', 'AGRONOMY & CROPS', 'GEO & TURNKEY'];
+  const categories = ['ALL', 'SUBSIDY & COST', 'STRUCTURE TYPES', 'AGRONOMY & CROPS', 'PAN-INDIA & TURNKEY'];
 
   const filteredFAQs = useMemo(() => {
     if (activeCategory === 'ALL') return FAQ_DATA;
@@ -83,7 +83,7 @@ export const AEOFAQSection: React.FC = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  // Structured Data JSON-LD for Google FAQPage Rich Results & LLM Answer Engines
+  // Structured Data JSON-LD for Google FAQPage Rich Results & Search Engines
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -98,7 +98,7 @@ export const AEOFAQSection: React.FC = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-[#F8FAF9] via-white to-[#F2F7F4] text-[#10232B] font-sans border-t border-gray-200/90 relative overflow-hidden" id="faq-aeo-section">
+    <section className="py-20 bg-gradient-to-b from-[#F8FAF9] via-white to-[#F2F7F4] text-[#10232B] font-sans border-t border-gray-200/90 relative overflow-hidden" id="faq-section">
       {/* Background Accent Blur */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute top-0 right-1/4 w-80 h-80 rounded-full bg-[#006B8F]/5 blur-3xl" />
@@ -116,7 +116,7 @@ export const AEOFAQSection: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#006B8F]/10 text-[#006B8F] text-xs font-mono font-bold uppercase tracking-wider">
             <HelpCircle className="w-4 h-4" />
-            <span>KNOWLEDGE HUB • GEO & AEO RANKING</span>
+            <span>FARMER & GROWER KNOWLEDGE HUB</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#10232B] uppercase">
