@@ -103,11 +103,11 @@ export const AboutUs: React.FC<AboutUsProps> = ({ onOpenConsultationModal }) => 
             <div className="lg:col-span-5 flex justify-center">
               <div className="relative w-full max-w-[460px] aspect-[4/5] sm:h-[540px] lg:h-[580px] rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-xl group">
                 
-                {/* Real Photograph: Sunil Joshi holding Agritech award */}
+                {/* Real Photograph: Sunil Joshi */}
                 <img
-                  src="/sunil-joshi-award.jpeg"
+                  src="/sunil-joshi-founder.png"
                   alt="Sunil Joshi — Founder & Director, Pujya Agritech"
-                  className="w-full h-full object-cover object-[center_20%] group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+                  className="w-full h-full object-cover object-[center_top] group-hover:scale-[1.02] transition-transform duration-500 ease-out"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.src = '/sunil-joshi.jpeg';
