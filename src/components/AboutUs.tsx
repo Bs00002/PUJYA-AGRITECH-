@@ -100,23 +100,23 @@ export const AboutUs: React.FC<AboutUsProps> = ({ onOpenConsultationModal }) => 
         <div className="max-w-[1240px] w-[90%] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             
-            {/* Left Column: Large Framed Founder Photograph */}
+            {/* Left Column: Large Framed Founder Photograph (Complete Full Standing Photo) */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-full max-w-[460px] aspect-[4/5] sm:h-[540px] lg:h-[580px] rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-xl group">
+              <div className="relative w-full max-w-[390px] rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-xl group">
                 
-                {/* Real Photograph: Sunil Joshi */}
+                {/* Real Photograph: Sunil Joshi — Full Uncropped Photo */}
                 <img
                   src="/sunil-joshi-founder.png"
                   alt="Sunil Joshi — Founder & Director, Pujya Agritech"
-                  className="w-full h-full object-cover object-[center_top] group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+                  className="w-full h-auto block group-hover:scale-[1.01] transition-transform duration-500 ease-out"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.src = '/sunil-joshi.jpeg';
                   }}
                 />
 
-                {/* Subtle Image Overlay Vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                {/* Subtle Image Overlay Vignette at bottom */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
 
                 {/* Elegant Bottom-Left Pill Badge */}
                 <div className="absolute bottom-5 left-5 z-10 bg-white/95 backdrop-blur-md px-4 py-2 rounded-lg border border-gray-200/90 shadow-md flex items-center gap-2">
