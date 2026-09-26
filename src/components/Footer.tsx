@@ -30,8 +30,8 @@ export const Footer: React.FC<FooterProps> = ({
 
   const navLinks = [
     { id: 'home', label: 'Home', path: '/' },
-    { id: 'products', label: 'Products', path: '/products' },
     { id: 'projects', label: 'Projects', path: '/projects' },
+    { id: 'products', label: 'Products', path: '/products' },
     { id: 'gallery', label: 'Gallery / Video', path: '/gallery' },
     { id: 'blog', label: 'Blog', path: '/blog' },
     { id: 'about', label: 'About Us', path: '/about' },

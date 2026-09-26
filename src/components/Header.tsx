@@ -26,8 +26,8 @@ export const Header: React.FC<HeaderProps> = ({
 
   const leftNavItems = [
     { id: 'home', label: 'HOME', path: '/' },
-    { id: 'products', label: 'PRODUCTS', path: '/products' },
     { id: 'projects', label: 'PROJECTS', path: '/projects' },
+    { id: 'products', label: 'PRODUCTS', path: '/products' },
     { id: 'gallery', label: 'GALLERY / VIDEO', path: '/gallery' },
   ];
 
@@ -39,8 +39,8 @@ export const Header: React.FC<HeaderProps> = ({
 
   const allNavItems = [
     { id: 'home', label: 'HOME', path: '/' },
-    { id: 'products', label: 'PRODUCTS', path: '/products' },
     { id: 'projects', label: 'PROJECTS', path: '/projects' },
+    { id: 'products', label: 'PRODUCTS', path: '/products' },
     { id: 'gallery', label: 'GALLERY / VIDEO', path: '/gallery' },
     { id: 'blog', label: 'BLOG', path: '/blog' },
     { id: 'about', label: 'ABOUT US', path: '/about' },
