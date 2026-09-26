@@ -6,7 +6,7 @@ import { useAdmin } from '../context/AdminContext';
 export interface ProductItemData {
   id: string;
   slug: string;
-  category: 'turnkey-project' | 'greenhouse-kit' | 'greenhouse-material';
+  category: 'turnkey-project' | 'greenhouse-material';
   categoryLabel: string;
   name: string;
   shortDescription: string;
@@ -202,52 +202,7 @@ export const PRODUCT_CATALOGUE: ProductItemData[] = [
     },
   },
 
-  // ================= 02 — GREEN HOUSE KIT =================
-  {
-    id: 'kit-1',
-    slug: 'hydroponic-nft-channel-kit',
-    category: 'greenhouse-kit',
-    categoryLabel: 'Green House Kit',
-    name: 'Hydroponic NFT Channel Kit',
-    shortDescription: 'Self-contained Nutrient Film Technique (NFT) channel setup for soil-less leafy green and herb cultivation.',
-    fullOverview: 'Food-grade UV-stabilized PVC NFT hydroponic channel setup designed for closed-loop water recirculation and soil-less crop production.',
-    imageUrl: '/who-we-are-bg.jpeg',
-    galleryImages: ['/who-we-are-bg.jpeg', '/workflow/step-06.png'],
-    features: [
-      'Food-grade UV-stabilized PVC NFT channels',
-      'Galvanized steel stand framework',
-      'Recirculating nutrient pump & manifold',
-      'Includes net pots and growing media',
-    ],
-    specifications: {
-      model: 'NFT-Kit-500',
-      standardGrids: '12m x 1.5m bench module',
-      suitableCrops: 'Lettuce, Exotic Herbs, Basil, Mint',
-    },
-  },
-  {
-    id: 'kit-2',
-    slug: 'substrate-trough-dosing-kit',
-    category: 'greenhouse-kit',
-    categoryLabel: 'Green House Kit',
-    name: 'Substrate Trough Dosing Kit',
-    shortDescription: 'Elevated coco-peat trough kit with drip fertigation delivery for vine crops and berries.',
-    fullOverview: 'Substrate grow trough kits engineered for soil-less coco-peat cultivation, offering optimal drainage and root-zone aeration.',
-    imageUrl: '/products/Drip Irrigation & Fertigation System.webp',
-    galleryImages: ['/products/Drip Irrigation & Fertigation System.webp', '/who-we-are-bg.jpeg'],
-    features: [
-      'Drainage-optimized grow troughs',
-      'Integrated micro-drip emitters & stakes',
-      'Coco-peat substrate grow bag alignment',
-    ],
-    specifications: {
-      model: 'Substrate-Kit-Pro',
-      standardGrids: 'Custom Row Length Troughs',
-      suitableCrops: 'Vine Tomatoes, Cucumbers, Strawberries',
-    },
-  },
-
-  // ================= 03 — GREEN HOUSE MATERIAL (EXACT 48 BROCHURE PRODUCTS) =================
+  // ================= 02 — GREEN HOUSE MATERIAL (EXACT 48 BROCHURE PRODUCTS) =================
   {
     id: 'mat-1',
     slug: 'five-way-plates-flat-roof-nethouses',
@@ -885,8 +840,11 @@ export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
   selectedSlug,
   onClearSlug,
 }) => {
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'turnkey-project' | 'greenhouse-kit' | 'greenhouse-material'>('turnkey-project');
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'turnkey-project' | 'greenhouse-material'>('turnkey-project');
   const [activeProductSlug, setActiveProductSlug] = useState<string | null>(selectedSlug || null);
+
+  const turnkeyCount = PRODUCT_CATALOGUE.filter((p) => p.category === 'turnkey-project').length;
+  const materialCount = PRODUCT_CATALOGUE.filter((p) => p.category === 'greenhouse-material').length;
 
   React.useEffect(() => {
     setActiveProductSlug(selectedSlug || null);
@@ -934,7 +892,7 @@ export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
           </h1>
 
           <p className="text-base sm:text-lg text-gray-600 max-w-xl mx-auto leading-relaxed font-normal">
-            Explore our greenhouse structures, kits and materials for protected cultivation.
+            Explore our greenhouse structures and materials for protected cultivation.
           </p>
         </div>
 
@@ -951,18 +909,7 @@ export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
                     : 'bg-white text-gray-700 hover:text-[#10232B] hover:bg-gray-100 border border-gray-200/60'
                 }`}
               >
-                Turnkey Projects (6)
-              </button>
-
-              <button
-                onClick={() => setSelectedCategory('greenhouse-kit')}
-                className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-bold transition-all uppercase cursor-pointer ${
-                  selectedCategory === 'greenhouse-kit'
-                    ? 'bg-[#006B8F] text-white shadow-2xs'
-                    : 'bg-white text-gray-700 hover:text-[#10232B] hover:bg-gray-100 border border-gray-200/60'
-                }`}
-              >
-                Greenhouse Kits (2)
+                Turnkey Projects ({turnkeyCount})
               </button>
 
               <button
@@ -973,7 +920,7 @@ export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
                     : 'bg-white text-gray-700 hover:text-[#10232B] hover:bg-gray-100 border border-gray-200/60'
                 }`}
               >
-                Materials (3)
+                Materials ({materialCount})
               </button>
 
               <button
