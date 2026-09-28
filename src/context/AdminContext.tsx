@@ -83,7 +83,7 @@ const STORAGE_KEYS = {
   ABOUT_US: 'pujya_about_us',
   CERTIFICATES: 'pujya_certificates_v3_local',
   PRODUCTS: 'pujya_products_v4_hyphenated',
-  PROJECTS: 'pujya_projects_v7_11_real_locations',
+  PROJECTS: 'pujya_projects_v12_jodhpur_real',
   GALLERY: 'pujya_gallery_v3_local',
   BLOG: 'pujya_blog_v3_clean',
   CONTACT_INFO: 'pujya_contact_info_v3',

@@ -42,8 +42,12 @@ export const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({
   const cropVal = project.crop;
   const areaVal = project.areaSize || project.area;
   const yearVal = project.yearCompleted || project.projectDate;
+  const promoterVal = project.promoter || project.farmerName;
+  const structureVal = project.structure || (project.structuresUsed && project.structuresUsed[0]?.name);
 
   const infoFields = [
+    promoterVal ? { label: 'PROMOTER / FARMER', value: promoterVal, icon: Building2, color: 'text-[#10232B]' } : null,
+    structureVal ? { label: 'STRUCTURE', value: structureVal, icon: Layers, color: 'text-[#006B8F]' } : null,
     projectTypeVal ? { label: 'PROJECT TYPE', value: projectTypeVal, icon: Building2, color: 'text-[#10232B]' } : null,
     locationVal ? { label: 'LOCATION', value: locationVal, icon: MapPin, color: 'text-[#006B8F]' } : null,
     executionVal ? { label: 'EXECUTION', value: executionVal, icon: CheckCircle2, color: 'text-[#2F7445]' } : null,
@@ -182,30 +186,48 @@ export const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({
                     PROJECT HIGHLIGHTS
                   </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    <div className="bg-[#FAFBF9] p-3.5 rounded-lg border border-gray-200/80 space-y-1">
-                      <div className="text-base sm:text-lg font-extrabold text-[#2F7445]">{areaVal || '55,000+ Sq. M.'}</div>
-                      <div className="text-[10px] font-mono font-semibold text-gray-500 uppercase">Project Area</div>
-                    </div>
-                    <div className="bg-[#FAFBF9] p-3.5 rounded-lg border border-gray-200/80 space-y-1">
-                      <div className="text-base sm:text-lg font-extrabold text-[#006B8F]">{yearVal || '2018–2019'}</div>
-                      <div className="text-[10px] font-mono font-semibold text-gray-500 uppercase">Project Period</div>
-                    </div>
-                    <div className="bg-[#FAFBF9] p-3.5 rounded-lg border border-gray-200/80 space-y-1">
-                      <div className="text-sm sm:text-base font-extrabold text-[#10232B] truncate">{projectTypeVal || 'Soilless Farming'}</div>
-                      <div className="text-[10px] font-mono font-semibold text-gray-500 uppercase">Cultivation Method</div>
-                    </div>
-                    <div className="bg-[#FAFBF9] p-3.5 rounded-lg border border-gray-200/80 space-y-1">
-                      <div className="text-sm sm:text-base font-extrabold text-[#10232B]">Multiple Structures</div>
-                      <div className="text-[10px] font-mono font-semibold text-gray-500 uppercase">Protected Models</div>
-                    </div>
-                    <div className="bg-[#FAFBF9] p-3.5 rounded-lg border border-gray-200/80 space-y-1">
-                      <div className="text-sm sm:text-base font-extrabold text-[#2F7445]">Fully Automated</div>
-                      <div className="text-[10px] font-mono font-semibold text-gray-500 uppercase">Centralized Control</div>
-                    </div>
-                    <div className="bg-[#FAFBF9] p-3.5 rounded-lg border border-gray-200/80 space-y-1">
-                      <div className="text-xs sm:text-sm font-extrabold text-[#006B8F] truncate">{project.location.split(',')[0] || 'Chekhla, Sanand'}</div>
-                      <div className="text-[10px] font-mono font-semibold text-gray-500 uppercase">Gujarat, India</div>
-                    </div>
+                    {areaVal && (
+                      <div className="bg-[#FAFBF9] p-3.5 rounded-lg border border-gray-200/80 space-y-1">
+                        <div className="text-base sm:text-lg font-extrabold text-[#2F7445]">{areaVal}</div>
+                        <div className="text-[10px] font-mono font-semibold text-gray-500 uppercase">Project Area</div>
+                      </div>
+                    )}
+                    {promoterVal && (
+                      <div className="bg-[#FAFBF9] p-3.5 rounded-lg border border-gray-200/80 space-y-1">
+                        <div className="text-sm sm:text-base font-extrabold text-[#10232B] truncate" title={promoterVal}>{promoterVal}</div>
+                        <div className="text-[10px] font-mono font-semibold text-gray-500 uppercase">Promoter / Farmer</div>
+                      </div>
+                    )}
+                    {structureVal && (
+                      <div className="bg-[#FAFBF9] p-3.5 rounded-lg border border-gray-200/80 space-y-1">
+                        <div className="text-sm sm:text-base font-extrabold text-[#006B8F] truncate" title={structureVal}>{structureVal}</div>
+                        <div className="text-[10px] font-mono font-semibold text-gray-500 uppercase">Structure Type</div>
+                      </div>
+                    )}
+                    {yearVal && (
+                      <div className="bg-[#FAFBF9] p-3.5 rounded-lg border border-gray-200/80 space-y-1">
+                        <div className="text-base sm:text-lg font-extrabold text-[#006B8F]">{yearVal}</div>
+                        <div className="text-[10px] font-mono font-semibold text-gray-500 uppercase">Project Period</div>
+                      </div>
+                    )}
+                    {projectTypeVal && (
+                      <div className="bg-[#FAFBF9] p-3.5 rounded-lg border border-gray-200/80 space-y-1">
+                        <div className="text-sm sm:text-base font-extrabold text-[#10232B] truncate" title={projectTypeVal}>{projectTypeVal}</div>
+                        <div className="text-[10px] font-mono font-semibold text-gray-500 uppercase">Cultivation Method</div>
+                      </div>
+                    )}
+                    {project.automationInfo && (
+                      <div className="bg-[#FAFBF9] p-3.5 rounded-lg border border-gray-200/80 space-y-1">
+                        <div className="text-sm sm:text-base font-extrabold text-[#2F7445]">Fully Automated</div>
+                        <div className="text-[10px] font-mono font-semibold text-gray-500 uppercase">Centralized Control</div>
+                      </div>
+                    )}
+                    {locationVal && (
+                      <div className="bg-[#FAFBF9] p-3.5 rounded-lg border border-gray-200/80 space-y-1">
+                        <div className="text-xs sm:text-sm font-extrabold text-[#006B8F] truncate" title={locationVal}>{locationVal.split(',')[0]}</div>
+                        <div className="text-[10px] font-mono font-semibold text-gray-500 uppercase">{project.state ? `${project.state}, India` : 'Gujarat, India'}</div>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -280,18 +302,32 @@ export const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({
                 <div className="space-y-3 text-xs">
                   <div className="flex justify-between items-center py-1 border-b border-gray-100">
                     <span className="text-gray-500 font-mono">PROJECT NAME</span>
-                    <span className="font-bold text-[#10232B] truncate max-w-[180px]">{project.title}</span>
+                    <span className="font-bold text-[#10232B] truncate max-w-[180px]" title={project.title}>{project.title}</span>
                   </div>
+
+                  {promoterVal && (
+                    <div className="flex justify-between items-center py-1 border-b border-gray-100">
+                      <span className="text-gray-500 font-mono">PROMOTER</span>
+                      <span className="font-bold text-[#10232B] truncate max-w-[180px]" title={promoterVal}>{promoterVal}</span>
+                    </div>
+                  )}
 
                   <div className="flex justify-between items-center py-1 border-b border-gray-100">
                     <span className="text-gray-500 font-mono">LOCATION</span>
                     <span className="font-bold text-[#006B8F] text-right truncate max-w-[180px]" title={project.location}>{project.location}</span>
                   </div>
 
+                  {structureVal && (
+                    <div className="flex justify-between items-center py-1 border-b border-gray-100">
+                      <span className="text-gray-500 font-mono">STRUCTURE</span>
+                      <span className="font-bold text-[#006B8F] truncate max-w-[180px]" title={structureVal}>{structureVal}</span>
+                    </div>
+                  )}
+
                   {projectTypeVal && (
                     <div className="flex justify-between items-center py-1 border-b border-gray-100">
                       <span className="text-gray-500 font-mono">TYPE</span>
-                      <span className="font-bold text-[#2F7445] truncate max-w-[180px]">{projectTypeVal}</span>
+                      <span className="font-bold text-[#2F7445] truncate max-w-[180px]" title={projectTypeVal}>{projectTypeVal}</span>
                     </div>
                   )}
 

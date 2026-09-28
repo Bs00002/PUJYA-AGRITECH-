@@ -49,6 +49,9 @@ export interface ProjectItem {
   id: string;
   slug: string;
   title: string;
+  promoter?: string;
+  farmerName?: string;
+  structure?: string;
   location: string;
   state?: string;
   country?: string;

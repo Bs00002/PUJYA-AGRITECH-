@@ -62,6 +62,9 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
             id: p.id,
             slug: p.slug || p.id,
             title: p.name,
+            promoter: (p as any).promoter || matchingVerified?.promoter,
+            farmerName: (p as any).farmerName || matchingVerified?.farmerName,
+            structure: (p as any).structure || matchingVerified?.structure,
             location: p.location,
             projectType: p.projectType || matchingVerified?.projectType || 'Protected Cultivation Project',
             executionType: p.executionType || matchingVerified?.executionType,
@@ -75,7 +78,11 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
             media: (p as any).media || matchingVerified?.media,
             galleryImageObjects: p.galleryImageObjects || matchingVerified?.galleryImageObjects,
             videoObjects: p.videoObjects || matchingVerified?.videoObjects,
+            structuresUsed: (p as any).structuresUsed || matchingVerified?.structuresUsed,
+            automationInfo: (p as any).automationInfo || matchingVerified?.automationInfo,
+            technologyInfo: (p as any).technologyInfo || matchingVerified?.technologyInfo,
             overview: p.description || matchingVerified?.overview || `Protected cultivation and agricultural infrastructure project at ${p.name}.`,
+            story: (p as any).story || matchingVerified?.story,
             isFeatured: p.featured,
           };
         });
@@ -92,7 +99,7 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
 
       let matchesRegion = true;
       if (selectedRegion === 'GUJARAT') {
-        matchesRegion = loc.includes('gujarat') || loc.includes('sanand') || loc.includes('jamnagar') || loc.includes('dholka') || loc.includes('kadi') || title.includes('vinayaka');
+        matchesRegion = loc.includes('gujarat') || loc.includes('sanand') || loc.includes('kadi') || loc.includes('vamaj') || title.includes('vinayaka') || title.includes('laxminarayan');
       } else if (selectedRegion === 'RAJASTHAN') {
         matchesRegion = loc.includes('rajasthan') || loc.includes('jodhpur') || loc.includes('pushkar') || loc.includes('kota');
       } else if (selectedRegion === 'CHHATTISGARH') {
