@@ -39,6 +39,31 @@ indexHtml = indexHtml.replace(/<link\s+rel="stylesheet"[^>]*>/i, inlinedStyleBlo
 fs.writeFileSync(indexPath, indexHtml, 'utf8');
 console.log('Successfully embedded CSS into dist/index.html!');
 
+// Ensure .htaccess from public is copied to dist
+const publicHtaccess = path.join(rootDir, 'public', '.htaccess');
+if (fs.existsSync(publicHtaccess)) {
+  fs.copyFileSync(publicHtaccess, path.join(distDir, '.htaccess'));
+  console.log('Synchronized .htaccess to dist/.htaccess');
+}
+
+// 2b. Provide index.html in every physical directory in dist (except assets)
+// This guarantees that any direct directory navigation (e.g. /projects/)
+// is served with index.html by DirectoryIndex without 403 Forbidden!
+function propagateIndexHtml(dir) {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    if (entry.isDirectory()) {
+      if (entry.name === 'assets') continue;
+      const subDir = path.join(dir, entry.name);
+      const subIndex = path.join(subDir, 'index.html');
+      fs.copyFileSync(indexPath, subIndex);
+      console.log(`Placed index.html into ${path.relative(distDir, subDir)}`);
+      propagateIndexHtml(subDir);
+    }
+  }
+}
+propagateIndexHtml(distDir);
+
 // 3. Copy dist to both uploads directories
 function copyRecursive(src, dest) {
   if (!fs.existsSync(dest)) {
@@ -61,3 +86,4 @@ copyRecursive(distDir, uploadsDir1);
 copyRecursive(distDir, uploadsDir2);
 
 console.log('Done preparing final distribution!');
+

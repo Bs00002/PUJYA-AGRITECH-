@@ -1,3 +1,5 @@
+# Pujya Agritech Production Apache Configuration
+Options -Indexes
 DirectoryIndex index.html
 
 <IfModule mod_mime.c>
@@ -18,11 +20,17 @@ DirectoryIndex index.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # Pass through root index.html
   RewriteRule ^index\.html$ - [L]
-  # Never rewrite Google Search Console verification files
+
+  # Pass through Google Search Console verification files
   RewriteRule ^google[a-zA-Z0-9_-]+\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME} !-l
-  RewriteRule . /index.html [L]
+
+  # If request is an existing physical file, serve it directly
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # For all other requests (including SPA directory routes like /projects, /projects/, /products, /gallery, etc.), route to /index.html
+  RewriteRule ^ /index.html [L]
 </IfModule>
