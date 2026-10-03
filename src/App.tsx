@@ -418,7 +418,9 @@ function MainLayout() {
 
             {activeTab === 'gallery' && <GalleryView />}
 
-            {activeTab === 'blog' && <BlogView />}
+            {activeTab === 'blog' && (
+              <BlogView onOpenConsultationModal={(title) => handleOpenConsultation(title)} />
+            )}
 
             {activeTab === 'contact' && (
               <ContactView onSubmitSuccess={(msg) => setToastMessage(msg)} />
