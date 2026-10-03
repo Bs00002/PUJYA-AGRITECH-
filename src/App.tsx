@@ -90,15 +90,19 @@ const GLOBAL_LOCAL_BUSINESS_SCHEMA = {
 function MainLayout() {
   const [activeTab, setActiveTab] = useState<string>('home');
   const [selectedProductSlug, setSelectedProductSlug] = useState<string | null>(null);
+  const [selectedProductCategory, setSelectedProductCategory] = useState<string>('turnkey-projects');
   const [selectedProjectSlug, setSelectedProjectSlug] = useState<string | null>(null);
   const [isConsultationModalOpen, setIsConsultationModalOpen] = useState(false);
   const [modalItemName, setModalItemName] = useState<string | undefined>(undefined);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Sync Initial URL Path & Hash to Tab State
+  // Sync Initial URL Path, Hash & Query to Tab State
   useEffect(() => {
     const parseUrlState = () => {
       const path = window.location.pathname.toLowerCase();
+      const searchParams = new URLSearchParams(window.location.search);
+      const categoryParam = searchParams.get('category') || searchParams.get('solution');
+
       let matchedTab = PATH_TO_TAB[path];
       if (!matchedTab) {
         if (path.startsWith('/products')) matchedTab = 'products';
@@ -114,15 +118,47 @@ function MainLayout() {
       const parts = path.split('/').filter(Boolean);
       const pathSlug = parts.length > 1 ? parts[1] : null;
       const hash = window.location.hash.replace('#', '');
-      const slug = hash || pathSlug;
 
-      if (slug && matchedTab === 'projects') {
-        setSelectedProjectSlug(slug);
-      } else if (slug && matchedTab === 'products') {
-        setSelectedProductSlug(slug);
-      } else {
+      const knownCategories = [
+        'green-houses',
+        'poly-houses',
+        'shade-net-houses',
+        'poly-tunnels',
+        'structures',
+        'protected-cultivation-structures',
+        'materials',
+        'greenhouse-material',
+        'green-house-materials',
+        'turnkey-project',
+        'turnkey-projects',
+        'products',
+        'all',
+        'fitting-accessories',
+        'poly-net-fastening-system',
+        'hvac-exhaust-cooling',
+        'steel-wire-rope-net-house-components',
+        'orchard-structure-components',
+        'trellising-accessories',
+        'curtain-installation-structure-accessories',
+        'covering-materials',
+      ];
+
+      if (categoryParam && knownCategories.includes(categoryParam)) {
+        setSelectedProductCategory(categoryParam);
         setSelectedProductSlug(null);
-        setSelectedProjectSlug(null);
+      } else if (hash && knownCategories.includes(hash)) {
+        setSelectedProductCategory(hash);
+        setSelectedProductSlug(null);
+      } else {
+        const slug = hash || pathSlug;
+        if (slug && matchedTab === 'projects') {
+          setSelectedProjectSlug(slug);
+        } else if (slug && matchedTab === 'products') {
+          setSelectedProductSlug(slug);
+        } else {
+          setSelectedProductSlug(null);
+          setSelectedProjectSlug(null);
+        }
       }
     };
 
@@ -152,6 +188,22 @@ function MainLayout() {
     if (window.location.pathname !== targetPath) {
       window.history.pushState({}, '', targetPath);
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSelectSolution = (categoryKey: string) => {
+    setSelectedProductCategory(categoryKey);
+    setSelectedProductSlug(null);
+    setActiveTab('products');
+    window.history.pushState({}, '', `/products?category=${categoryKey}`);
+    setTimeout(() => {
+      const el = document.getElementById('catalogue-grid') || document.getElementById('main-content');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }, 80);
   };
 
   const handleOpenConsultation = (itemName?: string) => {
@@ -178,10 +230,22 @@ function MainLayout() {
     const canonicalPath = TAB_TO_PATH[activeTab] || '/';
 
     switch (activeTab) {
-      case 'products':
+      case 'products': {
+        const categoryLabels: Record<string, string> = {
+          'green-houses': 'Green Houses',
+          'poly-houses': 'Poly Houses',
+          'shade-net-houses': 'Shade Net Houses',
+          'poly-tunnels': 'Poly Tunnels',
+          structures: 'Protected Cultivation Structures',
+          materials: 'Green House Materials',
+        };
+        const catName = categoryLabels[selectedProductCategory];
+
         return {
           title: selectedProductSlug
             ? `${selectedProductSlug.replace(/-/g, ' ').toUpperCase()} | Pujya Agritech`
+            : catName
+            ? `${catName} Catalogue & Solutions | Pujya Agritech`
             : 'Greenhouse & Polyhouse Materials Catalogue | Pujya Agritech',
           description: 'Explore Pujya Agritech\'s high-grade Greenhouse Materials, Naturally Ventilated Poly Houses, Fan & Pad Cooling Systems, Shade Net Houses, Insect Nets, and Drip Irrigation Systems.',
           canonicalPath: selectedProductSlug ? `/products#${selectedProductSlug}` : '/products',
@@ -196,6 +260,7 @@ function MainLayout() {
             },
           ],
         };
+      }
       case 'projects':
         return {
           title: 'Turnkey Protected Cultivation Projects & Infrastructure | Pujya Agritech',
@@ -291,6 +356,7 @@ function MainLayout() {
       <Header
         activeTab={activeTab}
         setActiveTab={handleTabChange}
+        onSelectSolution={handleSelectSolution}
         onOpenConsultationModal={() => handleOpenConsultation()}
       />
 
@@ -321,10 +387,19 @@ function MainLayout() {
 
             {activeTab === 'products' && (
               <ProductsShowcase
-                key={selectedProductSlug || 'products-list'}
+                key={selectedProductSlug ? `prod-${selectedProductSlug}` : 'products-list'}
                 onOpenQuote={(itemName) => handleOpenConsultation(itemName)}
                 selectedSlug={selectedProductSlug}
-                onClearSlug={() => setSelectedProductSlug(null)}
+                selectedCategory={selectedProductCategory}
+                onSelectCategory={(cat) => {
+                  setSelectedProductCategory(cat);
+                  window.history.pushState({}, '', `/products?category=${cat}`);
+                }}
+                onSelectProduct={(slug) => handleSelectProduct(slug)}
+                onClearSlug={() => {
+                  setSelectedProductSlug(null);
+                  window.history.pushState({}, '', `/products?category=${selectedProductCategory}`);
+                }}
               />
             )}
 
@@ -355,6 +430,7 @@ function MainLayout() {
       {/* Premium Pujya Agritech Footer with Crawlable Links */}
       <Footer
         setActiveTab={handleTabChange}
+        onSelectSolution={handleSelectSolution}
         onOpenConsultationModal={() => handleOpenConsultation()}
       />
 

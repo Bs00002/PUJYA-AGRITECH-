@@ -36,9 +36,18 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
   const activeImageUrl = allImages[activeImageIndex] || product.imageUrl;
 
-  const relatedProducts = PRODUCT_CATALOGUE.filter(
-    (p) => p.id !== product.id && p.category === product.category
-  ).slice(0, 3);
+  const isTurnkey = product.category === 'turnkey-project';
+  const relatedProducts = PRODUCT_CATALOGUE.filter((p) => {
+    if (p.id === product.id) return false;
+    if (isTurnkey) return p.category === 'turnkey-project';
+    const thisCat = (product as any).productCategory || product.categoryLabel;
+    const otherCat = (p as any).productCategory || p.categoryLabel;
+    return otherCat === thisCat;
+  }).slice(0, 3);
+
+  const fallbackRelatedProducts = relatedProducts.length > 0 
+    ? relatedProducts 
+    : PRODUCT_CATALOGUE.filter((p) => p.id !== product.id && p.category === product.category).slice(0, 3);
 
   const features = 'features' in product && product.features ? product.features : [];
   const specifications = 'specifications' in product && product.specifications ? product.specifications : undefined;
@@ -251,22 +260,66 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                   </table>
                 </div>
               ) : (
-                <div className="bg-[#F8FAF8] border border-gray-200/90 rounded-lg p-4 space-y-2.5 text-sm">
-                  <div className="font-mono font-bold text-xs text-[#006B8F] uppercase tracking-wider">
-                    PRODUCT DETAILS & SPECIFICATIONS
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                    {Object.entries(specifications).map(([key, val]) => {
-                      if (!val) return null;
-                      const formattedKey = key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase());
-                      return (
-                        <div key={key} className="flex flex-col py-1 border-b border-gray-200/60 last:border-0">
-                          <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">{formattedKey}</span>
-                          <span className="font-semibold text-[#10232B] text-sm sm:text-base">{String(val)}</span>
+                <div className="space-y-4">
+                  <div className="bg-[#F8FAF8] border border-gray-200/90 rounded-xl p-4 sm:p-5 space-y-3">
+                    <div className="font-mono font-bold text-xs text-[#006B8F] uppercase tracking-wider flex items-center justify-between border-b border-gray-200/60 pb-2">
+                      <span>PRODUCT DETAILS & APPLICATION</span>
+                      <span className="text-[11px] text-gray-500 font-sans font-medium">{categoryLabel}</span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-sm">
+                      {((product as any).primaryUse || specifications?.primaryUse) && (
+                        <div className="flex flex-col py-1 border-b border-gray-100 sm:border-b-0 sm:border-r sm:pr-3">
+                          <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Primary Use</span>
+                          <span className="font-semibold text-[#10232B] mt-0.5">
+                            {(product as any).primaryUse || specifications?.primaryUse}
+                          </span>
                         </div>
-                      );
-                    })}
+                      )}
+
+                      {((product as any).whereUsed || specifications?.whereUsed) && (
+                        <div className="flex flex-col py-1">
+                          <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Where Used</span>
+                          <span className="font-semibold text-[#10232B] mt-0.5">
+                            {(product as any).whereUsed || specifications?.whereUsed}
+                          </span>
+                        </div>
+                      )}
+
+                      {((product as any).application || specifications?.application) && (
+                        <div className="flex flex-col py-1 border-t border-gray-100 sm:col-span-2">
+                          <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Application / Location</span>
+                          <span className="font-semibold text-[#10232B] mt-0.5">
+                            {(product as any).application || specifications?.application}
+                          </span>
+                        </div>
+                      )}
+
+                      <div className="flex flex-col py-1 border-t border-gray-100 sm:col-span-2">
+                        <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Relevant Specifications</span>
+                        <span className="font-medium text-gray-800 mt-0.5">
+                          {(product as any).notes || specifications?.specifications || 'Specifications available on request.'}
+                        </span>
+                      </div>
+                    </div>
                   </div>
+
+                  {/* Key Benefits List for Products */}
+                  {((product as any).keyBenefits && (product as any).keyBenefits.length > 0) && (
+                    <div className="space-y-2 pt-1">
+                      <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#006B8F]">
+                        KEY BENEFITS
+                      </h4>
+                      <div className="grid grid-cols-1 gap-2 text-sm">
+                        {(product as any).keyBenefits.map((b: string, idx: number) => (
+                          <div key={idx} className="flex items-start gap-2 bg-gray-50/90 p-2.5 rounded-lg border border-gray-200/60">
+                            <span className="text-[#006B8F] font-bold text-base leading-none mt-0.5">✓</span>
+                            <span className="text-gray-800 text-xs sm:text-sm font-medium leading-snug">{b}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )
             )}
@@ -282,10 +335,10 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
             {/* Primary Action Button */}
             <div className="pt-2">
               <button
-                onClick={() => onOpenConsultationModal(`Product Consultation: ${product.name}`)}
+                onClick={() => onOpenConsultationModal(product.name)}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded text-sm font-semibold text-white bg-[#006B8F] hover:bg-[#005775] transition-colors uppercase tracking-wider cursor-pointer shadow-2xs"
               >
-                <span>GET PROJECT CONSULTATION</span>
+                <span>{product.category === 'turnkey-project' ? 'GET PROJECT CONSULTATION' : 'ENQUIRE ABOUT THIS PRODUCT'}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -374,15 +427,15 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
         </div>
       )}
 
-      {/* 7. EXPLORE OTHER PROTECTED CULTIVATION STRUCTURES */}
-      {relatedProducts.length > 0 && (
+      {/* 7. EXPLORE RELATED PRODUCTS / STRUCTURES */}
+      {fallbackRelatedProducts.length > 0 && (
         <div className="max-w-[1240px] w-[92%] mx-auto space-y-4">
           <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-[#006B8F]">
-            EXPLORE OTHER PROTECTED CULTIVATION STRUCTURES
+            {isTurnkey ? 'EXPLORE OTHER PROTECTED CULTIVATION STRUCTURES' : `EXPLORE RELATED PRODUCTS IN ${categoryLabel.toUpperCase()}`}
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {relatedProducts.map((rel) => (
+            {fallbackRelatedProducts.map((rel) => (
               <div
                 key={rel.id}
                 onClick={() => onSelectProduct(rel.slug)}

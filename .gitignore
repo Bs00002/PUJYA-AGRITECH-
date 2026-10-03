@@ -14,3 +14,9 @@ WhatsApp Image*.jpeg
 image.png
 Jodhpur, Rajasthan/
 Shree Laxminarayan,  Location,Vamaj,/
+product of pujya sales/
+imgofp/
+IMAGES OF PS/
+scratch/*.json
+scratch/*.py
+!scratch/push_production_branch.py

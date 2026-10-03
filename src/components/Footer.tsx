@@ -13,11 +13,13 @@ import { useAdmin } from '../context/AdminContext';
 
 interface FooterProps {
   setActiveTab: (tab: string) => void;
+  onSelectSolution?: (solutionId: string) => void;
   onOpenConsultationModal?: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   setActiveTab,
+  onSelectSolution,
   onOpenConsultationModal,
 }) => {
   const { contactInfo } = useAdmin();
@@ -26,6 +28,17 @@ export const Footer: React.FC<FooterProps> = ({
     if (e) e.preventDefault();
     setActiveTab(id);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSolutionClick = (solutionId: string, path: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onSelectSolution) {
+      onSelectSolution(solutionId);
+    } else {
+      setActiveTab('products');
+      window.history.pushState({}, '', path);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const navLinks = [
@@ -39,12 +52,12 @@ export const Footer: React.FC<FooterProps> = ({
   ];
 
   const solutions = [
-    'Green Houses',
-    'Poly Houses',
-    'Shade Net Houses',
-    'Poly Tunnels',
-    'Protected Cultivation Structures',
-    'Green House Materials',
+    { label: 'Green Houses', id: 'green-houses', path: '/products?category=green-houses' },
+    { label: 'Poly Houses', id: 'poly-houses', path: '/products?category=poly-houses' },
+    { label: 'Shade Net Houses', id: 'shade-net-houses', path: '/products?category=shade-net-houses' },
+    { label: 'Poly Tunnels', id: 'poly-tunnels', path: '/products?category=poly-tunnels' },
+    { label: 'Protected Cultivation Structures', id: 'structures', path: '/products?category=structures' },
+    { label: 'Green House Materials', id: 'materials', path: '/products?category=materials' },
   ];
 
   const socialLinks = [
@@ -140,13 +153,15 @@ export const Footer: React.FC<FooterProps> = ({
             </h4>
             <ul className="space-y-2 text-sm">
               {solutions.map((item) => (
-                <li key={item}>
+                <li key={item.id}>
                   <a
-                    href="/products"
-                    onClick={(e) => handleNavClick('products', e)}
-                    className="text-[#E2F1F8] hover:text-white transition-colors cursor-pointer text-left block py-0.5"
+                    href={item.path}
+                    onClick={(e) => handleSolutionClick(item.id, item.path, e)}
+                    className="text-[#E2F1F8] hover:text-white transition-colors cursor-pointer text-left block py-0.5 group flex items-center justify-between"
                   >
-                    {item}
+                    <span className="group-hover:translate-x-1 transition-transform inline-block">
+                      {item.label}
+                    </span>
                   </a>
                 </li>
               ))}
