@@ -26,7 +26,7 @@ commands = [
     ["git", "init"],
     ["git", "checkout", "-B", "production"],
     ["git", "add", "."],
-    ["git", "commit", "-m", "Deploy 51 products catalog, prioritize Greenhouses & Turnkey Projects, enable global search, and clean up UI navigation"],
+    ["git", "commit", "-m", "Deploy latest build: Update Agro Shade Net to single primary photo and clean up gallery"],
     ["git", "remote", "set-url", "origin", repo_url] if os.path.exists(os.path.join(temp_dir, ".git", "config")) else ["git", "remote", "add", "origin", repo_url],
     ["git", "push", "--force", "origin", "production"]
 ]
