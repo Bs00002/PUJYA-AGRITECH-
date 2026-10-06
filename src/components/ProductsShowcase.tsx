@@ -390,19 +390,23 @@ export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
 
             let pillClass = '';
 
-            if (isFlagship || pill.id === 'all-products') {
+            if (isFlagship) {
               if (isActive) {
-                pillClass = 'bg-[#2F7445] text-white shadow-sm ring-2 ring-[#2F7445]/30 font-bold';
+                pillClass = 'bg-[#1B5E20] text-white shadow-sm ring-2 ring-emerald-500/40 font-bold';
               } else {
-                pillClass = pill.id === 'all-products'
-                  ? 'bg-white text-gray-800 hover:text-[#2F7445] hover:bg-emerald-50/60 border border-gray-300 font-bold shadow-2xs'
-                  : 'bg-emerald-50 text-[#1B5E20] hover:bg-emerald-100 hover:text-emerald-950 border border-emerald-400 font-bold shadow-2xs';
+                pillClass = 'bg-white text-[#1B5E20] hover:bg-emerald-50/70 hover:text-emerald-950 border border-emerald-300/90 font-bold shadow-2xs';
+              }
+            } else if (pill.id === 'all-products') {
+              if (isActive) {
+                pillClass = 'bg-[#006B8F] text-white shadow-sm ring-2 ring-sky-500/30 font-bold';
+              } else {
+                pillClass = 'bg-white text-gray-800 hover:text-[#006B8F] hover:bg-gray-50 border border-gray-300 font-bold shadow-2xs';
               }
             } else {
               if (isActive) {
-                pillClass = 'bg-[#006B8F] text-white shadow-xs font-semibold';
+                pillClass = 'bg-[#006B8F] text-white shadow-sm ring-2 ring-sky-500/30 font-semibold';
               } else {
-                pillClass = 'bg-white text-gray-700 hover:text-[#006B8F] hover:bg-gray-50 border border-gray-200/80 font-medium';
+                pillClass = 'bg-white text-gray-700 hover:text-[#006B8F] hover:bg-gray-50 border border-gray-200/90 font-medium shadow-2xs';
               }
             }
 
@@ -410,7 +414,7 @@ export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
               <button
                 key={pill.id}
                 onClick={() => handlePillClick(pill)}
-                className={`rounded-full px-4.5 sm:px-5 py-2 text-xs sm:text-[13px] font-semibold transition-all cursor-pointer shadow-2xs ${pillClass}`}
+                className={`rounded-full px-4.5 sm:px-5 py-2 text-xs sm:text-[13px] transition-all cursor-pointer ${pillClass}`}
               >
                 {pill.label}
               </button>
@@ -497,7 +501,7 @@ export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
                 }`}
               >
                 {/* Image Container */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-50 border-b border-gray-100 flex items-center justify-center p-3">
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-white border-b border-gray-100 flex items-center justify-center p-3 sm:p-4">
                   <img
                     src={prod.imageUrl}
                     alt={prod.name}
@@ -509,13 +513,18 @@ export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
                 {/* Card Info */}
                 <div className="p-4 sm:p-5 space-y-2.5 flex-1 flex flex-col justify-between">
                   <div className="space-y-1.5">
-                    {isHouse && (
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 inline-flex items-center gap-1 w-fit mb-1">
+                    {isHouse ? (
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 inline-flex items-center gap-1 w-fit mb-0.5">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
                         Turnkey Greenhouse Structure
                       </span>
+                    ) : (
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#006B8F] bg-sky-50 px-2 py-0.5 rounded border border-sky-200/80 inline-flex items-center gap-1 w-fit mb-0.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#006B8F]"></span>
+                        {prod.productCategory || 'Fitting Accessories'}
+                      </span>
                     )}
-                    <h3 className="text-sm sm:text-base font-bold text-[#10232B] group-hover:text-[#006B8F] transition-colors leading-snug line-clamp-2">
+                    <h3 className="text-sm sm:text-base font-bold text-gray-900 group-hover:text-[#006B8F] transition-colors leading-snug line-clamp-2">
                       {prod.name}
                     </h3>
                     <p className="text-xs text-gray-600 leading-relaxed line-clamp-2 font-normal">

@@ -311,12 +311,15 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
                         KEY BENEFITS
                       </h4>
                       <div className="grid grid-cols-1 gap-2 text-sm">
-                        {(product as any).keyBenefits.map((b: string, idx: number) => (
-                          <div key={idx} className="flex items-start gap-2 bg-gray-50/90 p-2.5 rounded-lg border border-gray-200/60">
-                            <span className="text-[#006B8F] font-bold text-base leading-none mt-0.5">✓</span>
-                            <span className="text-gray-800 text-xs sm:text-sm font-medium leading-snug">{b}</span>
-                          </div>
-                        ))}
+                        {(product as any).keyBenefits.map((b: string, idx: number) => {
+                          const formattedText = b ? b.charAt(0).toUpperCase() + b.slice(1) : '';
+                          return (
+                            <div key={idx} className="flex items-start gap-2 bg-gray-50/90 p-2.5 rounded-lg border border-gray-200/60">
+                              <span className="text-[#006B8F] font-bold text-base leading-none mt-0.5">✓</span>
+                              <span className="text-gray-800 text-xs sm:text-sm font-medium leading-snug">{formattedText}</span>
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   )}
