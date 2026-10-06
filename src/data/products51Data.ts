@@ -191,7 +191,7 @@ export const PRODUCTS_51_DATA: Product51Item[] = [
     features: ["Provides a compact metal connection between structural members"],
     notes: "RC is retained as the catalogue designation; confirm exact configuration with supplier.",
     imageUrl: '/products/catalog/07-5mm-single-plate-rc.jpg',
-    galleryImages: ["/products/catalog/07-5mm-single-plate-rc.jpg", "/products/catalog/07-5mm-single-plate-rc-gallery-1.jpg"],
+    galleryImages: ["/products/catalog/07-5mm-single-plate-rc.jpg", "/products/catalog/07-5mm-single-plate-rc-gallery-1.jpg", "/products/catalog/07-5mm-single-plate-rc-gallery-2.jpg"],
     specifications: {
       category: "Poly / Net Fastening System",
       primaryUse: "Structural pipe connection",
