@@ -244,8 +244,8 @@ export const PRODUCTS_51_DATA: Product51Item[] = [
     keyBenefits: ["Simplifies multi-member frame connections and provides a defined junction"],
     features: ["Simplifies multi-member frame connections and provides a defined junction"],
     notes: "Commonly used in greenhouse structural systems.",
-    imageUrl: '/products/catalog/11-5-way-junction-plate.jpg',
-    galleryImages: ["/products/catalog/11-5-way-junction-plate.jpg", "/products/catalog/11-5-way-junction-plate-gallery-1.jpeg", "/products/catalog/11-5-way-junction-plate-gallery-2.jpg"],
+    imageUrl: '/products/catalog/11-5-way-junction-plate-gallery-1.jpeg',
+    galleryImages: ["/products/catalog/11-5-way-junction-plate-gallery-1.jpeg"],
     specifications: {
       category: "Poly / Net Fastening System",
       primaryUse: "Multi-direction structural connection",
