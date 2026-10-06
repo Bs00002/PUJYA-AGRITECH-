@@ -48,11 +48,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             
             {/* Gallery Column */}
             <div className="md:col-span-6 space-y-3">
-              <div className="relative h-64 sm:h-72 rounded-xl overflow-hidden bg-slate-100 border border-slate-200">
+              <div className="relative h-64 sm:h-72 rounded-xl overflow-hidden bg-white border border-slate-200 flex items-center justify-center p-3">
                 <img
                   src={activeImg || product.imageUrl}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
                 <div className="absolute top-3 left-3 bg-slate-900/90 text-white text-[10px] font-bold px-2.5 py-1 rounded uppercase tracking-wider flex items-center gap-1 shadow-sm">
                   <ShieldCheck className="w-3 h-3 text-emerald-400" />
@@ -65,21 +65,21 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <div className="flex items-center gap-2 overflow-x-auto pb-1">
                   <button
                     onClick={() => setActiveImg(product.imageUrl)}
-                    className={`h-16 w-20 rounded-lg overflow-hidden border-2 transition-all flex-shrink-0 ${
+                    className={`h-16 w-20 rounded-lg overflow-hidden border-2 transition-all flex-shrink-0 bg-white p-1 flex items-center justify-center ${
                       activeImg === product.imageUrl ? 'border-[#004b93] scale-105' : 'border-slate-200 opacity-70 hover:opacity-100'
                     }`}
                   >
-                    <img src={product.imageUrl} alt="Main" className="w-full h-full object-cover" />
+                    <img src={product.imageUrl} alt="Main" className="w-full h-full object-contain" />
                   </button>
                   {product.galleryImages.map((img, idx) => (
                     <button
                       key={idx}
                       onClick={() => setActiveImg(img)}
-                      className={`h-16 w-20 rounded-lg overflow-hidden border-2 transition-all flex-shrink-0 ${
+                      className={`h-16 w-20 rounded-lg overflow-hidden border-2 transition-all flex-shrink-0 bg-white p-1 flex items-center justify-center ${
                         activeImg === img ? 'border-[#004b93] scale-105' : 'border-slate-200 opacity-70 hover:opacity-100'
                       }`}
                     >
-                      <img src={img} alt={`Thumb ${idx}`} className="w-full h-full object-cover" />
+                      <img src={img} alt={`Thumb ${idx}`} className="w-full h-full object-contain" />
                     </button>
                   ))}
                 </div>

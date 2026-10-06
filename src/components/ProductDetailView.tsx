@@ -173,16 +173,16 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
           
           {/* LEFT COLUMN: Product Photograph (50% width = lg:col-span-6) */}
           <div className="lg:col-span-6 space-y-3">
-            <div className="overflow-hidden rounded border border-gray-200 bg-[#F8FAF8] relative">
+            <div className="overflow-hidden rounded-xl border border-gray-200 bg-white relative flex items-center justify-center p-3 sm:p-5 h-[320px] sm:h-[380px] lg:h-[420px] shadow-2xs">
               <img
                 src={activeImageUrl}
                 alt={product.name}
-                className="w-full h-[320px] sm:h-[380px] lg:h-[420px] object-cover cursor-pointer hover:scale-[1.01] transition-transform duration-300"
+                className="w-full h-full object-contain cursor-pointer hover:scale-[1.02] transition-transform duration-300"
                 onClick={() => setIsLightboxOpen(true)}
               />
               <button
                 onClick={() => setIsLightboxOpen(true)}
-                className="absolute bottom-3 right-3 bg-[#10232B]/85 hover:bg-[#10232B] text-white px-3 py-1 rounded text-xs font-mono flex items-center gap-1.5 cursor-pointer"
+                className="absolute bottom-3 right-3 bg-[#10232B]/85 hover:bg-[#10232B] text-white px-3 py-1 rounded text-xs font-mono flex items-center gap-1.5 cursor-pointer shadow-sm"
               >
                 <Maximize2 className="w-3.5 h-3.5 text-[#006B8F]" />
                 <span>FULLSCREEN</span>
@@ -191,18 +191,18 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({
 
             {/* Gallery Thumbnails */}
             {allImages.length > 1 && (
-              <div className="flex items-center gap-2 pt-1 overflow-x-auto">
+              <div className="flex items-center gap-2 pt-1 overflow-x-auto pb-1">
                 {allImages.map((imgUrl, idx) => (
                   <button
                     key={idx}
                     onClick={() => setActiveImageIndex(idx)}
-                    className={`relative w-18 h-12 rounded overflow-hidden border-2 transition-all cursor-pointer shrink-0 ${
+                    className={`relative w-20 h-14 rounded-lg overflow-hidden border-2 transition-all cursor-pointer shrink-0 bg-white p-1 flex items-center justify-center ${
                       activeImageIndex === idx
-                        ? 'border-[#006B8F] opacity-100 scale-105'
-                        : 'border-gray-200 opacity-60 hover:opacity-100'
+                        ? 'border-[#006B8F] opacity-100 scale-105 shadow-xs'
+                        : 'border-gray-200 opacity-65 hover:opacity-100'
                     }`}
                   >
-                    <img src={imgUrl} alt="" className="w-full h-full object-cover" />
+                    <img src={imgUrl} alt="" className="w-full h-full object-contain" />
                   </button>
                 ))}
               </div>
