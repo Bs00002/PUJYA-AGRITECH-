@@ -137,7 +137,7 @@ export const PRODUCTS_51_DATA: Product51Item[] = [
     features: ["Reduces flapping and mechanical stress on the covering"],
     notes: "Installation pattern depends on structure and wind conditions.",
     imageUrl: '/products/catalog/05-anti-flapping-bands.png',
-    galleryImages: ["/products/catalog/05-anti-flapping-bands.png", "/products/catalog/05-anti-flapping-bands-gallery-1.jpg", "/products/catalog/05-anti-flapping-bands-gallery-2.jpg"],
+    galleryImages: ["/products/catalog/05-anti-flapping-bands.png", "/products/catalog/05-anti-flapping-bands-gallery-2.jpg"],
     specifications: {
       category: "Fitting Accessories",
       primaryUse: "Wind restraint for covering film",
@@ -200,33 +200,6 @@ export const PRODUCTS_51_DATA: Product51Item[] = [
       specifications: "RC is retained as the catalogue designation; confirm exact configuration with supplier."
     },
     keywords: ["5mm", "and", "connection", "fastening", "frame", "frames", "greenhouse", "intersections", "joints", "net", "pipe", "plate", "poly", "polyhouse", "rc", "single", "structural", "system"]
-  },
-  {
-    id: 'prod-8',
-    itemNumber: 8,
-    slug: '5mm-single-plate-sc',
-    category: 'product',
-    productCategory: "Poly / Net Fastening System",
-    categoryLabel: "Poly / Net Fastening System",
-    name: "5mm Single Plate \u2013 SC",
-    shortDescription: "A 5 mm single-plate structural connector for joining greenhouse frame members at specific pipe intersections.",
-    fullOverview: "A 5 mm single-plate structural connector for joining greenhouse frame members at specific pipe intersections.",
-    primaryUse: "Structural pipe connection",
-    whereUsed: "Greenhouse and polyhouse frames",
-    application: "Frame junctions and pipe connections",
-    keyBenefits: ["Rigid mechanical joining of structural members"],
-    features: ["Rigid mechanical joining of structural members"],
-    notes: "SC is retained as the catalogue designation; confirm exact configuration with supplier.",
-    imageUrl: '/products/catalog/08-5mm-single-plate-sc.jpg',
-    galleryImages: ["/products/catalog/08-5mm-single-plate-sc.jpg"],
-    specifications: {
-      category: "Poly / Net Fastening System",
-      primaryUse: "Structural pipe connection",
-      whereUsed: "Greenhouse and polyhouse frames",
-      application: "Frame junctions and pipe connections",
-      specifications: "SC is retained as the catalogue designation; confirm exact configuration with supplier."
-    },
-    keywords: ["5mm", "and", "connection", "connections", "fastening", "frame", "frames", "greenhouse", "junctions", "net", "pipe", "plate", "poly", "polyhouse", "sc", "single", "structural", "system"]
   },
   {
     id: 'prod-9',
@@ -362,33 +335,6 @@ export const PRODUCTS_51_DATA: Product51Item[] = [
       specifications: "Cooling performance depends on airflow, humidity, water distribution and pad area."
     },
     keywords: ["airflow", "and", "cellulose", "climate-controlled", "cooling", "cooling-pad", "evaporative", "exhaust", "fan", "fan-and-pad", "fans", "greenhouses", "hvac", "opposite", "pad", "pads", "structures", "ventilation", "wall"]
-  },
-  {
-    id: 'prod-14',
-    itemNumber: 14,
-    slug: 'evaporative-cooling-pad-frames',
-    category: 'product',
-    productCategory: "HVAC / Exhaust & Cooling",
-    categoryLabel: "HVAC / Exhaust & Cooling",
-    name: "Evaporative Cooling Pad Frames",
-    shortDescription: "Frames that hold and support evaporative cooling-pad media while providing a defined installation assembly for the cooling wall.",
-    fullOverview: "Frames that hold and support evaporative cooling-pad media while providing a defined installation assembly for the cooling wall.",
-    primaryUse: "Supporting cooling pads",
-    whereUsed: "Fan-and-pad greenhouses",
-    application: "Cooling-pad wall/frame assembly",
-    keyBenefits: ["Keeps pad media positioned securely and supports installation of the cooling system"],
-    features: ["Keeps pad media positioned securely and supports installation of the cooling system"],
-    notes: "Frame dimensions must match the selected pad.",
-    imageUrl: '/products/catalog/14-evaporative-cooling-pad-frames.jpg',
-    galleryImages: ["/products/catalog/14-evaporative-cooling-pad-frames.jpg", "/products/catalog/14-evaporative-cooling-pad-frames-gallery-1.jpg"],
-    specifications: {
-      category: "HVAC / Exhaust & Cooling",
-      primaryUse: "Supporting cooling pads",
-      whereUsed: "Fan-and-pad greenhouses",
-      application: "Cooling-pad wall/frame assembly",
-      specifications: "Frame dimensions must match the selected pad."
-    },
-    keywords: ["airflow", "assembly", "cooling", "cooling-pad", "evaporative", "exhaust", "fan", "fan-and-pad", "frame", "frames", "greenhouses", "hvac", "pad", "pads", "supporting", "ventilation", "wall"]
   },
   {
     id: 'prod-15',
@@ -1392,14 +1338,14 @@ export const PRODUCTS_51_DATA: Product51Item[] = [
 ];
 
 export const PRODUCT_CATEGORIES = [
+  'Covering Materials',
   'Fitting Accessories',
+  'Trellising Accessories',
   'Poly / Net Fastening System',
   'HVAC / Exhaust & Cooling',
   'Steel Wire Rope & Net House Components',
   'Orchard Structure Components',
-  'Trellising Accessories',
-  'Curtain / Installation & Structure Accessories',
-  'Covering Materials'
+  'Curtain / Installation & Structure Accessories'
 ] as const;
 
 export type ProductCategory = typeof PRODUCT_CATEGORIES[number];

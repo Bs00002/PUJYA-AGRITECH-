@@ -40,9 +40,12 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
           className="space-y-4 sm:space-y-6 max-w-4xl mx-auto"
         >
           {/* Sub-tag: SINCE 2017 */}
-          <span className="block text-xs sm:text-sm font-mono font-medium tracking-[0.25em] text-[#34D399] uppercase">
-            SINCE 2017
-          </span>
+          <div className="inline-flex items-center justify-center">
+            <span className="inline-flex items-center gap-2 px-4.5 py-1.5 rounded-full bg-[#104396] text-white text-xs sm:text-sm font-bold tracking-[0.22em] shadow-lg shadow-[#104396]/40 border border-blue-400/40 uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-300 animate-pulse" />
+              SINCE 2017
+            </span>
+          </div>
 
           {/* Main Heading */}
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.15]">

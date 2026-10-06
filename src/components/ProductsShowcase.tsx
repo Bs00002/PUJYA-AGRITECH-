@@ -243,16 +243,16 @@ interface FilterPill {
 }
 
 const FILTER_PILLS: FilterPill[] = [
-  { id: 'turnkey-projects', label: 'Greenhouses & Turnkey Projects', type: 'turnkey', isFlagship: true },
   { id: 'all-products', label: 'All Products', type: 'all' },
+  { id: 'turnkey-projects', label: 'Greenhouses & Turnkey Projects', type: 'turnkey', isFlagship: true },
+  { id: 'covering-materials', label: 'Covering Materials', type: 'category', targetCat: 'Covering Materials' },
   { id: 'fitting-accessories', label: 'Fitting Accessories', type: 'category', targetCat: 'Fitting Accessories' },
+  { id: 'trellising', label: 'Trellising Accessories', type: 'category', targetCat: 'Trellising Accessories' },
   { id: 'poly-net-fastening', label: 'Poly / Net Fastening System', type: 'category', targetCat: 'Poly / Net Fastening System' },
   { id: 'hvac-cooling', label: 'HVAC / Exhaust & Cooling', type: 'category', targetCat: 'HVAC / Exhaust & Cooling' },
   { id: 'steel-wire-rope', label: 'Steel Wire Rope & Net House Components', type: 'category', targetCat: 'Steel Wire Rope & Net House Components' },
   { id: 'orchard-structure', label: 'Orchard Structure Components', type: 'category', targetCat: 'Orchard Structure Components' },
-  { id: 'trellising', label: 'Trellising Accessories', type: 'category', targetCat: 'Trellising Accessories' },
   { id: 'curtain-installation', label: 'Curtain / Installation & Structure Accessories', type: 'category', targetCat: 'Curtain / Installation & Structure Accessories' },
-  { id: 'covering-materials', label: 'Covering Materials', type: 'category', targetCat: 'Covering Materials' },
 ];
 
 export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
@@ -263,9 +263,9 @@ export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
   onSelectCategory,
   onSelectProduct,
 }) => {
-  // Normalize initial active pill - Default FIRST to Turnkey Greenhouses & Houses
+  // Normalize initial active pill - Default FIRST to All Products
   const getInitialPillId = (cat?: string | null): string => {
-    if (!cat) return 'turnkey-projects';
+    if (!cat) return 'all-products';
     const c = cat.toLowerCase();
     if (
       c === 'turnkey' ||
@@ -286,7 +286,7 @@ export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
     const match = FILTER_PILLS.find(
       p => p.id === c || (p.targetCat && p.targetCat.toLowerCase() === c) || (p.targetCat && p.targetCat.toLowerCase().replace(/[^a-z0-9]/g, '-') === c)
     );
-    return match ? match.id : 'turnkey-projects';
+    return match ? match.id : 'all-products';
   };
 
   const [activeFilterId, setActiveFilterId] = useState<string>(() => getInitialPillId(initialCategory));
@@ -388,17 +388,19 @@ export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
 
             let pillClass = '';
 
-            if (isFlagship) {
+            if (isFlagship || pill.id === 'all-products') {
               if (isActive) {
                 pillClass = 'bg-[#2F7445] text-white shadow-sm ring-2 ring-[#2F7445]/30 font-bold';
               } else {
-                pillClass = 'bg-emerald-50 text-[#1B5E20] hover:bg-emerald-100 hover:text-emerald-950 border border-emerald-400 font-bold shadow-2xs';
+                pillClass = pill.id === 'all-products'
+                  ? 'bg-white text-gray-800 hover:text-[#2F7445] hover:bg-emerald-50/60 border border-gray-300 font-bold shadow-2xs'
+                  : 'bg-emerald-50 text-[#1B5E20] hover:bg-emerald-100 hover:text-emerald-950 border border-emerald-400 font-bold shadow-2xs';
               }
             } else {
               if (isActive) {
-                pillClass = 'bg-[#006B8F] text-white shadow-xs';
+                pillClass = 'bg-[#006B8F] text-white shadow-xs font-semibold';
               } else {
-                pillClass = 'bg-white text-gray-700 hover:text-[#006B8F] hover:bg-gray-50 border border-gray-200/80';
+                pillClass = 'bg-white text-gray-700 hover:text-[#006B8F] hover:bg-gray-50 border border-gray-200/80 font-medium';
               }
             }
 
@@ -439,8 +441,8 @@ export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
           </div>
         </div>
 
-        {/* Flagship Greenhouses Highlight Header when viewing Turnkey Projects */}
-        {activeFilterId === 'turnkey-projects' && (
+        {/* Category Header Banner */}
+        {activeFilterId === 'turnkey-projects' ? (
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-1 pt-1 pb-0.5 border-b border-gray-200/70">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
@@ -450,6 +452,30 @@ export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
             </div>
             <span className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 w-fit">
               6 Complete Turnkey EPC Solutions
+            </span>
+          </div>
+        ) : activeFilterId === 'all-products' ? (
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-1 pt-1 pb-0.5 border-b border-gray-200/70">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+              <h2 className="text-sm sm:text-base font-bold text-gray-900">
+                All Products & Turnkey Infrastructure
+              </h2>
+            </div>
+            <span className="text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 w-fit">
+              {displayedItems.length} Products Available
+            </span>
+          </div>
+        ) : activePill && (
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-1 pt-1 pb-0.5 border-b border-gray-200/70">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#006B8F]"></span>
+              <h2 className="text-sm sm:text-base font-bold text-gray-900">
+                {activePill.label}
+              </h2>
+            </div>
+            <span className="text-[11px] font-semibold text-[#006B8F] bg-sky-50 px-2.5 py-0.5 rounded-full border border-sky-200 w-fit">
+              {displayedItems.length} Products
             </span>
           </div>
         )}

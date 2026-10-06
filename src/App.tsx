@@ -90,7 +90,7 @@ const GLOBAL_LOCAL_BUSINESS_SCHEMA = {
 function MainLayout() {
   const [activeTab, setActiveTab] = useState<string>('home');
   const [selectedProductSlug, setSelectedProductSlug] = useState<string | null>(null);
-  const [selectedProductCategory, setSelectedProductCategory] = useState<string>('turnkey-projects');
+  const [selectedProductCategory, setSelectedProductCategory] = useState<string>('all-products');
   const [selectedProjectSlug, setSelectedProjectSlug] = useState<string | null>(null);
   const [isConsultationModalOpen, setIsConsultationModalOpen] = useState(false);
   const [modalItemName, setModalItemName] = useState<string | undefined>(undefined);
@@ -120,6 +120,11 @@ function MainLayout() {
       const hash = window.location.hash.replace('#', '');
 
       const knownCategories = [
+        'all-products',
+        'all',
+        'products',
+        'turnkey-project',
+        'turnkey-projects',
         'green-houses',
         'poly-houses',
         'shade-net-houses',
@@ -129,18 +134,20 @@ function MainLayout() {
         'materials',
         'greenhouse-material',
         'green-house-materials',
-        'turnkey-project',
-        'turnkey-projects',
-        'products',
-        'all',
-        'fitting-accessories',
-        'poly-net-fastening-system',
-        'hvac-exhaust-cooling',
-        'steel-wire-rope-net-house-components',
-        'orchard-structure-components',
-        'trellising-accessories',
-        'curtain-installation-structure-accessories',
         'covering-materials',
+        'fitting-accessories',
+        'trellising',
+        'trellising-accessories',
+        'poly-net-fastening',
+        'poly-net-fastening-system',
+        'hvac-cooling',
+        'hvac-exhaust-cooling',
+        'steel-wire-rope',
+        'steel-wire-rope-net-house-components',
+        'orchard-structure',
+        'orchard-structure-components',
+        'curtain-installation',
+        'curtain-installation-structure-accessories',
       ];
 
       if (categoryParam && knownCategories.includes(categoryParam)) {
@@ -158,6 +165,9 @@ function MainLayout() {
         } else {
           setSelectedProductSlug(null);
           setSelectedProjectSlug(null);
+          if (matchedTab === 'products' && !categoryParam && !hash) {
+            setSelectedProductCategory('all-products');
+          }
         }
       }
     };
