@@ -250,7 +250,6 @@ const FILTER_PILLS: FilterPill[] = [
   { id: 'trellising', label: 'Trellising Accessories', type: 'category', targetCat: 'Trellising Accessories' },
   { id: 'poly-net-fastening', label: 'Poly / Net Fastening System', type: 'category', targetCat: 'Poly / Net Fastening System' },
   { id: 'hvac-cooling', label: 'HVAC / Exhaust & Cooling', type: 'category', targetCat: 'HVAC / Exhaust & Cooling' },
-  { id: 'steel-wire-rope', label: 'Steel Wire Rope & Net House Components', type: 'category', targetCat: 'Steel Wire Rope & Net House Components' },
   { id: 'orchard-structure', label: 'Orchard Structure Components', type: 'category', targetCat: 'Orchard Structure Components' },
   { id: 'curtain-installation', label: 'Curtain / Installation & Structure Accessories', type: 'category', targetCat: 'Curtain / Installation & Structure Accessories' },
 ];
@@ -282,6 +281,9 @@ export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
     }
     if (c === 'all' || c === 'products' || c === 'all-products' || c === 'materials' || c === 'greenhouse-material' || c === 'green-house-materials') {
       return 'all-products';
+    }
+    if (c === 'steel-wire-rope' || c === 'steel-wire-rope-net-house-components') {
+      return 'fitting-accessories';
     }
     const match = FILTER_PILLS.find(
       p => p.id === c || (p.targetCat && p.targetCat.toLowerCase() === c) || (p.targetCat && p.targetCat.toLowerCase().replace(/[^a-z0-9]/g, '-') === c)

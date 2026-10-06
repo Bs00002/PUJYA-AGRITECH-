@@ -151,10 +151,16 @@ function MainLayout() {
       ];
 
       if (categoryParam && knownCategories.includes(categoryParam)) {
-        setSelectedProductCategory(categoryParam);
+        const resolvedCategory = (categoryParam === 'steel-wire-rope' || categoryParam === 'steel-wire-rope-net-house-components')
+          ? 'fitting-accessories'
+          : categoryParam;
+        setSelectedProductCategory(resolvedCategory);
         setSelectedProductSlug(null);
       } else if (hash && knownCategories.includes(hash)) {
-        setSelectedProductCategory(hash);
+        const resolvedCategory = (hash === 'steel-wire-rope' || hash === 'steel-wire-rope-net-house-components')
+          ? 'fitting-accessories'
+          : hash;
+        setSelectedProductCategory(resolvedCategory);
         setSelectedProductSlug(null);
       } else {
         const slug = hash || pathSlug;
