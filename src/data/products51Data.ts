@@ -1162,8 +1162,8 @@ export const PRODUCTS_51_DATA: Product51Item[] = [
     keyBenefits: ["Controls sunlight and can help reduce heat stress depending on shade percentage"],
     features: ["Controls sunlight and can help reduce heat stress depending on shade percentage"],
     notes: "Shade percentage and weave should be selected according to crop and climate.",
-    imageUrl: '/products/catalog/47-agro-shade-net-mono-x-mono-and-tape-x-tape.webp',
-    galleryImages: ["/products/catalog/47-agro-shade-net-mono-x-mono-and-tape-x-tape.webp", "/products/catalog/47-agro-shade-net-mono-x-mono-and-tape-x-tape-gallery-1.jpeg", "/products/catalog/47-agro-shade-net-mono-x-mono-and-tape-x-tape-gallery-2.jpeg"],
+    imageUrl: '/products/catalog/47-agro-shade-net-mono-x-mono-and-tape-x-tape-gallery-1.jpeg',
+    galleryImages: ["/products/catalog/47-agro-shade-net-mono-x-mono-and-tape-x-tape-gallery-1.jpeg"],
     specifications: {
       category: "Covering Materials",
       primaryUse: "Shade and light management",
