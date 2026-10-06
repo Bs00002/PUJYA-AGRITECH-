@@ -229,33 +229,6 @@ export const PRODUCTS_51_DATA: Product51Item[] = [
     keywords: ["and", "clamp", "clamps", "connector", "fastening", "fixing", "frame", "greenhouses", "joining", "joints", "net", "pipe", "pipes", "poly", "polyhouses", "square", "structural", "supports", "system", "tube"]
   },
   {
-    id: 'prod-10',
-    itemNumber: 10,
-    slug: 'butterfly-plate',
-    category: 'product',
-    productCategory: "Poly / Net Fastening System",
-    categoryLabel: "Poly / Net Fastening System",
-    name: "Butterfly Plate",
-    shortDescription: "A multi-arm metal connector plate used to connect greenhouse structural members at junctions and support frame geometry.",
-    fullOverview: "A multi-arm metal connector plate used to connect greenhouse structural members at junctions and support frame geometry.",
-    primaryUse: "Structural frame junction",
-    whereUsed: "Greenhouses and polyhouses",
-    application: "Arch/gutter and structural junction areas",
-    keyBenefits: ["Creates multiple connection points from one fitting"],
-    features: ["Creates multiple connection points from one fitting"],
-    notes: "Exact hole pattern and compatible pipe sizes should be confirmed.",
-    imageUrl: '/products/catalog/10-butterfly-plate.jpg',
-    galleryImages: ["/products/catalog/10-butterfly-plate.jpg"],
-    specifications: {
-      category: "Poly / Net Fastening System",
-      primaryUse: "Structural frame junction",
-      whereUsed: "Greenhouses and polyhouses",
-      application: "Arch/gutter and structural junction areas",
-      specifications: "Exact hole pattern and compatible pipe sizes should be confirmed."
-    },
-    keywords: ["and", "arch", "areas", "butterfly", "fastening", "frame", "greenhouses", "gutter", "junction", "net", "plate", "poly", "polyhouses", "structural", "system"]
-  },
-  {
     id: 'prod-11',
     itemNumber: 11,
     slug: '5-way-junction-plate',
@@ -875,33 +848,6 @@ export const PRODUCTS_51_DATA: Product51Item[] = [
       specifications: "Exact shape is catalogue-specific; verify intended mounting point."
     },
     keywords: ["accessories", "and", "crop support", "cultivation", "greenhouses", "hanging", "hook", "overhead", "points", "protected", "stem", "support", "tomato", "trellis", "trellising", "twine", "vine", "w-hook", "wires"]
-  },
-  {
-    id: 'prod-35',
-    itemNumber: 35,
-    slug: 'roller-hook',
-    category: 'product',
-    productCategory: "Trellising Accessories",
-    categoryLabel: "Trellising Accessories",
-    name: "Roller-Hook",
-    shortDescription: "A roller/spool-based trellising hook that carries twine and allows controlled lowering of vine crops as plants grow.",
-    fullOverview: "A roller/spool-based trellising hook that carries twine and allows controlled lowering of vine crops as plants grow.",
-    primaryUse: "Vertical crop trellising and plant lowering",
-    whereUsed: "Greenhouses, especially tomato and cucumber cultivation",
-    application: "Hung from overhead trellis wire",
-    keyBenefits: ["Controls plant lowering", "saves labor and supports repeated crop cycles"],
-    features: ["Controls plant lowering", "saves labor and supports repeated crop cycles"],
-    notes: "Commonly used with trellising wire and UV-resistant twine.",
-    imageUrl: '/products/catalog/35-roller-hook.jpg',
-    galleryImages: ["/products/catalog/35-roller-hook.jpg", "/products/catalog/35-roller-hook-gallery-1.jpg"],
-    specifications: {
-      category: "Trellising Accessories",
-      primaryUse: "Vertical crop trellising and plant lowering",
-      whereUsed: "Greenhouses, especially tomato and cucumber cultivation",
-      application: "Hung from overhead trellis wire",
-      specifications: "Commonly used with trellising wire and UV-resistant twine."
-    },
-    keywords: ["accessories", "and", "crop", "crop support", "cucumber", "cultivation", "especially", "from", "greenhouses", "hook", "hung", "lowering", "overhead", "plant", "roller", "roller-hook", "stem", "tomato", "trellis", "trellising", "twine", "vertical", "vine", "wire"]
   },
   {
     id: 'prod-36',
