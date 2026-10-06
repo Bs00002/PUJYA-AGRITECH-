@@ -26,7 +26,7 @@ commands = [
     ["git", "init"],
     ["git", "checkout", "-B", "production"],
     ["git", "add", "."],
-    ["git", "commit", "-m", "Deploy latest build: Set structure photo as single primary image for Anti-Insect Net"],
+    ["git", "commit", "-m", "Deploy latest build: Rename to Greenhouse Poly Film and update real structure installation photo"],
     ["git", "remote", "set-url", "origin", repo_url] if os.path.exists(os.path.join(temp_dir, ".git", "config")) else ["git", "remote", "add", "origin", repo_url],
     ["git", "push", "--force", "origin", "production"]
 ]

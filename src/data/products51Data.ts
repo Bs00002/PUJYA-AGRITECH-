@@ -1122,21 +1122,21 @@ export const PRODUCTS_51_DATA: Product51Item[] = [
   {
     id: 'prod-46',
     itemNumber: 46,
-    slug: 'greenhouse-plastic-film',
+    slug: 'greenhouse-poly-film',
     category: 'product',
     productCategory: "Covering Materials",
     categoryLabel: "Covering Materials",
-    name: "Greenhouse Plastic Film",
-    shortDescription: "Specialized polyethylene greenhouse covering film used to enclose protected-cultivation structures and regulate the growing environment.",
-    fullOverview: "Specialized polyethylene greenhouse covering film used to enclose protected-cultivation structures and regulate the growing environment.",
+    name: "Greenhouse Poly Film",
+    shortDescription: "Specialized polyethylene greenhouse covering poly film used to enclose protected-cultivation structures and regulate the growing environment.",
+    fullOverview: "Specialized polyethylene greenhouse covering poly film used to enclose protected-cultivation structures and regulate the growing environment.",
     primaryUse: "Greenhouse covering",
     whereUsed: "Greenhouses and polyhouses",
     application: "Roof and sidewall covering",
     keyBenefits: ["Creates a protected growing environment and can be selected with UV and light-management properties"],
     features: ["Creates a protected growing environment and can be selected with UV and light-management properties"],
     notes: "Film thickness, UV treatment and optical properties should be specified per project.",
-    imageUrl: '/products/catalog/46-greenhouse-plastic-film.webp',
-    galleryImages: ["/products/catalog/46-greenhouse-plastic-film.webp"],
+    imageUrl: '/products/catalog/46-greenhouse-poly-film.webp',
+    galleryImages: ["/products/catalog/46-greenhouse-poly-film.webp"],
     specifications: {
       category: "Covering Materials",
       primaryUse: "Greenhouse covering",
@@ -1144,7 +1144,7 @@ export const PRODUCTS_51_DATA: Product51Item[] = [
       application: "Roof and sidewall covering",
       specifications: "Film thickness, UV treatment and optical properties should be specified per project."
     },
-    keywords: ["and", "covering", "film", "greenhouse", "greenhouses", "liner", "mat", "materials", "plastic", "polyhouses", "pond", "roof", "sidewall", "water", "weed"]
+    keywords: ["and", "covering", "film", "greenhouse", "greenhouses", "liner", "mat", "materials", "plastic", "poly", "polyhouses", "pond", "roof", "sidewall", "water", "weed"]
   },
   {
     id: 'prod-47',

@@ -356,7 +356,10 @@ export const ProductsShowcase: React.FC<ProductsShowcaseProps> = ({
 
   // If activeProductSlug is set, render ProductDetailView
   const currentProduct = PRODUCT_CATALOGUE.find(
-    (p) => p.slug === activeProductSlug || p.id === activeProductSlug
+    (p) =>
+      p.slug === activeProductSlug ||
+      p.id === activeProductSlug ||
+      (p.slug === 'greenhouse-poly-film' && activeProductSlug === 'greenhouse-plastic-film')
   );
 
   if (currentProduct) {
