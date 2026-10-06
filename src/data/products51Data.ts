@@ -1243,8 +1243,8 @@ export const PRODUCTS_51_DATA: Product51Item[] = [
     keyBenefits: ["Helps reduce gaps at ground level and provides a cleaner protected boundary"],
     features: ["Helps reduce gaps at ground level and provides a cleaner protected boundary"],
     notes: "Installation and material specification should suit the greenhouse covering system.",
-    imageUrl: '/products/catalog/50-apron-skirting-paper.jpeg',
-    galleryImages: ["/products/catalog/50-apron-skirting-paper.jpeg", "/products/catalog/50-apron-skirting-paper-gallery-1.jpg"],
+    imageUrl: '/products/catalog/50-apron-skirting-paper-gallery-1.jpg',
+    galleryImages: ["/products/catalog/50-apron-skirting-paper-gallery-1.jpg"],
     specifications: {
       category: "Covering Materials",
       primaryUse: "Perimeter sealing and skirting",
