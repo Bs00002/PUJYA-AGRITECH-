@@ -1216,8 +1216,8 @@ export const PRODUCTS_51_DATA: Product51Item[] = [
     keyBenefits: ["Physical pest barrier that supports protected cultivation and integrated pest management"],
     features: ["Physical pest barrier that supports protected cultivation and integrated pest management"],
     notes: "Mesh size must be selected according to target pest and airflow requirement.",
-    imageUrl: '/products/catalog/49-anti-insect-net.webp',
-    galleryImages: ["/products/catalog/49-anti-insect-net.webp", "/products/catalog/49-anti-insect-net-gallery-1.jpeg"],
+    imageUrl: '/products/catalog/49-anti-insect-net-gallery-1.jpeg',
+    galleryImages: ["/products/catalog/49-anti-insect-net-gallery-1.jpeg"],
     specifications: {
       category: "Covering Materials",
       primaryUse: "Insect exclusion",
