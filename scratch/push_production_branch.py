@@ -24,9 +24,12 @@ print(f"Copied dist files to {temp_dir}")
 
 commands = [
     ["git", "init"],
+    ["git", "config", "http.postBuffer", "524288000"],
+    ["git", "config", "http.lowSpeedLimit", "0"],
+    ["git", "config", "http.lowSpeedTime", "999999"],
     ["git", "checkout", "-B", "production"],
     ["git", "add", "."],
-    ["git", "commit", "-m", "Deploy latest build: Keep only structure photo for 5mm Single Plate - RC"],
+    ["git", "commit", "-m", "Deploy latest build: Add Mr. Maheshji Malav (Kota) and Mr. Samsuddin Malik (Dholka) turnkey projects"],
     ["git", "remote", "set-url", "origin", repo_url] if os.path.exists(os.path.join(temp_dir, ".git", "config")) else ["git", "remote", "add", "origin", repo_url],
     ["git", "push", "--force", "origin", "production"]
 ]
