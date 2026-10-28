@@ -44,10 +44,12 @@ export const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({
   const yearVal = project.yearCompleted || project.projectDate;
   const promoterVal = project.promoter || project.farmerName;
   const structureVal = project.structure || (project.structuresUsed && project.structuresUsed[0]?.name);
+  const schemeVal = project.scheme;
 
   const infoFields = [
     promoterVal ? { label: 'PROMOTER / FARMER', value: promoterVal, icon: Building2, color: 'text-[#10232B]' } : null,
     structureVal ? { label: 'STRUCTURE', value: structureVal, icon: Layers, color: 'text-[#006B8F]' } : null,
+    schemeVal ? { label: 'PROJECT SCHEME', value: schemeVal, icon: CheckCircle2, color: 'text-[#2F7445]' } : null,
     projectTypeVal ? { label: 'PROJECT TYPE', value: projectTypeVal, icon: Building2, color: 'text-[#10232B]' } : null,
     locationVal ? { label: 'LOCATION', value: locationVal, icon: MapPin, color: 'text-[#006B8F]' } : null,
     executionVal ? { label: 'EXECUTION', value: executionVal, icon: CheckCircle2, color: 'text-[#2F7445]' } : null,
@@ -204,6 +206,12 @@ export const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({
                         <div className="text-[10px] font-mono font-semibold text-gray-500 uppercase">Structure Type</div>
                       </div>
                     )}
+                    {schemeVal && (
+                      <div className="bg-[#FAFBF9] p-3.5 rounded-lg border border-gray-200/80 space-y-1">
+                        <div className="text-sm sm:text-base font-extrabold text-[#2F7445] truncate" title={schemeVal}>{schemeVal}</div>
+                        <div className="text-[10px] font-mono font-semibold text-gray-500 uppercase">Project Scheme</div>
+                      </div>
+                    )}
                     {yearVal && (
                       <div className="bg-[#FAFBF9] p-3.5 rounded-lg border border-gray-200/80 space-y-1">
                         <div className="text-base sm:text-lg font-extrabold text-[#006B8F]">{yearVal}</div>
@@ -321,6 +329,13 @@ export const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({
                     <div className="flex justify-between items-center py-1 border-b border-gray-100">
                       <span className="text-gray-500 font-mono">STRUCTURE</span>
                       <span className="font-bold text-[#006B8F] truncate max-w-[180px]" title={structureVal}>{structureVal}</span>
+                    </div>
+                  )}
+
+                  {schemeVal && (
+                    <div className="flex justify-between items-center py-1 border-b border-gray-100">
+                      <span className="text-gray-500 font-mono">SCHEME</span>
+                      <span className="font-bold text-[#2F7445] truncate max-w-[180px]" title={schemeVal}>{schemeVal}</span>
                     </div>
                   )}
 

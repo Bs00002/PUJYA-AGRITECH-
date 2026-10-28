@@ -190,8 +190,8 @@ export const PRODUCTS_51_DATA: Product51Item[] = [
     keyBenefits: ["Provides a compact metal connection between structural members"],
     features: ["Provides a compact metal connection between structural members"],
     notes: "RC is retained as the catalogue designation; confirm exact configuration with supplier.",
-    imageUrl: '/products/catalog/07-5mm-single-plate-rc-gallery-2.jpg',
-    galleryImages: ["/products/catalog/07-5mm-single-plate-rc-gallery-2.jpg"],
+    imageUrl: '/products/catalog/07-5mm-single-plate-rc.jpg',
+    galleryImages: ["/products/catalog/07-5mm-single-plate-rc.jpg"],
     specifications: {
       category: "Poly / Net Fastening System",
       primaryUse: "Structural pipe connection",
@@ -785,7 +785,7 @@ export const PRODUCTS_51_DATA: Product51Item[] = [
     features: ["Guides plant growth", "supports fruiting stems and helps use vertical space"],
     notes: "Choose UV-stabilized agricultural twine for outdoor/greenhouse exposure.",
     imageUrl: '/products/catalog/32-twine.png',
-    galleryImages: ["/products/catalog/32-twine.png", "/products/catalog/32-twine-gallery-1.jpg"],
+    galleryImages: ["/products/catalog/32-twine.png"],
     specifications: {
       category: "Trellising Accessories",
       primaryUse: "Crop training and plant support",

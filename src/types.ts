@@ -57,6 +57,7 @@ export interface ProjectItem {
   country?: string;
   projectType?: string;
   executionType?: string;
+  scheme?: string;
   crop?: string;
   areaSize?: string;
   area?: string;

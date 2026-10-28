@@ -195,7 +195,14 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             p.name?.includes('High-Density Shade-Net') ||
             p.name?.includes('Commercial Turnkey Greenhouse Project')
           );
-          if (!hasInvalid) return parsed;
+          if (!hasInvalid) {
+            const existingIds = new Set(parsed.map((p: any) => p.id));
+            const missingDefaults = DEFAULT_PROJECTS.filter((dp) => !existingIds.has(dp.id));
+            if (missingDefaults.length > 0) {
+              return [...parsed, ...missingDefaults];
+            }
+            return parsed;
+          }
         }
       }
     } catch {}
