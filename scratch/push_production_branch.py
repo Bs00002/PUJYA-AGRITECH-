@@ -29,7 +29,7 @@ commands = [
     ["git", "config", "http.lowSpeedTime", "999999"],
     ["git", "checkout", "-B", "production"],
     ["git", "add", "."],
-    ["git", "commit", "-m", "Deploy latest build: Add Mr. Maheshji Malav (Kota) and Mr. Samsuddin Malik (Dholka) turnkey projects"],
+    ["git", "commit", "-m", "Deploy latest build: Add Flat Roof Shade Net House (4000 Sqm) at Sargasan, Gandhinagar turnkey project with video voice tour"],
     ["git", "remote", "set-url", "origin", repo_url] if os.path.exists(os.path.join(temp_dir, ".git", "config")) else ["git", "remote", "add", "origin", repo_url],
     ["git", "push", "--force", "origin", "production"]
 ]

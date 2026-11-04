@@ -117,7 +117,20 @@ export const VinayakaAutoSlider: React.FC<VinayakaAutoSliderProps> = ({
   const toggleVideoPlayback = () => {
     if (videoRef.current) {
       if (videoRef.current.paused) {
-        videoRef.current.play();
+        // Unmute so voice commentary and audio can be heard immediately upon user interaction
+        videoRef.current.muted = false;
+        setIsMuted(false);
+        const playPromise = videoRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            // Autoplay policy fallback: if unmuted playback is blocked by browser, mute and retry
+            if (videoRef.current) {
+              videoRef.current.muted = true;
+              setIsMuted(true);
+              videoRef.current.play();
+            }
+          });
+        }
         setIsVideoPlaying(true);
         setIsPlaying(false);
       } else {
@@ -129,8 +142,9 @@ export const VinayakaAutoSlider: React.FC<VinayakaAutoSliderProps> = ({
 
   const toggleMute = () => {
     if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
+      const nextMuted = !isMuted;
+      videoRef.current.muted = nextMuted;
+      setIsMuted(nextMuted);
     }
   };
 
@@ -162,8 +176,18 @@ export const VinayakaAutoSlider: React.FC<VinayakaAutoSliderProps> = ({
                   ref={videoRef}
                   src={currentSlide.src}
                   playsInline
+                  controls={isVideoPlaying}
                   muted={isMuted}
-                  poster={(currentSlide as any).thumbnail || '/projects/vinayaka-farm/v2.jpg'}
+                  poster={(currentSlide as any).thumbnail || currentSlide.src}
+                  onPlay={() => {
+                    setIsVideoPlaying(true);
+                    setIsPlaying(false);
+                  }}
+                  onPause={() => setIsVideoPlaying(false)}
+                  onVolumeChange={(e) => {
+                    const v = e.currentTarget;
+                    setIsMuted(v.muted || v.volume === 0);
+                  }}
                   onEnded={() => {
                     setIsVideoPlaying(false);
                     goToNextSlide();
@@ -176,19 +200,26 @@ export const VinayakaAutoSlider: React.FC<VinayakaAutoSliderProps> = ({
 
                 {/* Center Play Overlay Button when video is paused */}
                 {!isVideoPlaying && (
-                  <button
-                    onClick={toggleVideoPlayback}
-                    className="absolute z-30 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#FF9933] via-[#D4AF37] to-[#800020] p-1 shadow-[0_0_30px_rgba(255,153,51,0.6)] hover:scale-110 transition-transform cursor-pointer flex items-center justify-center group"
-                  >
-                    <div className="w-full h-full rounded-full bg-[#07171E]/90 flex items-center justify-center group-hover:bg-[#07171E]/70 transition-colors">
-                      <Play className="w-9 h-9 sm:w-11 sm:h-11 text-[#FF9933] fill-[#FF9933] ml-1.5" />
-                    </div>
-                  </button>
+                  <div className="absolute inset-0 z-30 flex flex-col items-center justify-center pointer-events-none">
+                    <button
+                      onClick={toggleVideoPlayback}
+                      className="pointer-events-auto w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#FF9933] via-[#D4AF37] to-[#800020] p-1 shadow-[0_0_35px_rgba(255,153,51,0.7)] hover:scale-110 transition-transform cursor-pointer flex items-center justify-center group"
+                      title="Play Video with Voice Tour"
+                    >
+                      <div className="w-full h-full rounded-full bg-[#07171E]/90 flex items-center justify-center group-hover:bg-[#07171E]/70 transition-colors">
+                        <Play className="w-9 h-9 sm:w-11 sm:h-11 text-[#FF9933] fill-[#FF9933] ml-1.5" />
+                      </div>
+                    </button>
+                    <span className="mt-4 pointer-events-auto inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#07171E]/90 border border-[#D4AF37]/50 text-[#D4AF37] text-xs font-mono font-bold tracking-wider uppercase shadow-md">
+                      <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
+                      Click to Play Video & Voice Tour
+                    </span>
+                  </div>
                 )}
 
                 {/* Minimal Video Controls Bar */}
-                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 z-30 flex items-center justify-between gap-2 bg-[#07171E]/85 backdrop-blur-md px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl border border-[#D4AF37]/30 text-white shadow-lg">
-                  <div className="flex items-center gap-3">
+                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 z-30 flex items-center justify-between gap-2 bg-[#07171E]/90 backdrop-blur-md px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl border border-[#D4AF37]/40 text-white shadow-xl">
+                  <div className="flex items-center gap-2.5">
                     <button
                       onClick={toggleVideoPlayback}
                       className="p-2 rounded-lg bg-[#800020] hover:bg-[#9B1B30] text-[#D4AF37] transition-colors cursor-pointer"
@@ -199,20 +230,26 @@ export const VinayakaAutoSlider: React.FC<VinayakaAutoSliderProps> = ({
 
                     <button
                       onClick={toggleMute}
-                      className="p-2 rounded-lg bg-[#07171E] border border-white/20 hover:border-[#D4AF37] text-white transition-colors cursor-pointer"
-                      title={isMuted ? 'Unmute Audio' : 'Mute Audio'}
+                      className={`px-2.5 py-1.5 rounded-lg border flex items-center gap-1.5 text-xs font-mono font-bold transition-all cursor-pointer ${
+                        isMuted
+                          ? 'bg-amber-500/20 text-amber-300 border-amber-400/50 hover:bg-amber-500/30'
+                          : 'bg-emerald-500/20 text-emerald-300 border-emerald-400/50 hover:bg-emerald-500/30'
+                      }`}
+                      title={isMuted ? 'Unmute Audio (Turn Voice ON)' : 'Mute Audio'}
                     >
-                      {isMuted ? <VolumeX className="w-4 h-4 text-gray-400" /> : <Volume2 className="w-4 h-4 text-[#AEE583]" />}
+                      {isMuted ? <VolumeX className="w-4 h-4 text-amber-300" /> : <Volume2 className="w-4 h-4 text-emerald-300" />}
+                      <span className="hidden sm:inline">{isMuted ? 'UNMUTE VOICE' : 'VOICE ON'}</span>
                     </button>
 
-                    <span className="text-xs font-mono text-[#D4AF37] uppercase tracking-wider hidden sm:inline">
-                      {isVideoPlaying ? 'Playing Video' : 'Click Play to Watch'}
+                    <span className="text-xs font-mono text-gray-300 uppercase tracking-wider hidden md:inline truncate max-w-[200px]">
+                      {(currentSlide as any).title || (isVideoPlaying ? 'Playing Video Tour' : 'On-Site Video Tour')}
                     </span>
                   </div>
 
                   <button
                     onClick={() => setLightboxIndex(activeSlideIndex)}
                     className="p-2 rounded-lg bg-white/10 hover:bg-[#800020] text-white transition-colors cursor-pointer flex items-center gap-1 text-xs font-mono border border-white/20"
+                    title="Fullscreen Lightbox View"
                   >
                     <Maximize2 className="w-3.5 h-3.5 text-[#FF9933]" />
                     <span className="hidden sm:inline">FULLSCREEN</span>
@@ -279,6 +316,7 @@ export const VinayakaAutoSlider: React.FC<VinayakaAutoSliderProps> = ({
                   controls
                   autoPlay
                   playsInline
+                  muted={false}
                   className="max-w-full max-h-[82vh] object-contain rounded-lg shadow-2xl border border-white/10"
                 />
               ) : (

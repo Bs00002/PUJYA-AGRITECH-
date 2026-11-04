@@ -105,6 +105,28 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://pujyaagritech.com/projects/maheshji-malav-kota</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pujyaagritech.com/projects/samsuddin-malik-dholka</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pujyaagritech.com/projects/sargasan-gandhinagar</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pujyaagritech.com/projects/sargasan-gandhinagar/sargasan-photo-01-main.jpg</image:loc>
+      <image:title>Flat Roof Shade Net House 4000 Sqm at Sargasan, Gandhinagar</image:title>
+    </image:image>
+  </url>
 
   <!-- Gallery & Video Documentation Page -->
   <url>

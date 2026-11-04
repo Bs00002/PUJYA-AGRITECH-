@@ -100,7 +100,7 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
 
       let matchesRegion = true;
       if (selectedRegion === 'GUJARAT') {
-        matchesRegion = loc.includes('gujarat') || loc.includes('sanand') || loc.includes('kadi') || loc.includes('vamaj') || loc.includes('dholka') || loc.includes('ahmedabad') || title.includes('vinayaka') || title.includes('laxminarayan') || title.includes('samsuddin');
+        matchesRegion = loc.includes('gujarat') || loc.includes('sanand') || loc.includes('kadi') || loc.includes('vamaj') || loc.includes('dholka') || loc.includes('ahmedabad') || loc.includes('gandhinagar') || loc.includes('sargasan') || title.includes('vinayaka') || title.includes('laxminarayan') || title.includes('samsuddin') || title.includes('sargasan');
       } else if (selectedRegion === 'RAJASTHAN') {
         matchesRegion = loc.includes('rajasthan') || loc.includes('jodhpur') || loc.includes('pushkar') || loc.includes('kota');
       } else if (selectedRegion === 'CHHATTISGARH') {

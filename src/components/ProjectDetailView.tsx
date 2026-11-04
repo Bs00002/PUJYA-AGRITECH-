@@ -12,8 +12,10 @@ import {
   CheckCircle2,
   MessageCircle,
   Mail,
+  Volume2,
+  Video,
 } from 'lucide-react';
-import { VERIFIED_PROJECTS } from '../data/projects';
+import { VERIFIED_PROJECTS, getProjectVideos } from '../data/projects';
 import { SEOHead } from './SEOHead';
 import { VinayakaAutoSlider } from './VinayakaAutoSlider';
 
@@ -34,6 +36,9 @@ export const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({
   const relatedProjects = VERIFIED_PROJECTS.filter(
     (p) => p.id !== project.id && p.slug !== project.slug
   ).slice(0, 3);
+
+  // Project real videos (with audio / voice walkthrough)
+  const projectVideos = getProjectVideos(project);
 
   // Info fields
   const projectTypeVal = project.projectType;
@@ -294,6 +299,80 @@ export const ProjectDetailView: React.FC<ProjectDetailViewProps> = ({
                   </p>
                 </div>
               </div>
+
+              {/* ========================================================================= */}
+              {/* ON-SITE VIDEOS & SPOKEN AUDIO WALKTHROUGH */}
+              {/* ========================================================================= */}
+              {projectVideos.length > 0 && (
+                <div className="bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-2xs space-y-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-4">
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-mono font-bold text-[#006B8F] uppercase tracking-wider flex items-center gap-1.5">
+                        <Volume2 className="w-3.5 h-3.5 text-[#2F7445]" />
+                        ON-SITE REAL SITE RECORDINGS
+                      </span>
+                      <h3 className="text-xl sm:text-2xl font-bold text-[#10232B] flex items-center gap-2">
+                        <Video className="w-5 h-5 text-[#006B8F]" />
+                        <span>Project Walkthrough Videos</span>
+                      </h3>
+                    </div>
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 text-[#2F7445] border border-emerald-200 text-xs font-mono font-bold self-start sm:self-auto">
+                      <Volume2 className="w-4 h-4 text-[#2F7445]" />
+                      <span>VOICE & SOUND INCLUDED</span>
+                    </div>
+                  </div>
+
+                  <p className="text-sm text-gray-600 leading-relaxed font-normal">
+                    Listen to the real spoken walkaround commentary explaining structural erection, column alignment, high-tensile wire rope matrix, shade net canopy, and soil bed preparation. Turn on sound/unmute on the video player below to hear full voice details.
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {projectVideos.map((vid, vIdx) => (
+                      <div
+                        key={vid.id || vIdx}
+                        className="bg-[#FAFBF9] rounded-xl border border-gray-200/90 overflow-hidden shadow-2xs hover:shadow-md transition-shadow flex flex-col justify-between"
+                      >
+                        <div className="relative aspect-video bg-black flex items-center justify-center">
+                          <video
+                            src={vid.src}
+                            poster={vid.thumbnail}
+                            controls
+                            playsInline
+                            preload="metadata"
+                            className="w-full h-full object-contain"
+                          >
+                            Your browser does not support HTML5 video.
+                          </video>
+                        </div>
+                        <div className="p-4 space-y-2.5">
+                          <div className="flex items-start justify-between gap-2">
+                            <h4 className="text-sm font-bold text-[#10232B] line-clamp-2">
+                              {vid.title}
+                            </h4>
+                            <span className="text-[10px] font-mono font-bold text-[#006B8F] bg-blue-50 px-2 py-0.5 rounded border border-blue-200 uppercase shrink-0">
+                              VIDEO {vIdx + 1}
+                            </span>
+                          </div>
+                          {vid.caption && (
+                            <p className="text-xs text-gray-600 leading-relaxed font-normal">
+                              {vid.caption}
+                            </p>
+                          )}
+                          <div className="pt-2 border-t border-gray-200/60 flex items-center justify-between text-[11px] font-mono">
+                            <span className="flex items-center gap-1.5 text-[#2F7445] font-semibold">
+                              <Volume2 className="w-3.5 h-3.5" />
+                              Voice explanation active
+                            </span>
+                            <span className="text-gray-400 uppercase">
+                              {vid.videoType || 'MP4'}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
             </div>
 
