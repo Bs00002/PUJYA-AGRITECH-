@@ -1,0 +1,36 @@
+# Pujya Agritech Production Apache Configuration
+Options -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_mime.c>
+  AddType text/css .css
+  AddType application/javascript .js .mjs
+  AddType video/mp4 .mp4
+  AddType image/svg+xml .svg
+  AddType application/manifest+json .webmanifest
+  AddType application/xml .xml
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|mjs|png|jpg|jpeg|gif|webp|svg|ico|pdf|mp4|xml|webmanifest)$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Pass through root index.html
+  RewriteRule ^index\.html$ - [L]
+
+  # Pass through Google Search Console verification files
+  RewriteRule ^google[a-zA-Z0-9_-]+\.html$ - [L]
+
+  # If request is an existing physical file, serve it directly
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # For all other requests (including SPA directory routes like /projects, /projects/, /products, /gallery, etc.), route to /index.html
+  RewriteRule ^ /index.html [L]
+</IfModule>
