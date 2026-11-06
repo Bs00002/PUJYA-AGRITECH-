@@ -84,7 +84,7 @@ const STORAGE_KEYS = {
   CERTIFICATES: 'pujya_certificates_v3_local',
   PRODUCTS: 'pujya_products_v4_hyphenated',
   PROJECTS: 'pujya_projects_v12_jodhpur_real',
-  GALLERY: 'pujya_gallery_v3_local',
+  GALLERY: 'pujya_gallery_v12_all_anime_videos',
   BLOG: 'pujya_blog_v3_clean',
   CONTACT_INFO: 'pujya_contact_info_v3',
   ENQUIRIES: 'pujya_enquiries_v2',
@@ -117,6 +117,8 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       'pujya_products_v3',
       'pujya_gallery',
       'pujya_gallery_v2',
+      'pujya_gallery_v3_local',
+      'pujya_gallery_v4_videos',
       'pujya_certificates',
       'pujya_certificates_v2',
       'pujya_contact_info',
@@ -216,7 +218,8 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
           const hasUnsplash = parsed.some((g: any) => g.url?.includes('unsplash'));
-          if (!hasUnsplash) return parsed;
+          const hasVideos = parsed.some((g: any) => g.type === 'video');
+          if (!hasUnsplash && hasVideos) return parsed;
         }
       }
     } catch {}

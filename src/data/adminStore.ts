@@ -34,6 +34,7 @@ export interface Project {
   scheme?: string;
   category?: string;
   areaSize?: string;
+  area?: string;
   crop?: string;
   description: string;
   challenge?: string;
@@ -49,6 +50,7 @@ export interface Project {
   videoObjects?: ProjectVideoItem[];
   completionDate?: string;
   yearCompleted?: string;
+  projectDate?: string;
   crops?: string[];
   featured?: boolean;
   published: boolean;
@@ -653,6 +655,72 @@ export const DEFAULT_PROJECTS: Project[] = [
 ];
 
 export const DEFAULT_GALLERY: GalleryMedia[] = [
+  {
+    id: 'gal-vid-1',
+    type: 'video',
+    title: 'Comprehensive Polyhouse & Protected Cultivation Walkthrough',
+    category: 'video',
+    url: '/gallery/greenhouse-walkthrough.jpg',
+    videoEmbedUrl: '/gallery/greenhouse-walkthrough-video.mp4',
+    description: 'Full site video walkthrough highlighting structural hot-dip galvanized frame erection, top ridge ventilation, gutter connections, and crop environment.',
+    featured: true,
+    published: true,
+  },
+  {
+    id: 'gal-vid-2',
+    type: 'video',
+    title: 'Commercial Capsicum Polyhouse Cultivation & Crop Health',
+    category: 'video',
+    url: '/gallery/capsicum-polyhouse.jpg',
+    videoEmbedUrl: '/gallery/capsicum-polyhouse-video.mp4',
+    description: 'On-site video documenting lush Dutch bell pepper (capsicum) crop growth and microclimate stability inside Pujya Agritech polyhouse.',
+    featured: true,
+    published: true,
+  },
+  {
+    id: 'gal-vid-3',
+    type: 'video',
+    title: 'High-Yield Commercial Cucumber Trellising & Production',
+    category: 'video',
+    url: '/gallery/cucumber-polyhouse.jpg',
+    videoEmbedUrl: '/gallery/cucumber-polyhouse-video.mp4',
+    description: 'Precision vertical trellising wire system and healthy European cucumber crop canopy recorded live at customer site.',
+    featured: true,
+    published: true,
+  },
+  {
+    id: 'gal-vid-4',
+    type: 'video',
+    title: 'Commercial Floriculture & Flower Greenhouse Operation',
+    category: 'video',
+    url: '/gallery/flower-polyhouse.jpg',
+    videoEmbedUrl: '/gallery/flower-polyhouse-video.mp4',
+    description: 'High-density commercial flower crop cultivation under climate-controlled protected polyhouse environment.',
+    featured: true,
+    published: true,
+  },
+  {
+    id: 'gal-vid-5',
+    type: 'video',
+    title: 'Flat Roof Shade Net House On-Site Walkthrough — Gandhinagar',
+    category: 'video',
+    url: '/projects/sargasan-gandhinagar/sargasan-photo-01-main.jpg',
+    videoEmbedUrl: '/projects/sargasan-gandhinagar/sargasan-video-01-walkthrough.mp4',
+    description: 'Turnkey 4,000 Sq. M. flat roof shade net house walkthrough showing steel columns, cable matrix, and exotic crop rows.',
+    featured: true,
+    published: true,
+  },
+  {
+    id: 'gal-vid-6',
+    type: 'video',
+    title: 'Naturally Ventilated Polyhouse Facility — Mahesh Malav, Kota',
+    category: 'video',
+    url: '/gallery/site-gallery-2.jpg',
+    videoEmbedUrl: '/projects/maheshji-malav-kota/mahesh-malav-polyhouse-video.mp4',
+    description: 'Commercial polyhouse facility inspection highlighting trellising wires, structural purlins, and climate regulation.',
+    featured: true,
+    published: true,
+  },
   {
     id: 'gal-1',
     type: 'photo',
